@@ -119,32 +119,9 @@ class AuthController extends Controller
 
   public function update(Request $request, $id)
   {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['fresher', 'first_name', 'last_name', 'email', 'password', 'birthdate', 'sex'])), [
-      'id' => 'required|exists:users,id',
-      'fresher' => 'required|exists:users,fresher',
-      'first_name' => 'required',
-      'last_name' => 'required',
-      'email' => 'required|email|exists:users,email',
-      'password' => 'required|min:6',
-      'birthdate' => 'required|date_format:Y-m-d',
-      'sex' => 'required'
-    ]);
-
-    if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
-    }
-
     $user = User::find($id);
 
-    $user->fresher = $request->get('fresher');
-    $user->first_name = $request->get('first_name');
-    $user->last_name = $request->get('last_name');
-    $user->email = $request->get('email');
-    $user->password = $request->get('password');
-    $user->birthdate = $request->get('birthdate');
-    $user->sex = $request->get('sex');
     $user->image = $request->get('image');
-    $user->confirmation_token = str_random(255);
 
     if($user->save()) {
       return $this->response->item(User::find($user->id), new UserTransformer);

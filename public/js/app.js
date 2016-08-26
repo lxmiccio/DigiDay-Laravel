@@ -15,6 +15,9 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/utente/:id', {
     templateUrl: 'views/profile.html',
     controller: 'ProfileController as ctrl'
+  }).when('/utente/:id/immagine', {
+    templateUrl: 'views/updateImage.html',
+    controller: 'UpdateImageController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
@@ -30,7 +33,6 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
 .factory('AuthHttpInterceptor', function(localStorageService) {
   return {
     request: function(config) {
-      console.log(localStorageService.get('token'))
       config.headers.Authorization = localStorageService.get('token');
       return config;
     },

@@ -1,0 +1,41 @@
+<div class="row" ng-if="index.isAuthenticated()">
+  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center"><strong>Modifica immagine</strong></h2>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="text-right"><a ng-click="ctrl.removeImage()">Rimuovi Immagine</a></p>
+
+        <div class="form-control" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="!ctrl.image" ng-init="ctrl.image = index.user.image" ng-model="image">
+          <div class="placeholder">Immagine...</div>
+        </div>
+
+        <div class="form-control form-control-image" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="ctrl.image" ng-model="image">
+          <div class="row">
+            <div class="col-xs-12">
+              <img ngf-src="ctrl.image" class="img-responsive img-rounded center-block">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <button type="button" class="btn btn-success" ng-click="ctrl.updateImage(ctrl.image, index.user)">Modifica immagine</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row br-lg"></div>
+  </div>
+</div>
