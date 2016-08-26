@@ -1,0 +1,31 @@
+body {
+  color: #000;
+  font-family: 'Sniglet';
+  min-width: 300px;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.form-control-image {
+  height: auto;
+  padding: 10px;
+}
+
+.highlight {
+  color: #EE3B25;
+}
+
+.jumbotron h1, h2, h3, h4, h5 {
+  margin: 0px 0px;
+}
+
+.jumbotron p {
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.placeholder {
+  color: #999;
+}

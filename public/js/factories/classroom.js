@@ -1,55 +1,45 @@
-angular.module("myServices").factory("itemService", function ($http, userService) {
+angular.module('myServices').factory('classroomService', function ($http) {
 
 	function getAll(onSuccess, onError) {
-		
-		$http.get('api/items').then(function(response) {
+		$http.get('api/classrooms').then(function(response) {
 			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-		
 	};
 
 	function getById(id, onSuccess, onError) {
-
-		$http.get('api/items/' + id).then(function(response) {
+		$http.get('api/classrooms/' + id).then(function(response) {
 			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-
 	};
 
 	function create(data, onSuccess, onError) {
-
-		$http.post('api/items?token=' + userService.getToken(), data).then(function(response) {
+		$http.post('api/classrooms', data).then(function(response) {
 			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-
 	};
 
 	function update(id, data, onSuccess, onError) {
-
-		$http.put('api/items/' + id + '?token=' + userService.getToken(), data).then(function(response) {
+		$http.put('api/classrooms/' + id, data).then(function(response) {
 			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-
 	};
 
 	function remove(id, onSuccess, onError) {
-		
-		$http.delete('api/items/' + id + '?token=' + userService.getToken()).then(function() {
+		$http.delete('api/classrooms/' + id).then(function() {
 			onSuccess();
-		}, function(response){
+		}, function(response) {
 			onError(response);
 		});
-		
 	};
-	
+
 	return {
 		getAll: getAll,
 		getById: getById,
