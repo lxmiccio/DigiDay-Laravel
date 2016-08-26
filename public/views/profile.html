@@ -1,0 +1,47 @@
+<div class="row" ng-if="index.isAuthenticated()">
+  <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-12">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <img ng-src="{{index.user.image | decache}}" class="img-responsive img-rounded center-block"/>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+          <div class="row br-lg visible-xs"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <h3 class="text-center"><strong>{{index.user.firstName}} {{index.user.lastName}}</strong></h3>
+            </div>
+          </div>
+
+          <div class="row br-lg"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="text-center">Matricola: <strong>{{index.user.fresher}}</strong></p>
+            </div>
+          </div>
+
+          <div class="row br-sm"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="text-center">Email: <strong>{{index.user.email}}</strong></p>
+            </div>
+          </div>
+
+          <div class="row br-lg"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="text-center">
+                <button type="button" class="btn btn-primary" ng-click="openUser('md', 'views/user/updateImage.html')">Modifica immagine</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

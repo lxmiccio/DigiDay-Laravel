@@ -1,4 +1,4 @@
-angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
+angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
 
 .config(function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
@@ -12,6 +12,9 @@ angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStora
   }).when('/accedi', {
     templateUrl: 'views/login.html',
     controller: 'LoginController as ctrl'
+  }).when('/utente/:id', {
+    templateUrl: 'views/profile.html',
+    controller: 'ProfileController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
