@@ -9,6 +9,9 @@ angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStora
   }).when('/registrati', {
     templateUrl: 'views/signup.html',
     controller: 'SignupController as ctrl'
+  }).when('/accedi', {
+    templateUrl: 'views/login.html',
+    controller: 'LoginController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
@@ -24,6 +27,7 @@ angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStora
 .factory('AuthHttpInterceptor', function(localStorageService) {
   return {
     request: function(config) {
+      console.log(localStorageService.get('token'))
       config.headers.Authorization = localStorageService.get('token');
       return config;
     },

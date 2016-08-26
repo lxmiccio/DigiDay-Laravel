@@ -41,6 +41,7 @@
   <script src="js/controllers/calendar.js"></script>
   <script src="js/controllers/event.js"></script>
   <script src="js/controllers/index.js"></script>
+  <script src="js/controllers/login.js"></script>
   <script src="js/controllers/signup.js"></script>
 
   <script src="js/factories/module.js"></script>
@@ -74,7 +75,15 @@
       <nav class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
-          <li><a href="/registrati">Registrati</a></li>
+          <li ng-if="!index.isAuthenticated()"><a href="/registrati">Registrati</a></li>
+          <li ng-if="!index.isAuthenticated()"><a href="/accedi">Accedi</a></li>
+          <li class="dropdown" ng-if="index.isAuthenticated()">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{index.user.firstName}} {{index.user.lastName}} &nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/utente/{{index.user.id}}">Profilo</a></li>
+              <li><a ng-click="index.logout()">Logout</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

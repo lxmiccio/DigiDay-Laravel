@@ -32,8 +32,8 @@ angular.module("myControllers").controller("CalendarController", function ($filt
     console.log(response);
   });
 
-  vm.onEventClick = function(event) {
-    console.log(event)
+  vm.onTopicClick = function(events, topics) {
+    vm.filteredEvents = $filter('eventsOfTopic')(events, topics);
   };
 
 });

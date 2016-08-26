@@ -25,7 +25,7 @@
         <div class="col-md-4 col-sm-4">
           <div class="text-center">
             <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1"
-            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.selectedTopics)"
+            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)"
             translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
           </div>
         </div>
@@ -43,7 +43,7 @@
       <div class="row br-md"></div>
 
       <mwl-calendar events="ctrl.filteredEvents" view="ctrl.calendarView" view-title="ctrl.calendarTitle" view-date="ctrl.viewDate"
-      on-event-click="ctrl.onEventClick(calendarEvent)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
+      on-event-click="index.redirect('evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
     </div>
   </div>
 </div>
@@ -90,7 +90,7 @@
         <div class="col-xs-12">
           <div class="text-center">
             <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1"
-            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.selectedTopics)"
+            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)"
             translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
           </div>
         </div>
@@ -99,7 +99,7 @@
       <div class="row br-md"></div>
 
       <mwl-calendar events="ctrl.filteredEvents" view="ctrl.calendarView" view-title="ctrl.calendarTitle" view-date="ctrl.viewDate"
-      on-event-click="index.redirect('/evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
+      on-event-click="index.redirect('evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
     </div>
   </div>
 </div>

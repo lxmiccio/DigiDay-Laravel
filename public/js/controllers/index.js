@@ -14,7 +14,7 @@ angular.module("myControllers").controller("IndexController", function ($locatio
 
   vm.logout = function() {
     userService.logout(function(response) {
-      $window.location.reload();
+      $window.location.href = '/';
     }, function(response) {
       console.log(response);
     });
