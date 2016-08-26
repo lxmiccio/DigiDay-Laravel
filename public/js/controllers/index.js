@@ -1,4 +1,4 @@
-angular.module("myControllers").controller("IndexController", function ($http, $window, localStorageService, counterService, socket, userService) {
+angular.module("myControllers").controller("IndexController", function ($location, $window, localStorageService, userService) {
 
   var vm  = this;
 
@@ -6,30 +6,6 @@ angular.module("myControllers").controller("IndexController", function ($http, $
     vm.user = response.data.data;
   }, function(response) {
     console.log(response);
-  });
-
-  counterService.increase(1, function(response) {
-
-  }, function(response) {
-    console.log(response);
-  });
-
-  socket.on('counter.increase', function(counter) {
-    vm.counter = angular.fromJson(counter).counter;
-  });
-
-  vm.increaseCounter = function(visitors) {
-    counterService.update(1, {
-      visitors: visitors
-    },function(response) {
-      vm.counter = response.data.data;
-    }, function(response) {
-      console.log(response)
-    });
-  };
-
-  socket.on('counter.update', function(counter) {
-    vm.counter = angular.fromJson(counter).counter;
   });
 
   vm.isAuthenticated = function () {
@@ -42,6 +18,10 @@ angular.module("myControllers").controller("IndexController", function ($http, $
     }, function(response) {
       console.log(response);
     });
+  };
+
+  vm.redirect = function(path) {
+    $location.path(path);
   };
 
 });

@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center"><strong>{{ctrl.event.name}}</strong></h2>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-center">Argomento: <strong>{{ctrl.event.topic.name}}</strong></p>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-center">{{ctrl.event.description}}a</p>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-center">La lezione sarà tenuta da <strong>{{ctrl.event.user.firstName}} {{ctrl.event.user.lastName}}</strong> e si terrà in aula <strong>{{ctrl.event.classroom.name}}</strong> il giorno <strong>{{ctrl.stringToDate(ctrl.event.startingDate, 'dd/MM/yyyy')}}</strong> dalle <strong>{{ctrl.stringToDate(ctrl.event.startingDate, 'HH:mm')}}</strong> alle <strong>{{ctrl.stringToDate(ctrl.event.endingDate, 'HH:mm')}}</strong></p>
+        </div>
+      </div>
+
+      {{ctrl.event}}
+    </div>
+  </div>
+</div>

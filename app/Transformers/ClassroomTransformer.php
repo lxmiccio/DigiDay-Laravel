@@ -12,7 +12,7 @@ class ClassroomTransformer extends Fractal\TransformerAbstract
 			'id' => $classroom->id,
 			'name' => $classroom->name,
 			'description' => $classroom->description,
-			'maximum_partecipants as maximumPartecipants' => $classroom->maximum_partecipants,
+			'maximumPartecipants' => $classroom->maximum_partecipants,
 
 			'events' => $topic->events()->orderBy('starting_date')->get([
 				'id',

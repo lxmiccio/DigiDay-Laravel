@@ -12,45 +12,45 @@ class EventTransformer extends Fractal\TransformerAbstract
 			'id' => $event->id,
 			'name' => $event->name,
 			'description' => $event->description,
-			'starting_date' => $event->starting_date,
-			'ending_date' => $event->ending_date,
-			'maximum_partecipants as maximumPartecipants' => $event->maximum_partecipants,
+			'startingDate' => $event->starting_date,
+			'endingDate' => $event->ending_date,
+			'maximumPartecipants' => $event->maximum_partecipants,
 
 			'user' => $event->user()->get([
-				'id',
-				'fresher',
-				'first_name as firstName',
-				'last_name as lastName',
-				'email',
-				'image',
+				'users.id',
+				'users.fresher',
+				'users.first_name as firstName',
+				'users.last_name as lastName',
+				'users.email',
+				'users.image',
 			])
 			->first(),
 
 			'users' => $event->users()->orderBy('last_name')->get([
-				'id',
-				'fresher',
-				'first_name as firstName',
-				'last_name as lastName',
-				'email',
-				'image',
+				'users.id',
+				'users.fresher',
+				'users.first_name as firstName',
+				'users.last_name as lastName',
+				'users.email',
+				'users.image',
 			]),
 
 			'classroom' => $event->classroom()->get([
-				'id',
-				'name',
-				'maximum_partecipants as maximumPartecipants',
+				'classrooms.id',
+				'classrooms.name',
+				'classrooms.maximum_partecipants as maximumPartecipants',
 			])->first(),
 
 			'topic' => $event->topic()->get([
-				'id',
-				'name'
-			]),
+				'topics.id',
+				'topics.name'
+			])->first(),
 
 			'items' => $event->items()->orderBy('name')->get([
 				'items.id',
 				'items.name',
 				'items.amount',
-				'items.required_amount as requiredAmount'
+				'required_amount as requiredAmount'
 			])
 		];
 	}

@@ -1,41 +1,14 @@
-angular.module('digidayApp', ['angucomplete-alt', 'angular-jwt', 'angularRandomString', 'btford.socket-io', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'ngRoute', 'ngSanitize', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
+angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
 
 .config(function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
 
   $routeProvider.when('/', {
-    templateUrl: 'views/categories.html',
-    controller: 'CategoriesController as ctrl'
-  }).when('/categoria/:id/modifica', {
-    templateUrl: 'views/updateCategory.html',
-    controller: 'UpdateCategoryController as ctrl'
-  }).when('/categoria/:id/crea/evento', {
-    templateUrl: 'views/createEvent.html',
-    controller: 'CreateEventController as ctrl'
-  }).when('/categoria/:id', {
+    templateUrl: 'views/calendar.html',
+    controller: 'CalendarController as ctrl'
+  }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
-  }).when('/categoria/:id/pagina/:page', {
-    templateUrl: 'views/events.html',
-    controller: 'EventsController as ctrl'
-  }).when('/evento/:id/modifica', {
-    templateUrl: 'views/updateEvent.html',
-    controller: 'UpdateEventController as ctrl'
-  }).when('/dj/crea', {
-    templateUrl: 'views/createDj.html',
-    controller: 'CreateDjController as ctrl'
-  }).when('/dj/:id/modifica', {
-    templateUrl: 'views/updateDj.html',
-    controller: 'UpdateDjController as ctrl'
-  }).when('/dj', {
-    templateUrl: 'views/djs.html',
-    controller: 'DjsController as ctrl'
-  }).when('/dj/:id', {
-    templateUrl: 'views/dj.html',
-    controller: 'DjController as ctrl'
-  }).when('/login', {
-    templateUrl: 'views/login.html',
-    controller: 'LoginController as ctrl'
   })/*.otherwise({
     redirectTo: '/'
   })*/;
