@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'birthdate', 'sex', 'image'
+        'fresher', 'first_name', 'last_name', 'email', 'password', 'birthdate', 'sex', 'image'
     ];
 
     /**
@@ -21,9 +21,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'confirmation_token',
     ];
-    
+
     /**
      * Get the events for the user.
      */
@@ -31,7 +31,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Event');
     }
-    
+
     /**
      * Get the password resets for the user.
      */
@@ -39,7 +39,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\PasswordReset');
     }
-    
+
     /**
      * Get the roles that belong to the user.
      */
@@ -47,6 +47,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+
+  	/**
+  	* Get the events that the user attends.
+  	*/
+  	public function attendedEvents()
+  	{
+  		return $this->belongsToMany('App\Event');
+  	}
 
     /**
      * This mutator automatically hashes the password.

@@ -8,20 +8,20 @@ class ItemTransformer extends Fractal\TransformerAbstract
 {
 	public function transform(Item $item)
 	{
-		/*
-		$events = $item->events()->orderBy('starting_date', 'desc')->get();
-		
-		foreach($events as &$event) {
-			
-		}
-		*/
-		
-	    return [
-	        'id' => $item->id,
-	        'name' => $item->name,
-	        'description' => $item->description,
-	        'amount' => $item->amount,
-	        'events' => $item->events()->orderBy('starting_date', 'desc')->get()
-	    ];
+		return [
+			'id' => $item->id,
+			'name' => $item->name,
+			'description' => $item->description,
+			'amount' => $item->amount,
+
+			'events' => $item->events()->orderBy('starting_date', 'desc')->get([
+				'id',
+				'name',
+				'description',
+				'starting_date as startingDate',
+				'ending_date as endingDate',
+				'maximum_partecipants as maximumPartecipants'
+			])
+		];
 	}
 }

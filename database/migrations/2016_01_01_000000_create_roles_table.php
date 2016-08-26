@@ -5,29 +5,29 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRolesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('roles', function (Blueprint $table) {
-			$table->increments('id');
-			
-			$table->string('name');
-            
-            $table->timestamps();
-        });
-    }
+  /**
+  * Run the migrations.
+  *
+  * @return void
+  */
+  public function up()
+  {
+    Schema::create('roles', function (Blueprint $table) {
+      $table->increments('id');
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('roles');
-    }
+      $table->string('name');
+
+      $table->timestamps();
+    });
+  }
+
+  /**
+  * Reverse the migrations.
+  *
+  * @return void
+  */
+  public function down()
+  {
+    Schema::drop('roles');
+  }
 }

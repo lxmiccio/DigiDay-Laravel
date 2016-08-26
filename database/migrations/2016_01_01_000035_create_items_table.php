@@ -5,32 +5,32 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateItemsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('items', function (Blueprint $table) {
-			$table->increments('id');
-			
-			$table->string('name');
-			$table->text('description')->nullable();
-			
-			$table->integer('amount')->unsigned();
-            
-            $table->timestamps();
-        });
-    }
+  /**
+  * Run the migrations.
+  *
+  * @return void
+  */
+  public function up()
+  {
+    Schema::create('items', function (Blueprint $table) {
+      $table->increments('id');
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('items');
-    }
+      $table->string('name');
+      $table->text('description')->nullable();
+      
+      $table->integer('amount')->unsigned();
+
+      $table->timestamps();
+    });
+  }
+
+  /**
+  * Reverse the migrations.
+  *
+  * @return void
+  */
+  public function down()
+  {
+    Schema::drop('items');
+  }
 }

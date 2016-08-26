@@ -5,30 +5,30 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTopicsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('topics', function (Blueprint $table) {
-			$table->increments('id');
-			
-			$table->string('name');
-			$table->text('description')->nullable();
-            
-            $table->timestamps();
-        });
-    }
+  /**
+  * Run the migrations.
+  *
+  * @return void
+  */
+  public function up()
+  {
+    Schema::create('topics', function (Blueprint $table) {
+      $table->increments('id');
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('topics');
-    }
+      $table->string('name');
+      $table->text('description')->nullable();
+
+      $table->timestamps();
+    });
+  }
+
+  /**
+  * Reverse the migrations.
+  *
+  * @return void
+  */
+  public function down()
+  {
+    Schema::drop('topics');
+  }
 }

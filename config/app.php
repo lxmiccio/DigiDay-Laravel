@@ -159,9 +159,9 @@ return [
         /*
          * Third Party Providers...
          */
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 
     /*
