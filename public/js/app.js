@@ -6,6 +6,9 @@ angular.module('digidayApp', ['angular-jwt', 'isteven-multi-select', 'LocalStora
   $routeProvider.when('/', {
     templateUrl: 'views/calendar.html',
     controller: 'CalendarController as ctrl'
+  }).when('/registrati', {
+    templateUrl: 'views/signup.html',
+    controller: 'SignupController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'

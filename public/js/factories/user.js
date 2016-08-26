@@ -47,6 +47,14 @@ angular.module('myServices').factory('userService', function ($http, localStorag
     });
   };
 
+	function update(id, data, onSuccess, onError) {
+		$http.put('api/auth/' + id + '/update', data).then(function(response) {
+			onSuccess(response);
+		}, function(response) {
+			onError(response);
+		});
+	};
+
 	function attachRole(id, data, onSuccess, onError) {
 		$http.put('api/auth/' + id + '/attach/role', data).then(function(response) {
 			onSuccess(response);
@@ -93,6 +101,7 @@ angular.module('myServices').factory('userService', function ($http, localStorag
     logout: logout,
     signup: signup,
     confirm: confirm,
+    update: update,
     attachRole: attachRole,
     detachRole: detachRole,
     recover: recover,

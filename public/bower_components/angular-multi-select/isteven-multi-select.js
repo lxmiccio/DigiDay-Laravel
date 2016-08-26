@@ -520,7 +520,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 // refresh button label...
                 if ( $scope.outputModel.length === 0 ) {
                     // https://github.com/isteven/angular-multi-select/pull/19
-                    $scope.varButtonLabel = $scope.lang.nothingSelected;
+                    $scope.varButtonLabel = '<div class="col-xs-11 text-left" style="color: #888; padding: 0px;"> &nbsp;' + $scope.lang.nothingSelected + '</div>';
                 }
                 else {
                     var tempMaxLabels = $scope.outputModel.length;
@@ -539,7 +539,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     angular.forEach( $scope.inputModel, function( value, key ) {
                         if ( typeof value !== 'undefined' && value[ attrs.tickProperty ] === true ) {
                             if ( ctr < tempMaxLabels ) {
-                                $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
+                                $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + '<div class="col-xs-11 text-left" style="color: #333; padding: 0px;">' + $scope.writeLabel( value, 'buttonLabel' ) + '</div>';
                             }
                             ctr++;
                         }
@@ -548,12 +548,12 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     if ( $scope.more === true ) {
                         // https://github.com/isteven/angular-multi-select/pull/16
                         if (tempMaxLabels > 0) {
-                            $scope.varButtonLabel += ', ... ';
+                          $scope.varButtonLabel = $scope.varButtonLabel.slice(0, -6) + ', ...';
                         }
-                        $scope.varButtonLabel += '(' + $scope.outputModel.length + ')';
+                        $scope.varButtonLabel += '(' + $scope.outputModel.length + ')' + '</div>';
                     }
                 }
-                $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );
+                $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<div class="col-xs-1 text-right" style="padding: 0px;"><span class="caret"></span></div>' );
             }
 
             // Check if a checkbox is disabled or enabled. It will check the granular control (disableProperty) and global control (isDisabled)
@@ -1031,7 +1031,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
     var template =
         '<span class="multiSelect inlineBlock">' +
             // main button
-            '<button id="{{directiveId}}" type="button"' +
+            '<button id="{{directiveId}}" type="button" style="max-height: 34px"' +
                 'ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton(); prepareGrouping; prepareIndex();"' +
                 'ng-bind-html="varButtonLabel"' +
                 'ng-disabled="disable-button"' +

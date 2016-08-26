@@ -13,7 +13,6 @@ class RoleTransformer extends Fractal\TransformerAbstract
 			'name' => $role->name,
 
 			'users' => $role->users()->orderBy('last_name')->get([
-        'id',
 				'fresher',
 				'first_name as firstName',
 				'last_name as lastName',
