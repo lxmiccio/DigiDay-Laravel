@@ -1,3 +1,93 @@
 <div class="row" ng-if="index.isAdministrator()">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center"><strong>Amministra i Materiali</strong></h2>
+      </div>
+    </div>
 
+    <div class="row br-lg"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="text-center">Aggiungi un Materiale</h4>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" class="form-control" placeholder="Nome..." ng-model="ctrl.name" required/>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="number" class="form-control" placeholder="Quantità..." ng-model="ctrl.amount" required/>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <textarea rows="5" class="form-control" placeholder="Descrizione..." ng-model="ctrl.description" style="resize: none;"></textarea>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.name, ctrl.amount, ctrl.description)">Crea</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="visible-sm visible-xs"/>
+      <div class="row br-lg visible-sm visible-xs"></div>
+    </div>
+
+    <div class="col-md-5 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="text-center">Materiali esistenti</h4>
+        </div>
+      </div>
+
+      <hr/>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col-xs-5 text-center">Nome</th>
+                <th class="col-xs-4 text-center">Quantità</th>
+                <th class="col-xs-3 text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in ctrl.items">
+                <td class="text-center" style="padding-top: 9px;">{{item.name}}</td>
+                <td class="text-center" style="padding-top: 9px;">{{item.amount}}</td>
+                <td class="text-center">
+                  <a class="btn btn-info btn-xs" ng-click="index.redirect('amministrazione/materiale/' + item.id + '/modifica')"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                  <a class="btn btn-danger btn-xs" ng-click="ctrl.remove(item)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </div>

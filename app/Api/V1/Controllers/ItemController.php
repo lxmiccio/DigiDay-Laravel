@@ -57,7 +57,7 @@ class ItemController extends Controller
     $item->amount = $request->get('amount');
 
     if($item->save()) {
-      return $this->response->item(Item::find($id), new ItemTransformer);
+      return $this->response->item(Item::find($item->id), new ItemTransformer);
     }
     else {
       return $this->response->errorInternal('could_not_create_item');

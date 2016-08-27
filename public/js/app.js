@@ -22,12 +22,21 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/argomenti', {
     templateUrl: 'views/administerTopics.html',
     controller: 'AdministerTopicsController as ctrl'
+  }).when('/amministrazione/argomento/:id/modifica', {
+    templateUrl: 'views/updateTopic.html',
+    controller: 'UpdateTopicController as ctrl'
   }).when('/amministrazione/classi', {
     templateUrl: 'views/administerClassrooms.html',
-    controller: 'administerClassroomsController as ctrl'
+    controller: 'AdministerClassroomsController as ctrl'
+  }).when('/amministrazione/classe/:id/modifica', {
+    templateUrl: 'views/updateClassroom.html',
+    controller: 'UpdateClassRoomController as ctrl'
   }).when('/amministrazione/materiali', {
     templateUrl: 'views/administerItems.html',
-    controller: 'administerItemsController as ctrl'
+    controller: 'AdministerItemsController as ctrl'
+  }).when('/amministrazione/materiale/:id/modifica', {
+    templateUrl: 'views/updateItem.html',
+    controller: 'UpdateItemController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'

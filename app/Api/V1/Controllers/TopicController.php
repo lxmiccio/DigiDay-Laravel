@@ -64,7 +64,7 @@ class TopicController extends Controller
 
   public function update(Request $request, $id)
   {
-    $$validator = Validator::make(array_merge(['id' => $id], $request->only(['name'])), [
+    $validator = Validator::make(array_merge(['id' => $id], $request->only(['name'])), [
       'id' => 'required|exists:topics,id',
       'name' => 'required'
     ]);

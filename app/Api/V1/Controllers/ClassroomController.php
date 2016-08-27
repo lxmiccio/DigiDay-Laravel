@@ -57,7 +57,7 @@ class ClassroomController extends Controller
     $classroom->maximum_partecipants = $request->get('maximum_partecipants');
 
     if($classroom->save()) {
-      return $this->response->item(Classroom::find($id), new ClassroomTransformer);
+      return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
     }
     else {
       return $this->response->errorInternal('could_not_create_classroom');
@@ -83,7 +83,7 @@ class ClassroomController extends Controller
     $classroom->maximum_partecipants = $request->get('maximum_partecipants');
 
     if($classroom->save()) {
-      return $this->response->item(Classroom::find($id), new ClassroomTransformer);
+      return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
     }
     else {
       return $this->response->errorInternal('could_not_update_classroom');

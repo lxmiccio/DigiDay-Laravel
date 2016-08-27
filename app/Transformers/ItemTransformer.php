@@ -15,7 +15,7 @@ class ItemTransformer extends Fractal\TransformerAbstract
 			'amount' => $item->amount,
 
 			'events' => $item->events()->orderBy('starting_date', 'desc')->get([
-				'id',
+				'events.id',
 				'name',
 				'description',
 				'starting_date as startingDate',
