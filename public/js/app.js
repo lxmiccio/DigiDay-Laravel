@@ -37,6 +37,12 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/materiale/:id/modifica', {
     templateUrl: 'views/updateItem.html',
     controller: 'UpdateItemController as ctrl'
+  }).when('/amministrazione/utenti', {
+    templateUrl: 'views/administerUsers.html',
+    controller: 'AdministerUsersController as ctrl'
+  }).when('/amministrazione/utente/:id/modifica', {
+    templateUrl: 'views/updateUser.html',
+    controller: 'UpdateUserController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'

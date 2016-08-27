@@ -10,11 +10,17 @@ $api->version('v1', function ($api) {
 	$api->get('auth/logout', 'App\Api\V1\Controllers\AuthController@logout');
 	$api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
 	$api->post('auth/confirm', 'App\Api\V1\Controllers\AuthController@confirm');
-	$api->put('auth/{id}/update', 'App\Api\V1\Controllers\AuthController@update');
-	$api->put('auth/{id}/attach/role', 'App\Api\V1\Controllers\AuthController@attachRole');
-	$api->put('auth/{id}/detach/role', 'App\Api\V1\Controllers\AuthController@detachRole');
 	$api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
 	$api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
+
+	$api->get('users', 'App\Api\V1\Controllers\UserController@index');
+	$api->get('users/{id}', 'App\Api\V1\Controllers\UserController@show');
+	$api->post('users', 'App\Api\V1\Controllers\UserController@create');
+	$api->put('users/{id}/update/email', 'App\Api\V1\Controllers\UserController@updateEmail');
+	$api->put('users/{id}/update/image', 'App\Api\V1\Controllers\UserController@updateImage');
+	$api->put('users/{id}/attach/role', 'App\Api\V1\Controllers\UserController@attachRole');
+	$api->put('users/{id}/detach/role', 'App\Api\V1\Controllers\UserController@detachRole');
+	$api->delete('users/{id}', 'App\Api\V1\Controllers\UserController@destroy');
 
 	$api->resource('classrooms', 'App\Api\V1\Controllers\ClassroomController');
 

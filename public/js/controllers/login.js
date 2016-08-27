@@ -1,9 +1,9 @@
-angular.module('myControllers').controller('LoginController', function ($window, userService) {
+angular.module('myControllers').controller('LoginController', function ($window, authService) {
 
   var vm  = this;
 
   vm.login = function(fresher, password) {
-    userService.login({
+    authService.login({
       fresher: fresher,
       password: password
     }, function(response) {

@@ -1,8 +1,8 @@
-angular.module('myControllers').controller('SignupController', function ($filter, $location, $routeParams, eventService, imageService, roleService, userService) {
+angular.module('myControllers').controller('SignupController', function ($filter, $location, $routeParams, authService, eventService, imageService, roleService, userService) {
 
   var vm = this;
 
-  userService.me(function(response) {
+  authService.me(function(response) {
     vm.user = response.data.data;
   }, function(response) {
     console.log(response);
@@ -20,10 +20,6 @@ angular.module('myControllers').controller('SignupController', function ($filter
     console.log(response);
   });
 
-  vm.onBirthdateChange = function(birthdate) {
-    vm.birthdate = $filter('date')(birthdate, 'yyyy-MM-dd');
-  };
-
   vm.removeImage = function() {
     vm.image = null;
   };
@@ -34,16 +30,14 @@ angular.module('myControllers').controller('SignupController', function ($filter
     }
   };
 
-  vm.signup = function(fresher, firstName, lastName, email, password, birthdate, sex, role, image) {
+  vm.signup = function(fresher, firstName, lastName, email, password, role, image) {
     if(image) {
-      userService.signup({
+      authService.signup({
         'fresher': fresher,
         'first_name': firstName,
         'last_name': lastName,
         'email': email,
-        'password': password,
-        'birthdate': birthdate,
-        'sex': sex,
+        'password': password
       }, function(response) {
 
         var id = response.data.data.id;
@@ -54,14 +48,7 @@ angular.module('myControllers').controller('SignupController', function ($filter
           'filename': id
         }, function(response) {
 
-          userService.update(id, {
-            'fresher': fresher,
-            'first_name': firstName,
-            'last_name': lastName,
-            'email': email,
-            'password': password,
-            'birthdate': birthdate,
-            'sex': sex,
+          userService.updateImage(id, {
             'image': response.data.image
           }, function(response) {
 
@@ -86,14 +73,12 @@ angular.module('myControllers').controller('SignupController', function ($filter
       });
     }
     else {
-      userService.signup({
+      authService.signup({
         'fresher': fresher,
         'first_name': firstName,
         'last_name': lastName,
         'email': email,
-        'password': password,
-        'birthdate': birthdate,
-        'sex': sex
+        'password': password
       }, function(response) {
 
         userService.attachRole(response.data.data.id, {

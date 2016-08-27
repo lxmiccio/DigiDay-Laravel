@@ -36,7 +36,7 @@ angular.module('myControllers').controller('UpdateImageController', function ($w
           'filename': user.id
         }, function(response) {
 
-          userService.update(user.id, {
+          userService.updateImage(user.id, {
             'image': response.data.image
           }, function(response) {
             $window.location.href = 'utente/' + user.id;

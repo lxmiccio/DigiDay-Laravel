@@ -83,14 +83,12 @@ class AuthController extends Controller
 
   public function signup(Request $request)
   {
-    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email', 'password', 'birthdate', 'sex']), [
+    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email', 'password']), [
       'fresher' => 'required|unique:users,fresher',
       'first_name' => 'required',
       'last_name' => 'required',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|min:6',
-      'birthdate' => 'required|date_format:Y-m-d',
-      'sex' => 'required'
+      'password' => 'required|min:6'
     ]);
 
     if($validator->fails()) {
@@ -104,8 +102,6 @@ class AuthController extends Controller
     $user->last_name = $request->get('last_name');
     $user->email = $request->get('email');
     $user->password = $request->get('password');
-    $user->birthdate = $request->get('birthdate');
-    $user->sex = $request->get('sex');
     $user->image = $request->get('image');
     $user->confirmation_token = str_random(255);
 
@@ -114,70 +110,6 @@ class AuthController extends Controller
     }
     else {
       return $this->response->errorInternal('could_not_create_user');
-    }
-  }
-
-  public function update(Request $request, $id)
-  {
-    $user = User::find($id);
-
-    $user->image = $request->get('image');
-
-    if($user->save()) {
-      return $this->response->item(User::find($user->id), new UserTransformer);
-    }
-    else {
-      return $this->response->errorInternal('could_not_create_user');
-    }
-  }
-
-  public function attachRole(Request $request, $id)
-  {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['role_id'])), [
-      'id' => 'required|exists:users,id',
-      'role_id' => 'required|exists:roles,id'
-    ]);
-
-    if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
-    }
-
-    $user = User::find($id);
-
-    $count = count($user->roles()->get());
-
-    $user->roles()->attach($request->get('role_id'));
-
-    if(count($user->roles()->get()) > $count) {
-      return $this->response->item(User::find($id), new UserTransformer);
-    }
-    else {
-      return $this->response->errorInternal('could_not_attach_role');
-    }
-  }
-
-  public function detachRole(Request $request, $id)
-  {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['role_id'])), [
-      'id' => 'required|exists:users,id',
-      'role_id' => 'required|exists:roles,id'
-    ]);
-
-    if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
-    }
-
-    $user = User::find($id);
-
-    $count = count($user->roles()->get());
-
-    $user->roles()->detach($request->get('role_id'));
-
-    if(count($user->roles()->get()) < $count) {
-      return $this->response->item(User::find($id), new UserTransformer);
-    }
-    else {
-      return $this->response->errorInternal('could_not_detach_role');
     }
   }
 

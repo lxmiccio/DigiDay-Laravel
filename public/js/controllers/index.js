@@ -1,8 +1,8 @@
-angular.module('myControllers').controller('IndexController', function ($location, $window, localStorageService, userService) {
+angular.module('myControllers').controller('IndexController', function ($location, $window, localStorageService, authService) {
 
   var vm  = this;
 
-  userService.me(function(response) {
+  authService.me(function(response) {
     vm.user = response.data.data;
   }, function(response) {
     console.log(response);
@@ -24,11 +24,11 @@ angular.module('myControllers').controller('IndexController', function ($locatio
   };
 
   vm.isAuthenticated = function () {
-    return userService.isAuthenticated();
+    return authService.isAuthenticated();
   };
 
   vm.logout = function() {
-    userService.logout(function(response) {
+    authService.logout(function(response) {
       $window.location.href = '/';
     }, function(response) {
       console.log(response);

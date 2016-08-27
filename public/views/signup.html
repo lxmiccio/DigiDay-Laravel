@@ -58,40 +58,6 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <div class="dropdown">
-          <p class="dropdown-toggle" id="dropdown" data-toggle="dropdown">
-            <input type="text" class="form-control" placeholder="Data di Nascita..." data-ng-model="ctrl.birthdate" ng-change="ctrl.onBirthdateChange(ctrl.birthdate)">
-          </p>
-          <ul class="dropdown-menu">
-            <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown', startView:'year', minView: 'day'}" data-ng-model="ctrl.birthdate" ng-change="ctrl.onBirthdateChange(ctrl.birthdate)"/>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="row br-xs"></div>
-
-    <div class="row">
-      <div class="funkyradio">
-        <div class="col-xs-6">
-          <div class="funkyradio-primary">
-            <input type="radio" name="radio" id="radio1" ng-click="ctrl.sex = 'Uomo'" ng-init="ctrl.sex = 'Uomo'" checked/>
-            <label for="radio1" style="height: 34px;">Uomo</label>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="funkyradio-danger">
-            <input type="radio" name="radio" id="radio2" ng-click="ctrl.sex = 'Donna'"/>
-            <label for="radio2" style="height: 34px;">Donna</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row br-xs"></div>
-
-    <div class="row" style="margin-top: -5px">
-      <div class="col-xs-12">
         <div isteven-multi-select selection-mode="single" button-label="name" item-label="name" tick-property="ticked" max-labels="1"
         input-model="ctrl.roles" output-model="ctrl.role" helper-elements="filter"
         translation="{ search: 'Cerca Ruolo...', nothingSelected : 'Roulo...' }"></div>
@@ -100,7 +66,7 @@
 
     <div class="row br-xs"></div>
 
-    <div class="row" style="margin-top: -3px">
+    <div class="row">
       <div class="col-xs-12">
         <p class="text-right"><a ng-click="ctrl.removeImage()">Rimuovi Immagine</a></p>
 
@@ -123,7 +89,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <button type="button" class="btn btn-success" ng-click="ctrl.signup(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.password, ctrl.birthdate, ctrl.sex, ctrl.role, ctrl.image)">Registrati</button>
+          <button type="button" class="btn btn-success" ng-click="ctrl.signup(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.password, ctrl.role, ctrl.image)">Registrati</button>
         </div>
       </div>
     </div>
