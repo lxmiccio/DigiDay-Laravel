@@ -20,8 +20,8 @@ class CreateEventItemTable extends Migration
 
       $table->integer('item_id')->unsigned();
       $table->foreign('item_id')->references('id')->on('items');
-      
-      $table->integer('required_amount')->unsigned();
+
+      $table->integer('required')->unsigned();
 
       $table->unique(array('event_id','item_id'));
 

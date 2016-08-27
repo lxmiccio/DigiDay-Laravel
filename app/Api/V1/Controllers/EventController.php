@@ -41,14 +41,14 @@ class EventController extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make($request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipant', 'user_id', 'classroom_id', 'topic_id']), [
+    $validator = Validator::make($request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipants', 'user_id', 'classroom_id', 'topic_id']), [
       'name' => 'required',
       'starting_date' => 'required|date_format:Y-m-d H:i:s',
       'ending_date' => 'required|date_format:Y-m-d H:i:s|after:starting_date',
-      'maximum_partecipant' => 'required|integer|min:0',
-      'user_id' => 'required|exists:users:id',
+      'maximum_partecipants' => 'required|integer|min:0',
+      'user_id' => 'required|exists:users,id',
       'classroom_id' => 'required|exists:classrooms,id',
-      'topic_id' => 'required|exists:topics:id'
+      'topic_id' => 'required|exists:topics,id'
     ]);
 
     if($validator->fails()) {
@@ -61,13 +61,13 @@ class EventController extends Controller
     $event->description = $request->get('description');
     $event->starting_date = $request->get('starting_date');
     $event->ending_date = $request->get('ending_date');
-    $event->maximum_partecipant = $request->get('maximum_partecipant');
+    $event->maximum_partecipants = $request->get('maximum_partecipants');
     $event->user_id = $request->get('user_id');
     $event->classroom_id = $request->get('classroom_id');
     $event->topic_id = $request->get('topic_id');
 
     if($event->save()) {
-      return $this->response->item(Event::find($id), new EventTransformer);
+      return $this->response->item(Event::find($event->id), new EventTransformer);
     }
     else {
       return $this->response->errorInternal('could_not_create_event');
@@ -76,12 +76,12 @@ class EventController extends Controller
 
   public function update(Request $request, $id)
   {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipant'])), [
+    $validator = Validator::make(array_merge(['id' => $id], $request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipants'])), [
       'id' => 'required|exists:events,id',
       'name' => 'required',
       'starting_date' => 'required|date_format:Y-m-d H:i:s',
       'ending_date' => 'required|date_format:Y-m-d H:i:s|after:starting_date',
-      'maximum_partecipant' => 'required|integer|min:0'
+      'maximum_partecipants' => 'required|integer|min:0'
     ]);
 
     if($validator->fails()) {
@@ -94,7 +94,7 @@ class EventController extends Controller
     $event->description = $request->get('description');
     $event->starting_date = $request->get('starting_date');
     $event->ending_date = $request->get('ending_date');
-    $event->maximum_partecipant = $request->get('maximum_partecipant');
+    $event->maximum_partecipants = $request->get('maximum_partecipants');
 
     if($event->save()) {
       return $this->response->item(Event::find($id), new EventTransformer);
@@ -153,10 +153,10 @@ class EventController extends Controller
   }
 
   public function attachItem(Request $request, $id) {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['item_id', 'required_amount'])), [
+    $validator = Validator::make(array_merge(['id' => $id], $request->only(['item_id', 'required'])), [
       'id' => 'required|exists:events,id',
       'item_id' => 'required|exists:items,id',
-      'required_amount' => 'required|integer|min:0'
+      'required' => 'required|integer|min:0'
     ]);
 
     if($validator->fails()) {
@@ -167,7 +167,7 @@ class EventController extends Controller
 
     $count = count($event->items()->get());
 
-    $event->items()->attach([$request->get('item_id') => ['required_amount' => $request->get('required_amount')]]);
+    $event->items()->attach([$request->get('item_id') => ['required' => $request->get('required')]]);
 
     if(count($event->items()->get()) > $count) {
       return $this->response->item(Event::find($id), new EventTransformer);

@@ -10,7 +10,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <input type="text" class="form-control" placeholder="Nome..." ng-model="ctrl.nome" required/>
+        <input type="text" class="form-control" placeholder="Nome..." ng-model="ctrl.name" required/>
       </div>
     </div>
 
@@ -77,6 +77,15 @@
         <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" input-model="ctrl.filteredItems" output-model="ctrl.selectedItems"
         helper-elements="none filter" max-labels="1" translation="{ selectNone: 'Deseleziona tutti', search: 'Cerca Materiale...', nothingSelected : 'Materiali...' }"></div>
       </div>
+      <div class="row-fluid" ng-repeat="item in ctrl.selectedItems">
+        <div class="col-xs-6">
+          <div class="text-right" style="margin-top: 8px;">{{item.name}} ({{item.available}}): </div>
+        </div>
+
+        <div class="col-xs-6">
+          <input type="number" class="form-control" placeholder="{{item.name}}..." ng-change="ctrl.onItemRequiredChange(ctrl.selectedItems, $index)" ng-model="ctrl.selectedItems[$index].required" required/>
+        </div>
+      </div>
     </div>
 
     <div class="row br-sm"></div>
@@ -92,7 +101,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.name, ctrl.startingDate, ctrl.endingDate, ctrl.maximumPartecipants, ctrl.selectedClassroom, ctrl.selectedTopic, ctrl.selectedItems, index.user)">Crea</button>
+          <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.name, ctrl.startingDate, ctrl.endingDate, ctrl.maximumPartecipants, ctrl.selectedClassroom, ctrl.selectedTopic, ctrl.selectedItems, ctrl.description, index.user)">Crea</button>
         </div>
       </div>
     </div>

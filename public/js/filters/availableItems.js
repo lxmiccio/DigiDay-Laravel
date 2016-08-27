@@ -4,7 +4,7 @@ angular.module('myFilters').filter('availableItems', function() {
       var availableItems = [];
 
       angular.forEach(items, function(item) {
-        item.availableAmount = item.amount;
+        item.available = item.amount;
 
         if(!items.events) {
           availableItems.push(item);

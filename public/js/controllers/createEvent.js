@@ -1,4 +1,4 @@
-angular.module('myControllers').controller('CreateEventController', function ($filter, classroomService, eventService, itemService, topicService) {
+angular.module('myControllers').controller('CreateEventController', function ($filter, $q, classroomService, eventService, itemService, topicService) {
 
   var vm  = this;
 
@@ -43,6 +43,54 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
       vm.maximumPartecipants = 0;
     }
+  };
+
+  vm.onItemRequiredChange = function(selectedItems, index) {
+    if(!Number.isInteger(selectedItems[index].required) || selectedItems[index].required < 0) {
+      vm.selectedItems[index].required = 0;
+    } else if(selectedItems[index].required > selectedItems[index].available) {
+      vm.selectedItems[index].required = vm.selectedItems[index].available;
+    }
+  };
+
+  vm.create = function(name, startingDate, endingDate, maximumPartecipants, selectedClassroom, selectedTopic, selectedItems, description, user) {
+    console.log(maximumPartecipants)
+    eventService.create({
+      'name': name,
+      'starting_date': startingDate,
+      'ending_date': endingDate,
+      'maximum_partecipants': maximumPartecipants,
+      'user_id': user.id,
+      'classroom_id': selectedClassroom[0].id,
+      'topic_id': selectedTopic[0].id,
+      'description': description
+    }, function(response) {
+      var promises = [];
+
+      angular.forEach(selectedItems, function(item) {
+        var deferred = $q.defer();
+
+        eventService.attachItem(response.data.data.id, {
+          'item_id': item.id,
+          'required': item.required
+        }, function(response) {
+          deferred.resolve(response);
+        }, function(response) {
+          console.log(response);
+        });
+
+        promises.push(deferred.promise);
+      });
+
+      $q.all(promises).then(function(responses) {
+        $window.location.href = '';
+      }, function(response) {
+        console.log(response);
+      });
+
+    }, function(response) {
+      console.log(response);
+    });
   };
 
 });
