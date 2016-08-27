@@ -12,11 +12,15 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/accedi', {
     templateUrl: 'views/login.html',
     controller: 'LoginController as ctrl'
-  }).when('/utente/conferma/:confirmationToken', {
+  }).when('/utente/conferma/:token', {
     templateUrl: 'views/confirm.html',
     controller: 'ConfirmController as ctrl'
-  }).when('/utente/:id', {
-    templateUrl: 'views/profile.html'
+  }).when('/utente/recupera', {
+    templateUrl: 'views/recover.html',
+    controller: 'RecoverController as ctrl'
+  }).when('/utente/reimposta/:token', {
+    templateUrl: 'views/reset.html',
+    controller: 'ResetController as ctrl'
   }).when('/utente/:id/immagine', {
     templateUrl: 'views/updateImage.html',
     controller: 'UpdateImageController as ctrl'

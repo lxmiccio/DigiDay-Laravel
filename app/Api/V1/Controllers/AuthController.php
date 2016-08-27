@@ -115,8 +115,8 @@ class AuthController extends Controller
 
   public function confirm(Request $request)
   {
-    $validator = Validator::make($request->only(['confirmation_token', 'password']), [
-      'confirmation_token' => 'required|exists:users,confirmation_token',
+    $validator = Validator::make($request->only(['token', 'password']), [
+      'token' => 'required|exists:users,confirmation_token',
       'password' => 'required|min:6'
     ]);
 
@@ -124,7 +124,7 @@ class AuthController extends Controller
       throw new ValidationHttpException($validator->errors()->all());
     }
 
-    $user = User::where('confirmation_token', $request->get('confirmation_token'))->first();
+    $user = User::where('confirmation_token', $request->get('token'))->first();
 
     $user->password = $request->get('password');
     $user->confirmed = 1;

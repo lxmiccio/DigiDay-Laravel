@@ -4,19 +4,19 @@
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
     <div class="row">
       <div class="col-xs-12">
-        <h2 class="text-center"><strong>Conferma il tuo Account su DigiDay</strong></h2>
-      </div>
-    </div>
-
-    <div class="row br-sm"></div>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="text-center">Per confermare l'Account inserisci la Password</p>
+        <h2 class="text-center"><strong>Reimposta la tua Password</strong></h2>
       </div>
     </div>
 
     <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="text" class="form-control" placeholder="Matricola..." ng-model="ctrl.fresher" required/>
+      </div>
+    </div>
+
+    <div class="row br-xs"></div>
 
     <div class="row">
       <div class="col-xs-12">
@@ -37,7 +37,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <button type="button" class="btn btn-success" ng-click="ctrl.confirm(ctrl.password)" ng-disabled="!ctrl.password || ctrl.password.length < 6 || ctrl.password != ctrl.confirmationPassword">Conferma</button>
+          <button type="button" class="btn btn-success" ng-click="ctrl.reset(ctrl.fresher, ctrl.password, ctrl.confirmationPassword)" ng-disabled="!ctrl.password || ctrl.password.length < 6 || ctrl.password != ctrl.confirmationPassword">Conferma</button>
         </div>
       </div>
     </div>
