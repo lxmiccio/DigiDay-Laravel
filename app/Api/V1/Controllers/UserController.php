@@ -70,7 +70,6 @@ class UserController extends Controller
     if($user->save()) {
       Mail::send('emails.auth.confirm', ['user' => $user], function ($message) use ($user) {
         $message->from('miccio.alex@gmail.com', 'DigiDay');
-
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
       });
 
@@ -95,8 +94,15 @@ class UserController extends Controller
     $user = User::find($id);
 
     $user->email = $request->get('email');
+    $user->confirmation_token = str_random(255);
+    $user->confirmed = 0;
 
     if($user->save()) {
+      Mail::send('emails.auth.change', ['user' => $user], function ($message) use ($user) {
+        $message->from('miccio.alex@gmail.com', 'DigiDay');
+        $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
+      });
+
       return $this->response->item(User::find($user->id), new UserTransformer);
     }
     else {

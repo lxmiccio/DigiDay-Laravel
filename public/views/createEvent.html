@@ -1,0 +1,100 @@
+<div class="row" ng-if="index.isAuthenticated()">
+  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center"><strong>Crea un nuovo Evento</strong></h2>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="text" class="form-control" placeholder="Nome..." ng-model="ctrl.nome" required/>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="dropdown">
+          <p class="dropdown-toggle" id="dropdown1" data-toggle="dropdown">
+            <input type="text" class="form-control" placeholder="Data e Ora di Inizio..." data-ng-model="ctrl.startingDate" ng-change="ctrl.onStartingDateChange(ctrl.startingDate)">
+          </p>
+          <ul class="dropdown-menu">
+            <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown1'}" data-ng-model="ctrl.startingDate" ng-change="ctrl.onStartingDateChange(ctrl.startingDate)"/>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="dropdown">
+          <p class="dropdown-toggle" id="dropdown2" data-toggle="dropdown">
+            <input type="text" class="form-control" placeholder="Data e Ora di Fine..." data-ng-model="ctrl.endingDate" ng-change="ctrl.onEndingDateChange(ctrl.endingDate, ctrl.startingDate)">
+          </p>
+          <ul class="dropdown-menu">
+            <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown2'}" data-ng-model="ctrl.endingDate" ng-change="ctrl.onEndingDateChange(ctrl.endingDate, ctrl.startingDate, ctrl.classrooms, ctrl.items)"/>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="number" class="form-control" placeholder="Partecipanti..." ng-change="ctrl.onMaximumPartecipantsChange(ctrl.maximumPartecipants)" ng-model="ctrl.maximumPartecipants" required/>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div isteven-multi-select selection-mode="single" button-label="name" item-label="name" tick-property="ticked" input-model="ctrl.filteredClassrooms" output-model="ctrl.selectedClassroom"
+        helper-elements="none filter" max-labels="1" translation="{ selectNone: 'Deseleziona tutti', search: 'Cerca Aula...', nothingSelected : 'Aula...' }"></div>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div isteven-multi-select selection-mode="single" button-label="name" item-label="name" tick-property="ticked" input-model="ctrl.topics" output-model="ctrl.selectedTopic"
+        helper-elements="none filter" max-labels="1" translation="{ selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomento...' }"></div>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" input-model="ctrl.filteredItems" output-model="ctrl.selectedItems"
+        helper-elements="none filter" max-labels="1" translation="{ selectNone: 'Deseleziona tutti', search: 'Cerca Materiale...', nothingSelected : 'Materiali...' }"></div>
+      </div>
+    </div>
+
+    <div class="row br-sm"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <textarea rows="5" class="form-control" placeholder="Descrizione..." ng-model="ctrl.description" style="resize: none;"></textarea>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.name, ctrl.startingDate, ctrl.endingDate, ctrl.maximumPartecipants, ctrl.selectedClassroom, ctrl.selectedTopic, ctrl.selectedItems, index.user)">Crea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
