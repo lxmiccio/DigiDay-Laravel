@@ -1,15 +1,9 @@
-angular.module("myControllers").controller("CalendarController", function ($filter, calendarConfig, eventService, topicService, userService) {
+angular.module('myControllers').controller('CalendarController', function ($filter, calendarConfig, eventService, topicService) {
 
   var vm = this;
 
   vm.calendarView = 'month';
   vm.viewDate = new Date();
-
-  userService.me(function(response) {
-    vm.user = response.data.data;
-  }, function(response) {
-    console.log(response);
-  });
 
   eventService.getAll(function(response) {
     vm.events = response.data.data;
@@ -33,7 +27,7 @@ angular.module("myControllers").controller("CalendarController", function ($filt
   });
 
   vm.onTopicClick = function(events, topics) {
-    vm.filteredEvents = $filter('eventsOfTopic')(events, topics);
+    vm.filteredEvents = $filter('eventsOfTopics')(events, topics);
   };
 
 });

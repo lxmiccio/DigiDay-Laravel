@@ -39,11 +39,13 @@
   <script src="js/app.js"></script>
 
   <script src="js/controllers/module.js"></script>
+  <script src="js/controllers/administerClassrooms.js"></script>
+  <script src="js/controllers/administerItems.js"></script>
+  <script src="js/controllers/administerTopics.js"></script>
   <script src="js/controllers/calendar.js"></script>
   <script src="js/controllers/event.js"></script>
   <script src="js/controllers/index.js"></script>
   <script src="js/controllers/login.js"></script>
-  <script src="js/controllers/profile.js"></script>
   <script src="js/controllers/signup.js"></script>
   <script src="js/controllers/updateImage.js"></script>
 
@@ -58,7 +60,7 @@
 
   <script src="js/filters/module.js"></script>
   <script src="js/filters/decache.js"></script>
-  <script src="js/filters/eventsOfTopic.js"></script>
+  <script src="js/filters/eventsOfTopics.js"></script>
   <script src="js/filters/newEvents.js"></script>
   <script src="js/filters/oldEvents.js"></script>
 </head>
@@ -78,6 +80,7 @@
       <nav class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
+          <li ng-if="index.isAdministrator()"><a href="/amministrazione">Amministrazione</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/registrati">Registrati</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/accedi">Accedi</a></li>
           <li class="dropdown" ng-if="index.isAuthenticated()">

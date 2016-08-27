@@ -1,4 +1,4 @@
-angular.module("myControllers").controller("IndexController", function ($location, $window, localStorageService, userService) {
+angular.module('myControllers').controller('IndexController', function ($location, $window, localStorageService, userService) {
 
   var vm  = this;
 
@@ -7,6 +7,21 @@ angular.module("myControllers").controller("IndexController", function ($locatio
   }, function(response) {
     console.log(response);
   });
+
+  vm.isAdministrator = function () {
+    if(vm.user) {
+      var administrator = false;
+      angular.forEach(vm.user.roles, function(role) {
+        if(role.name == 'Amministratore') {
+          administrator = true;
+        }
+      });
+      return administrator;
+    }
+    else {
+      return false;
+    }
+  };
 
   vm.isAuthenticated = function () {
     return userService.isAuthenticated();

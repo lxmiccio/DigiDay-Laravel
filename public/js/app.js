@@ -13,11 +13,21 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
     templateUrl: 'views/login.html',
     controller: 'LoginController as ctrl'
   }).when('/utente/:id', {
-    templateUrl: 'views/profile.html',
-    controller: 'ProfileController as ctrl'
+    templateUrl: 'views/profile.html'
   }).when('/utente/:id/immagine', {
     templateUrl: 'views/updateImage.html',
     controller: 'UpdateImageController as ctrl'
+  }).when('/amministrazione', {
+    templateUrl: 'views/administration.html'
+  }).when('/amministrazione/argomenti', {
+    templateUrl: 'views/administerTopics.html',
+    controller: 'AdministerTopicsController as ctrl'
+  }).when('/amministrazione/classi', {
+    templateUrl: 'views/administerClassrooms.html',
+    controller: 'administerClassroomsController as ctrl'
+  }).when('/amministrazione/materiali', {
+    templateUrl: 'views/administerItems.html',
+    controller: 'administerItemsController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'

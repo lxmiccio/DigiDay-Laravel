@@ -1,4 +1,4 @@
-angular.module('myFilters').filter('eventsOfTopic', function() {
+angular.module('myFilters').filter('eventsOfTopics', function() {
   return function (events, topics) {
     if(angular.isArray(events) && angular.isArray(topics) && topics.length > 0) {
       var eventsOfTopic = [];

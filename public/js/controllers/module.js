@@ -1,1 +1,1 @@
-angular.module("myControllers", []);
+angular.module('myControllers', []);

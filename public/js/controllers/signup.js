@@ -1,4 +1,4 @@
-angular.module("myControllers").controller("SignupController", function ($filter, $location, $routeParams, eventService, imageService, roleService, userService) {
+angular.module('myControllers').controller('SignupController', function ($filter, $location, $routeParams, eventService, imageService, roleService, userService) {
 
   var vm = this;
 

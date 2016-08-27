@@ -1,4 +1,4 @@
-angular.module("myControllers").controller("LoginController", function ($window, userService) {
+angular.module('myControllers').controller('LoginController', function ($window, userService) {
 
   var vm  = this;
 

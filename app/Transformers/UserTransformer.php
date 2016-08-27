@@ -20,6 +20,11 @@ class UserTransformer extends Fractal\TransformerAbstract
 			'image' => $user->image,
 			'confirmed' => $user->confirmed,
 
+			'roles' => $user->roles()->orderBy('id')->get([
+				'roles.id',
+				'name'
+			]),
+
 			'events' => $user->events()->orderBy('starting_date')->get([
 				'events.id',
 				'name',

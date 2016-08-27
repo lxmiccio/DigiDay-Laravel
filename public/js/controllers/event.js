@@ -1,12 +1,6 @@
-angular.module("myControllers").controller("EventController", function ($filter, $routeParams, $window, eventService, userService) {
+angular.module('myControllers').controller('EventController', function ($filter, $routeParams, $window, eventService) {
 
   var vm = this;
-
-  userService.me(function(response) {
-    vm.user = response.data.data;
-  }, function(response) {
-    console.log(response);
-  });
 
   eventService.getById($routeParams.id, function(response) {
     vm.event = response.data.data;
