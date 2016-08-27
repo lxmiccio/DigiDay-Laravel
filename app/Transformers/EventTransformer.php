@@ -50,7 +50,7 @@ class EventTransformer extends Fractal\TransformerAbstract
 				'items.id',
 				'items.name',
 				'items.amount',
-				'required_amount as requiredAmount'
+				'required as required'
 			])
 		];
 	}

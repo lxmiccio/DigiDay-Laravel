@@ -15,6 +15,6 @@ class Item extends Model
 	*/
 	public function events()
 	{
-		return $this->belongsToMany('App\Event')->withPivot('required_amount');
+		return $this->belongsToMany('App\Event')->withPivot('required');
 	}
 }

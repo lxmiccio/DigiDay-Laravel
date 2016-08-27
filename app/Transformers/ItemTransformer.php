@@ -20,7 +20,8 @@ class ItemTransformer extends Fractal\TransformerAbstract
 				'description',
 				'starting_date as startingDate',
 				'ending_date as endingDate',
-				'maximum_partecipants as maximumPartecipants'
+				'maximum_partecipants as maximumPartecipants',
+        'required'
 			])
 		];
 	}
