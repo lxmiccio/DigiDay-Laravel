@@ -12,6 +12,9 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/accedi', {
     templateUrl: 'views/login.html',
     controller: 'LoginController as ctrl'
+  }).when('/utente/conferma/:confirmationToken', {
+    templateUrl: 'views/confirm.html',
+    controller: 'ConfirmController as ctrl'
   }).when('/utente/:id', {
     templateUrl: 'views/profile.html'
   }).when('/utente/:id/immagine', {

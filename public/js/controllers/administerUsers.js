@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('AdministerUsersController', function ($q, $window, roleService, userService) {
 
   var vm = this;
@@ -61,6 +63,14 @@ angular.module('myControllers').controller('AdministerUsersController', function
 
       userService.getAll(function(response) {
         vm.users = response.data.data;
+
+        angular.forEach(vm.users, function(user, index) {
+          var writtenRoles = '';
+          angular.forEach(user.roles, function(role) {
+            writtenRoles += role.name + ', ';
+          });
+          vm.users[index].writtenRoles = writtenRoles.slice(0, -2);
+        });
       }, function(response) {
         console.log(response);
       });

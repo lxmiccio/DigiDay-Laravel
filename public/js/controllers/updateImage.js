@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('UpdateImageController', function ($window, imageService, userService) {
 
   var vm  = this;

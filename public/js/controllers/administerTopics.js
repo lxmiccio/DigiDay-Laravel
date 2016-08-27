@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('AdministerTopicsController', function (topicService) {
 
   var vm  = this;

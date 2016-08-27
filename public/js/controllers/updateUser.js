@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('UpdateUserController', function ($filter, $routeParams, $window, roleService, userService) {
 
   var vm  = this;
@@ -19,7 +21,7 @@ angular.module('myControllers').controller('UpdateUserController', function ($fi
     console.log(response);
   });
 
-  vm.update = function(email, user) {
+  vm.updateEmail = function(email, user) {
     userService.updateEmail(user.id, {
       'email': email
     }, function(response) {

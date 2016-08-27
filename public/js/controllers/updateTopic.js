@@ -1,10 +1,12 @@
+// Flawless
+
 angular.module('myControllers').controller('UpdateTopicController', function ($routeParams, $window, topicService) {
 
   var vm  = this;
 
   topicService.getById($routeParams.id, function(response) {
     vm.topic = response.data.data;
-    
+
     vm.name = vm.topic.name;
     vm.description = vm.topic.description;
   }, function(response) {
