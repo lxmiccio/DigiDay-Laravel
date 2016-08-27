@@ -4,6 +4,7 @@ angular.module('myControllers').controller('UpdateItemController', function ($ro
 
   itemService.getById($routeParams.id, function(response) {
     vm.item = response.data.data;
+
     vm.name = vm.item.name;
     vm.amount = vm.item.amount;
     vm.description = vm.item.description;

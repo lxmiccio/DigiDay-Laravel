@@ -5,6 +5,7 @@ angular.module('myControllers').controller('UpdateUserController', function ($fi
   userService.getById($routeParams.id, function(response) {
 
     vm.user = response.data.data;
+
     vm.email = vm.user.email;
 
     roleService.getAll(function(response) {

@@ -8,12 +8,19 @@ angular.module('myControllers').controller('AdministerClassroomsController', fun
     console.log(response);
   });
 
+  vm.onMaximumPartecipantsChange = function(maximumPartecipants) {
+    if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
+      vm.maximumPartecipants = 0;
+    }
+  };
+
   vm.create = function(name, maximumPartecipants, description) {
     classroomService.create({
       'name': name,
       'maximum_partecipants': maximumPartecipants,
       'description': description
     }, function(response) {
+
       vm.name = null;
       vm.maximumPartecipants = null;
       vm.description = null;

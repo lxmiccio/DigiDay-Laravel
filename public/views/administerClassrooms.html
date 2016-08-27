@@ -29,7 +29,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <input type="number" class="form-control" placeholder="Partecipanti..." ng-model="ctrl.maximumPartecipants" required/>
+          <input type="number" class="form-control" placeholder="Partecipanti..." ng-change="ctrl.onMaximumPartecipantsChange(ctrl.maximumPartecipants)" ng-model="ctrl.maximumPartecipants" required/>
         </div>
       </div>
 
@@ -52,7 +52,8 @@
       </div>
 
       <hr class="visible-sm visible-xs"/>
-      <div class="row br-lg visible-sm visible-xs"></div>
+      <hr class="visible-sm visible-xs"/>
+      <hr class="visible-sm visible-xs"/>
     </div>
 
     <div class="col-md-5 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">

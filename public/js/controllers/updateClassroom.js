@@ -4,6 +4,7 @@ angular.module('myControllers').controller('UpdateClassRoomController', function
 
   classroomService.getById($routeParams.id, function(response) {
     vm.classroom = response.data.data;
+
     vm.name = vm.classroom.name;
     vm.maximumPartecipants = vm.classroom.maximumPartecipants;
     vm.description = vm.classroom.description;

@@ -13,6 +13,7 @@ angular.module('myControllers').controller('AdministerTopicsController', functio
       'name': name,
       'description': description
     }, function(response) {
+
       vm.name = null;
       vm.description = null;
 

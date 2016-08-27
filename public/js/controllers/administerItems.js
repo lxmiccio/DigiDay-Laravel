@@ -8,12 +8,19 @@ angular.module('myControllers').controller('AdministerItemsController', function
     console.log(response);
   });
 
+  vm.onAmountChange = function(amount) {
+    if(!Number.isInteger(amount) || amount < 0) {
+      vm.amount = 0;
+    }
+  };
+
   vm.create = function(name, amount, description) {
     itemService.create({
       'name': name,
       'amount': amount,
       'description': description
     }, function(response) {
+
       vm.name = null;
       vm.amount = null;
       vm.description = null;
