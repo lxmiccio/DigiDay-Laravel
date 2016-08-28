@@ -93,6 +93,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
           <li ng-if="index.isAdministrator()"><a href="/amministrazione">Amministrazione</a></li>
+          <li ng-if="index.isAuthenticated()"><a href="/evento/crea">Crea Evento</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/registrati">Registrati</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/accedi">Accedi</a></li>
           <li class="dropdown" ng-if="index.isAuthenticated()">

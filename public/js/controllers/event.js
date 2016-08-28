@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('EventController', function ($filter, $routeParams, $window, eventService) {
 
   var vm = this;
@@ -8,13 +10,19 @@ angular.module('myControllers').controller('EventController', function ($filter,
     console.log(response);
   });
 
+  vm.formatDate = function(string, format) {
+    var date = new Date(string);
+    date.setDate(date.getDate());
+    return $filter('date')(date, format);
+  };
+
   vm.remove = function(event) {
     eventService.remove(event.id, function(response) {
       $window.location.href = '/';
     }, function(response) {
       console.log(response);
     });
-  }
+  };
 
   vm.isSubscribed = function(event, user) {
     if(event) {
@@ -49,12 +57,6 @@ angular.module('myControllers').controller('EventController', function ($filter,
     }, function(response) {
       console.log(response);
     });
-  };
-
-  vm.stringToDate = function(string, format) {
-    var date = new Date(string);
-    date.setDate(date.getDate());
-    return $filter('date')(date, format);
   };
 
 });

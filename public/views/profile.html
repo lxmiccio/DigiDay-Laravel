@@ -41,9 +41,9 @@
             </div>
           </div>
 
-          <div class="row br-sm"></div>
+          <div class="row br-sm" ng-if="index.user.id == ctrl.user.id"></div>
 
-          <div class="row">
+          <div class="row" ng-if="index.user.id == ctrl.user.id">
             <div class="col-xs-12">
               <p class="text-center" ng-if="ctrl.user.confirmed">Hai confermato la Email</p>
               <p class="text-center" ng-if="!ctrl.user.confirmed">Non hai confermato la Email</p>

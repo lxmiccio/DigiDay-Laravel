@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('CreateEventController', function ($filter, $q, $window, classroomService, eventService, itemService, topicService) {
 
   var vm  = this;
@@ -24,19 +26,19 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     if(startingDate >= new Date()) {
       vm.startingDate = $filter('date')(startingDate, 'yyyy-MM-dd HH:mm:ss');
     } else {
-      vm.startingDate = '';
+      vm.startingDate = null;
     }
-    vm.endingDate = '';
+    vm.endingDate = null;
   };
 
   vm.onEndingDateChange = function(endingDate, startingDate, classrooms, items) {
     if(endingDate > new Date(startingDate)) {
       vm.endingDate = $filter('date')(endingDate, 'yyyy-MM-dd HH:mm:ss');
+      vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, startingDate, endingDate);
+      vm.filteredItems = $filter('availableItems')(items, startingDate, endingDate);
     } else {
-      vm.endingDate = '';
+      vm.endingDate = null;
     }
-    vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, startingDate, endingDate);
-    vm.filteredItems = $filter('availableItems')(items, startingDate, endingDate);
   };
 
   vm.onMaximumPartecipantsChange = function(maximumPartecipants, selectedClassroom) {
