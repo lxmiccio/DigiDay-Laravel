@@ -5,18 +5,20 @@ angular.module('myFilters').filter('availableItems', function() {
 
       angular.forEach(items, function(item) {
         item.available = item.amount;
-
-        if(!items.events) {
+        if(!item.events) {
           availableItems.push(item);
         } else {
-          angular.forEach(items.events, function(event) {
-            if ((!(startingDate < event.startingDate)) && (!(startingDate > event.endingDate))
-            || (!(event.startingDate < startingDate)) && (!(event.startingDate > endingDate))
-            || (!(endingDate < event.startingDate)) && (!(endingDate > event.endingDate))
-            || (!(event.endingDate < startingDate)) && (!(event.endingDate > endingDate))) {
-              //item.availableItems -= event.
+          angular.forEach(item.events, function(event) {
+            if ((!(new Date(startingDate) < new Date(event.startingDate))) && (!(new Date(startingDate) > new Date(event.endingDate)))
+            || (!(new Date(event.startingDate) < new Date(startingDate))) && (!(new Date(event.startingDate) > new Date(endingDate)))
+            || (!(new Date(endingDate) < new Date(event.startingDate))) && (!(new Date(endingDate) > new Date(event.endingDate)))
+            || (!(new Date(event.endingDate) < new Date(startingDate))) && (!(new Date(event.endingDate) > new Date(endingDate)))) {
+              item.available -= event.required
             }
           });
+          if(item.available > 0) {
+            availableItems.push(item);
+          }
         }
       });
 

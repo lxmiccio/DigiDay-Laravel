@@ -4,16 +4,16 @@ angular.module('myFilters').filter('availableClassrooms', function() {
       var availableClassrooms = [];
 
       angular.forEach(classrooms, function(classroom) {
-        if(!classrooms.events) {
+        if(!classroom.events) {
           availableClassrooms.push(classroom);
         } else {
           var free = true;
 
-          angular.forEach(classrooms.events, function(event) {
-            if ((!(startingDate < event.startingDate)) && (!(startingDate > event.endingDate))
-            || (!(event.startingDate < startingDate)) && (!(event.startingDate > endingDate))
-            || (!(endingDate < event.startingDate)) && (!(endingDate > event.endingDate))
-            || (!(event.endingDate < startingDate)) && (!(event.endingDate > endingDate))) {
+          angular.forEach(classroom.events, function(event) {
+            if ((!(new Date(startingDate) < new Date(event.startingDate))) && (!(new Date(startingDate) > new Date(event.endingDate)))
+            || (!(new Date(event.startingDate) < new Date(startingDate))) && (!(new Date(event.startingDate) > new Date(endingDate)))
+            || (!(new Date(endingDate) < new Date(event.startingDate))) && (!(new Date(endingDate) > new Date(event.endingDate)))
+            || (!(new Date(event.endingDate) < new Date(startingDate))) && (!(new Date(event.endingDate) > new Date(endingDate)))) {
               free = false;
             }
           });

@@ -1,4 +1,4 @@
-angular.module('myControllers').controller('CreateEventController', function ($filter, $q, classroomService, eventService, itemService, topicService) {
+angular.module('myControllers').controller('CreateEventController', function ($filter, $q, $window, classroomService, eventService, itemService, topicService) {
 
   var vm  = this;
 
@@ -39,9 +39,11 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     vm.filteredItems = $filter('availableItems')(items, startingDate, endingDate);
   };
 
-  vm.onMaximumPartecipantsChange = function(maximumPartecipants) {
+  vm.onMaximumPartecipantsChange = function(maximumPartecipants, selectedClassroom) {
     if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
       vm.maximumPartecipants = 0;
+    } else if(maximumPartecipants > selectedClassroom[0].maximumPartecipants) {
+      vm.maximumPartecipants = selectedClassroom[0].maximumPartecipants;
     }
   };
 
@@ -54,7 +56,6 @@ angular.module('myControllers').controller('CreateEventController', function ($f
   };
 
   vm.create = function(name, startingDate, endingDate, maximumPartecipants, selectedClassroom, selectedTopic, selectedItems, description, user) {
-    console.log(maximumPartecipants)
     eventService.create({
       'name': name,
       'starting_date': startingDate,
