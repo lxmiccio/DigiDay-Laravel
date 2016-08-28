@@ -6,6 +6,7 @@ angular.module('myControllers').controller('SignupController', function ($window
 
   roleService.getAll(function(response) {
     vm.roles = [];
+
     angular.forEach(response.data.data, function(role, index) {
       if(role.name != 'Amministratore') {
         vm.roles.push(role);

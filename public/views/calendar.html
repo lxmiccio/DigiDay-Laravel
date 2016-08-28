@@ -1,105 +1,80 @@
-<div class="hidden-xs">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
-      <div class="row">
+<!-- Flawless -->
+
+<style>
+  body {
+    min-width: 580px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
+    <div class="row">
+      <div class="col-xs-12">
         <h2 class="text-center">{{ctrl.calendarTitle}}</h2>
       </div>
+    </div>
 
-      <div class="row br-md"></div>
+    <div class="row br-md"></div>
 
-      <div class="row">
-        <div class="col-md-4 col-sm-4">
+    <div class="row hidden-xs">
+      <div class="col-md-4 col-sm-4">
+        <div class="btn-group">
+          <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" decrement="ctrl.calendarView"><i class="fa fa-backward" aria-hidden="true"></i></button>
+          <button mwl-date-modifier type="button" class="btn btn-default" date="ctrl.viewDate" set-to-today>Oggi</button>
+          <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" increment="ctrl.calendarView"><i class="fa fa-forward" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4">
+        <div class="text-center">
+          <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1" input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)" translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4">
+        <div class="text-right">
           <div class="btn-group">
-            <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" decrement="ctrl.calendarView">
-              <i class="fa fa-backward" aria-hidden="true"></i>
-            </button>
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'year'">Anno</label>
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'month'">Mese</label>
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'week'">Settimana</label>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="row visible-xs">
+      <div class="col-xs-6">
+        <div class="text-right">
+          <div class="btn-group">
+            <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" decrement="ctrl.calendarView"><i class="fa fa-backward" aria-hidden="true"></i></button>
             <button mwl-date-modifier type="button" class="btn btn-default" date="ctrl.viewDate" set-to-today>Oggi</button>
-
-            <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" increment="ctrl.calendarView">
-              <i class="fa fa-forward" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="text-center">
-            <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1"
-            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)"
-            translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="text-right">
-            <div class="btn-group">
-              <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'year'">Anno</label>
-              <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'month'">Mese</label>
-            </div>
+            <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" increment="ctrl.calendarView"><i class="fa fa-forward" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
 
-      <div class="row br-md"></div>
-
-      <mwl-calendar events="ctrl.filteredEvents" view="ctrl.calendarView" view-title="ctrl.calendarTitle" view-date="ctrl.viewDate"
-      on-event-click="index.redirect('evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
+      <div class="col-xs-6">
+        <div class="text-left">
+          <div class="btn-group">
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'year'">Anno</label>
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'month'">Mese</label>
+            <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'week'">Settimana</label>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="visible-xs">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="row">
-        <h2 class="text-center">{{ctrl.calendarTitle}}</h2>
-      </div>
+    <div class="row br-md visible-xs"></div>
 
-      <div class="row br-md"></div>
-
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="text-right">
-            <div class="btn-group">
-              <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" decrement="ctrl.calendarView">
-                <i class="fa fa-backward" aria-hidden="true"></i>
-              </button>
-
-              <button mwl-date-modifier type="button" class="btn btn-default" date="ctrl.viewDate" set-to-today>Oggi</button>
-
-              <button mwl-date-modifier type="button" class="btn btn-primary" date="ctrl.viewDate" increment="ctrl.calendarView">
-                <i class="fa fa-forward" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-6">
-          <div class="text-left">
-            <div class="btn-group">
-              <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'year'">Anno</label>
-              <label class="btn btn-primary" ng-model="ctrl.calendarView" uib-btn-radio="'month'">Mese</label>
-            </div>
-          </div>
+    <div class="row visible-xs">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="text-center">
+          <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1" input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)" translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
         </div>
       </div>
-
-      <div class="row br-md"></div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="text-center">
-            <div isteven-multi-select button-label="name" item-label="name" tick-property="ticked" max-labels="1"
-            input-model="ctrl.topics" output-model="ctrl.selectedTopics" helper-elements="all none filter" on-item-click="ctrl.onTopicClick(ctrl.events, ctrl.selectedTopics)"
-            translation="{ selectAll: 'Seleziona tutti', selectNone: 'Deseleziona tutti', search: 'Cerca Argomento...', nothingSelected : 'Argomenti...' }"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row br-md"></div>
-
-      <mwl-calendar events="ctrl.filteredEvents" view="ctrl.calendarView" view-title="ctrl.calendarTitle" view-date="ctrl.viewDate"
-      on-event-click="index.redirect('evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
     </div>
+
+    <div class="row br-md"></div>
+
+    <mwl-calendar events="ctrl.filteredEvents" view="ctrl.calendarView" view-title="ctrl.calendarTitle" view-date="ctrl.viewDate" on-event-click="index.redirect('evento/' + calendarEvent.id)" day-view-start="00:00" day-view-end="24:00" day-view-split="30"></mwl-calendar>
   </div>
 </div>
