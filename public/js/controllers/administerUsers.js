@@ -8,11 +8,11 @@ angular.module('myControllers').controller('AdministerUsersController', function
     vm.users = response.data.data;
 
     angular.forEach(vm.users, function(user, index) {
-      var writtenRoles = '';
+      vm.users[index].writtenRoles = '';
       angular.forEach(user.roles, function(role) {
-        writtenRoles += role.name + ', ';
+        vm.users[index].writtenRoles += role.name + ', ';
       });
-      vm.users[index].writtenRoles = writtenRoles.slice(0, -2);
+      vm.users[index].writtenRoles = vm.users[index].writtenRoles.slice(0, -2);
     });
   }, function(response) {
     console.log(response);

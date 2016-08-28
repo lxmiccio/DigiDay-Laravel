@@ -1,4 +1,6 @@
-<div class="row">
+<!-- Flawless -->
+
+<div class="row" ng-if="!index.isAuthenticated()">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
     <div class="row">
       <div class="col-xs-12">
@@ -22,7 +24,7 @@
       </div>
     </div>
 
-    <div class="row br-xs"></div>
+    <div class="row br-sm"></div>
 
     <div class="row">
       <div class="col-xs-12">
@@ -30,7 +32,7 @@
       </div>
     </div>
 
-    <div class="row br-xs"></div>
+    <div class="row br-sm"></div>
 
     <div class="row">
       <div class="col-xs-12">
@@ -38,7 +40,7 @@
       </div>
     </div>
 
-    <div class="row br-xs"></div>
+    <div class="row br-sm"></div>
 
     <div class="row">
       <div class="col-xs-12">
@@ -46,41 +48,11 @@
       </div>
     </div>
 
-    <div class="row br-xs"></div>
+    <div class="row br-sm"></div>
 
     <div class="row">
       <div class="col-xs-12">
-        <input type="password" class="form-control" placeholder="Password..." ng-model="ctrl.password" required/>
-      </div>
-    </div>
-
-    <div class="row br-xs"></div>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <div isteven-multi-select selection-mode="single" button-label="name" item-label="name" tick-property="ticked" max-labels="1"
-        input-model="ctrl.roles" output-model="ctrl.role" helper-elements="filter"
-        translation="{ search: 'Cerca Ruolo...', nothingSelected : 'Roulo...' }"></div>
-      </div>
-    </div>
-
-    <div class="row br-xs"></div>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="text-right"><a ng-click="ctrl.removeImage()">Rimuovi Immagine</a></p>
-
-        <div class="form-control" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="!ctrl.image" ng-model="image">
-          <div class="placeholder">Immagine...</div>
-        </div>
-
-        <div class="form-control form-control-image" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="ctrl.image" ng-model="image">
-          <div class="row">
-            <div class="col-xs-12">
-              <img ngf-src="ctrl.image" class="img-responsive img-rounded center-block">
-            </div>
-          </div>
-        </div>
+        <div isteven-multi-select selection-mode="single" button-label="name" item-label="name" tick-property="ticked" max-labels="1" input-model="ctrl.roles" output-model="ctrl.role" helper-elements="filter" translation="{ search: 'Cerca Ruolo...', nothingSelected : 'Roulo...' }"></div>
       </div>
     </div>
 
@@ -89,7 +61,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <button type="button" class="btn btn-success" ng-click="ctrl.signup(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.password, ctrl.role, ctrl.image)">Registrati</button>
+          <button type="button" class="btn btn-success" ng-click="ctrl.signup(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.role)">Registrati</button>
         </div>
       </div>
     </div>

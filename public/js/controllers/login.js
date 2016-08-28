@@ -1,3 +1,5 @@
+// Flawless
+
 angular.module('myControllers').controller('LoginController', function ($window, authService) {
 
   var vm  = this;

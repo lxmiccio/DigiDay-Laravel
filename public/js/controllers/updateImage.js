@@ -1,10 +1,18 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateImageController', function ($window, imageService, userService) {
+angular.module('myControllers').controller('UpdateImageController', function ($routeParams, $window, imageService, userService) {
 
   var vm  = this;
 
   vm.changedImage = false;
+
+  userService.getById($routeParams.id, function(response) {
+    vm.user = response.data.data;
+
+    vm.image = vm.user.image;
+  }, function(response) {
+    console.log(response);
+  });
 
   vm.removeImage = function() {
     vm.image = null;

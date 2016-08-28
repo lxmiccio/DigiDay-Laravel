@@ -88,7 +88,6 @@ class AuthController extends Controller
       'first_name' => 'required',
       'last_name' => 'required',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|min:6'
     ]);
 
     if($validator->fails()) {
@@ -101,11 +100,15 @@ class AuthController extends Controller
     $user->first_name = $request->get('first_name');
     $user->last_name = $request->get('last_name');
     $user->email = $request->get('email');
-    $user->password = $request->get('password');
-    $user->image = $request->get('image');
+    $user->password = str_random(255);
     $user->confirmation_token = str_random(255);
 
     if($user->save()) {
+      Mail::send('emails.auth.confirm', ['user' => $user], function ($message) use ($user) {
+        $message->from('miccio.alex@gmail.com', 'DigiDay');
+        $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
+      });
+
       return $this->response->item(User::find($user->id), new UserTransformer);
     }
     else {
