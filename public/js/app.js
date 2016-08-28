@@ -41,6 +41,9 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/classe/:id/modifica', {
     templateUrl: 'views/updateClassroom.html',
     controller: 'UpdateClassRoomController as ctrl'
+  }).when('/amministrazione/eventi', {
+    templateUrl: 'views/administerEvents.html',
+    controller: 'AdministerEventsController as ctrl'
   }).when('/amministrazione/materiali', {
     templateUrl: 'views/administerItems.html',
     controller: 'AdministerItemsController as ctrl'

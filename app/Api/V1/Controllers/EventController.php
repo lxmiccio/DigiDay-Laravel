@@ -209,6 +209,9 @@ class EventController extends Controller
 
     $event = Event::find($id);
 
+    $event->items()->detach();
+    $event->users()->detach();
+
     if($event->delete()) {
       return $this->response->noContent();
     }

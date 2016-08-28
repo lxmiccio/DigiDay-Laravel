@@ -16,7 +16,7 @@ class CreateEventItemTable extends Migration
       $table->increments('id');
 
       $table->integer('event_id')->unsigned();
-      $table->foreign('event_id')->references('id')->on('events');
+      $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 
       $table->integer('item_id')->unsigned();
       $table->foreign('item_id')->references('id')->on('items');

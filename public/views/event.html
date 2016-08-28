@@ -46,7 +46,6 @@
       <div class="row" ng-if="index.isAuthenticated()">
         <div class="col-xs-12">
           <div class="text-center" ng-if="index.user.id == ctrl.event.user.id">
-            <button class="btn btn-info" ng-click="index.redirect('evento/' + ctrl.event.id + '/modifica')">Modifica</button>
             <button class="btn btn-danger" ng-click="ctrl.remove(ctrl.event)">Elimina</button>
           </div>
           <div class="text-center" ng-if="index.user.id != ctrl.event.user.id">
