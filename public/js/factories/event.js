@@ -64,14 +64,6 @@ angular.module('myServices').factory('eventService', function ($http, localStora
 		});
 	};
 
-	function increase(id, onSuccess, onError) {
-		$http.put('api/events/' + id + '/increase').then(function(response) {
-			onSuccess(response);
-		}, function(response) {
-			onError(response);
-		});
-	};
-
 	function remove(id, onSuccess, onError) {
 		$http.delete('api/events/' + id).then(function() {
 			onSuccess();

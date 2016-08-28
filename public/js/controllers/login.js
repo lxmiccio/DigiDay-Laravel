@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('LoginController', function ($window, authService) {
+angular.module('myControllers').controller('LoginController', function ($rootScope, $window, authService) {
 
   var vm  = this;
 
@@ -9,7 +9,7 @@ angular.module('myControllers').controller('LoginController', function ($window,
       fresher: fresher,
       password: password
     }, function(response) {
-      $window.location.href = '/';
+      $window.location.href = $rootScope.previous;
     }, function(response) {
       console.log(response);
     });

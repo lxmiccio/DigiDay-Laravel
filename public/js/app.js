@@ -62,31 +62,13 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
-  })/*.otherwise({
+  }).otherwise({
     redirectTo: '/'
-  })*/;
+  });
 })
 
-.config(function($httpProvider) {
-  $httpProvider.interceptors.push('AuthHttpInterceptor');
-})
-
-.factory('AuthHttpInterceptor', function(localStorageService) {
-  return {
-    request: function(config) {
-      config.headers.Authorization = localStorageService.get('token');
-      return config;
-    },
-    // response: function(response) {
-    //   if(response.headers('Authorization')) {
-    //     localStorageService.set('token', response.headers('Authorization'));
-    //   }
-    //   return response;
-    // },
-    // responseError: function(response) {
-    //   return response;
-    // }
-  };
+.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider.setPrefix('digidayApp').setStorageType('localStorage');
 })
 
 .config(function($httpProvider, jwtInterceptorProvider) {
@@ -115,8 +97,26 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   $httpProvider.interceptors.push('jwtInterceptor');
 })
 
-.config(function (localStorageServiceProvider) {
-  localStorageServiceProvider.setPrefix('digidayApp').setStorageType('localStorage');
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('AuthHttpInterceptor');
+})
+
+.factory('AuthHttpInterceptor', function(localStorageService) {
+  return {
+    request: function(config) {
+      config.headers.Authorization = localStorageService.get('token');
+      return config;
+    },
+    // response: function(response) {
+    //   if(response.headers('Authorization')) {
+    //     localStorageService.set('token', response.headers('Authorization'));
+    //   }
+    //   return response;
+    // },
+    // responseError: function(response) {
+    //   return response;
+    // }
+  };
 })
 
 .run(function($rootScope) {

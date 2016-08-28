@@ -11,13 +11,12 @@
   <link href="bower_components/angular-multi-select/isteven-multi-select.css" rel="stylesheet"/>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet"/>
-  <link href="http://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet"/>
 
   <link href="css/body.css" rel="stylesheet"/>
   <link href="css/breaks.css" rel="stylesheet"/>
-  <link href="css/footer.css" rel="stylesheet"/>
-  <link href="css/funky-radio-buttons.css" rel="stylesheet"/>
   <link href="css/header.css" rel="stylesheet"/>
+
+  <link href="font/sniglet.css" rel="stylesheet"/>
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
@@ -98,13 +97,15 @@
           <li ng-if="index.isAuthenticated()"><a href="/evento/crea">Crea Evento</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/registrati">Registrati</a></li>
           <li ng-if="!index.isAuthenticated()"><a href="/accedi">Accedi</a></li>
-          <li class="dropdown" ng-if="index.isAuthenticated()">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{index.user.firstName}} {{index.user.lastName}} &nbsp;<span class="caret"></span></a>
+          <li class="dropdown hidden-xs" ng-if="index.isAuthenticated()">
+            <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}&nbsp;&nbsp;<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="/utente/{{index.user.id}}">Profilo</a></li>
               <li><a ng-click="index.logout()">Logout</a></li>
             </ul>
           </li>
+          <li class="visible-xs" ng-if="index.isAuthenticated()"><a href="/utente/{{index.user.id}}">Profilo</a></li>
+          <li class="visible-xs" ng-if="index.isAuthenticated()"><a ng-click="index.logout()">Logout</a></li>
         </ul>
       </nav>
     </div>

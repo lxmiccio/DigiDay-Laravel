@@ -1,5 +1,15 @@
 .navbar-inverse {
-  background-color: #792468;
+  background-color: #337ab7;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #FFF;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: #EFA94A;
 }
 
 .navbar-inverse .navbar-brand img {
@@ -40,14 +50,29 @@
     text-align: center;
     width: 100%;
   }
+    .navbar-inverse .navbar-nav > li > ul > li {
+      color: #FFF;
+      display: inline-block;
+      font-size: 16px;
+      line-height: 40px;
+      padding: 5px 0 5px 0px;
+      text-align: center;
+      width: 100%;
+    }
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a {
+  background: transparent;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > .dropdown > a:focus,
+.navbar-inverse .navbar-nav > .dropdown > a:hover,
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:focus,
 .navbar-inverse .navbar-nav > .active > a:hover {
   background: transparent;
-  color: #EE3B25;
+  color: #EFA94A;
 }
 
 .navbar-inverse .navbar-toggle {
