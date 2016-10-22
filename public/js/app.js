@@ -121,6 +121,8 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
 
 .run(function($rootScope) {
   $rootScope.$on('$locationChangeStart', function() {
-    $rootScope.previous = location.pathname;
+    if(location.pathname != "/accedi") {
+      $rootScope.previous = location.pathname;
+    }
   })
 });

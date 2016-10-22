@@ -83,7 +83,7 @@ class AuthController extends Controller
 
   public function signup(Request $request)
   {
-    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email', 'password']), [
+    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email']), [
       'fresher' => 'required|unique:users,fresher',
       'first_name' => 'required',
       'last_name' => 'required',
@@ -104,7 +104,7 @@ class AuthController extends Controller
     $user->confirmation_token = str_random(255);
 
     if($user->save()) {
-      Mail::send('emails.auth.confirm', ['user' => $user], function ($message) use ($user) {
+      Mail::send('emails.auth.confirm', ['user' => $user], function($message) use($user) {
         $message->from('miccio.alex@gmail.com', 'DigiDay');
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
       });

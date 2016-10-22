@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('SignupController', function ($window, authService, roleService) {
+angular.module('myControllers').controller('SignupController', function($window, authService, roleService, userService) {
 
   var vm = this;
 
@@ -22,9 +22,17 @@ angular.module('myControllers').controller('SignupController', function ($window
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
-      'role_id': role.id
+      'role_id': role[0].id
     }, function(response) {
-      $window.location.href = '';
+      
+      userService.attachRole(response.data.data.id, {
+        'role_id': role[0].id
+      }, function(response) {
+        $window.location.href = '';
+      }, function(response) {
+        console.log(response);
+      });
+
     }, function(response) {
       console.log(response);
     });
