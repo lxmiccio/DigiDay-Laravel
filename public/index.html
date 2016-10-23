@@ -88,24 +88,25 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">DigiDay</a>
+        <a class="navbar-brand" ng-click="index.redirect('/')">DigiDay</a>
       </div>
       <nav class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
-          <li ng-if="index.isAdministrator()"><a href="/amministrazione">Amministrazione</a></li>
-          <li ng-if="index.isAuthenticated()"><a href="/evento/crea">Crea Evento</a></li>
-          <li ng-if="!index.isAuthenticated()"><a href="/registrati">Registrati</a></li>
-          <li ng-if="!index.isAuthenticated()"><a href="/accedi">Accedi</a></li>
-          <li class="dropdown hidden-xs" ng-if="index.isAuthenticated()">
-            <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}&nbsp;&nbsp;<span class="caret"></span></a>
+          <li><a href="/eventi">Eventi</a></li>
+          <li ng-if="!index.isAuthenticated()"><a ng-click="index.locate('/registrati')">Registrati</a></li>
+          <li ng-if="!index.isAuthenticated()"><a ng-click="index.locate('/accedi')">Accedi</a></li>
+          <li ng-if="index.isAdministrator()"><a ng-click="index.locate('/amministrazione')">Amministrazione</a></li>
+          <li ng-if="index.isAuthenticated()"><a ng-click="index.locate('/evento/crea')">Crea Evento</a></li>
+          <li ng-if="index.isAuthenticated()" class="dropdown hidden-xs">
+            <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}&nbsp;<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/utente/{{index.user.id}}">Profilo</a></li>
+              <li><a ng-click="index.locate('/utente/' + index.user.id)">Profilo</a></li>
               <li><a ng-click="index.logout()">Logout</a></li>
             </ul>
           </li>
-          <li class="visible-xs" ng-if="index.isAuthenticated()"><a href="/utente/{{index.user.id}}">Profilo</a></li>
-          <li class="visible-xs" ng-if="index.isAuthenticated()"><a ng-click="index.logout()">Logout</a></li>
+          <li ng-if="index.isAuthenticated()" class="visible-xs"><a ng-click="index.locate('/utente/' + index.user.id)">Profilo</a></li>
+          <li ng-if="index.isAuthenticated()" class="visible-xs"><a ng-click="index.logout()">Logout</a></li>
         </ul>
       </nav>
     </div>

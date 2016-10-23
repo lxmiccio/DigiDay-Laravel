@@ -22,17 +22,32 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     console.log(response);
   });
 
+  vm.onDateChange = function(date) {
+    if(date >= new Date()) {
+      vm.date = $filter('date')(date, 'yyyy-MM-dd');
+    } else {
+      vm.date = null;
+    }
+    vm.startingDate = null;
+    vm.endingDate = null;
+  };
+
   vm.onStartingDateChange = function(startingDate) {
-    if(startingDate >= new Date()) {
-      vm.startingDate = $filter('date')(startingDate, 'yyyy-MM-dd HH:mm:ss');
+    startingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(startingDate).getHours(), new Date(startingDate).getMinutes());
+
+    if(startingDate >= new Date() && startingDate.getHours() >= 14 && startingDate.getHours() <= 18) {
+      vm.startingDate = $filter('date')(startingDate, 'yyyy-MM-dd HH:mm:ss')
     } else {
       vm.startingDate = null;
     }
+
     vm.endingDate = null;
   };
 
   vm.onEndingDateChange = function(endingDate, startingDate, classrooms, items) {
-    if(endingDate > new Date(startingDate)) {
+    endingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(endingDate).getHours(), new Date(endingDate).getMinutes());
+
+    if(endingDate > new Date(startingDate) && endingDate.getHours() <= 18) {
       vm.endingDate = $filter('date')(endingDate, 'yyyy-MM-dd HH:mm:ss');
       vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, startingDate, endingDate);
       vm.filteredItems = $filter('availableItems')(items, startingDate, endingDate);
@@ -40,6 +55,13 @@ angular.module('myControllers').controller('CreateEventController', function ($f
       vm.endingDate = null;
     }
   };
+
+  vm.onClassroomChange = function(classroom, maximumPartecipants)
+  {
+    if(maximumPartecipants > classroom[0].maximumPartecipants) {
+      vm.maximumPartecipants = classroom[0].maximumPartecipants;
+    }
+  }
 
   vm.onMaximumPartecipantsChange = function(maximumPartecipants, selectedClassroom) {
     if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
@@ -49,7 +71,7 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     }
   };
 
-  vm.onItemRequiredChange = function(selectedItems, index) {
+  vm.onItemRequiredAmountChange = function(selectedItems, index) {
     if(!Number.isInteger(selectedItems[index].required) || selectedItems[index].required < 0) {
       vm.selectedItems[index].required = 0;
     } else if(selectedItems[index].required > selectedItems[index].available) {
