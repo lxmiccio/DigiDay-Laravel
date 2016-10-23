@@ -11,16 +11,15 @@ class ClassroomTransformer extends Fractal\TransformerAbstract
 		return [
 			'id' => $classroom->id,
 			'name' => $classroom->name,
+			'capacity' => $classroom->capacity,
 			'description' => $classroom->description,
-			'maximumPartecipants' => $classroom->maximum_partecipants,
+			'disabled' => $classroom->disabled,
 
-			'events' => $classroom->events()->orderBy('starting_date')->get([
+			'events' => $classroom->events()->orderBy('starting_date', 'desc')->get([
 				'id',
 				'name',
-				'description',
 				'starting_date as startingDate',
 				'ending_date as endingDate',
-				'maximum_partecipants as maximumPartecipants'
 			])
 		];
 	}

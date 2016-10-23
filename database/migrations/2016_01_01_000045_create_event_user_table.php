@@ -15,6 +15,8 @@ class CreateEventUserTable extends Migration
     Schema::create('event_user', function (Blueprint $table) {
       $table->increments('id');
 
+      $table->boolean('attended');
+
       $table->integer('event_id')->unsigned();
       $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 

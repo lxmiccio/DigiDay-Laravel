@@ -8,16 +8,16 @@ angular.module('myControllers').controller('UpdateClassRoomController', function
     vm.classroom = response.data.data;
 
     vm.name = vm.classroom.name;
-    vm.maximumPartecipants = vm.classroom.maximumPartecipants;
+    vm.capacity = vm.classroom.capacity;
     vm.description = vm.classroom.description;
   }, function(response) {
     console.log(response);
   });
 
-  vm.update = function(name, maximumPartecipants, description, classroom) {
+  vm.update = function(name, capacity, description, classroom) {
     classroomService.update(classroom.id, {
       'name': name,
-      'maximum_partecipants': maximumPartecipants,
+      'capacity': capacity,
       'description': description
     }, function(response) {
       $window.location.href = 'amministrazione/classi';

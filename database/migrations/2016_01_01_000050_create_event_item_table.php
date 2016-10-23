@@ -15,13 +15,13 @@ class CreateEventItemTable extends Migration
     Schema::create('event_item', function (Blueprint $table) {
       $table->increments('id');
 
+      $table->integer('required')->unsigned();
+
       $table->integer('event_id')->unsigned();
       $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 
       $table->integer('item_id')->unsigned();
       $table->foreign('item_id')->references('id')->on('items');
-
-      $table->integer('required')->unsigned();
 
       $table->unique(array('event_id','item_id'));
 

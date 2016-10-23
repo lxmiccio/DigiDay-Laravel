@@ -16,9 +16,11 @@ class CreateClassroomsTable extends Migration
       $table->increments('id');
 
       $table->string('name')->unique();
-      $table->text('description')->nullable();
+      $table->integer('capacity')->unsigned();
 
-      $table->integer('maximum_partecipants')->unsigned();
+      $table->text('description')->nullable();
+      
+      $table->boolean('disabled')->default(0);
 
       $table->timestamps();
     });

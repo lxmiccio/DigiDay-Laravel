@@ -41,9 +41,9 @@ class ClassroomController extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make($request->only(['name', 'maximum_partecipants']), [
+    $validator = Validator::make($request->only(['name', 'capacity']), [
       'name' => 'required|unique:classrooms,name',
-      'maximum_partecipants' => 'required|integer|min:0'
+      'capacity' => 'required|integer|min:0'
     ]);
 
     if($validator->fails()) {
@@ -54,7 +54,7 @@ class ClassroomController extends Controller
 
     $classroom->name = $request->get('name');
     $classroom->description = $request->get('description');
-    $classroom->maximum_partecipants = $request->get('maximum_partecipants');
+    $classroom->capacity = $request->get('capacity');
 
     if($classroom->save()) {
       return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
@@ -66,10 +66,10 @@ class ClassroomController extends Controller
 
   public function update(Request $request, $id)
   {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['name', 'maximum_partecipants'])), [
+    $validator = Validator::make(array_merge(['id' => $id], $request->only(['name', 'capacity'])), [
       'id' => 'required|exists:classrooms,id',
       'name' => 'required',
-      'maximum_partecipants' => 'required|integer|min:0'
+      'capacity' => 'required|integer|min:0'
     ]);
 
     if($validator->fails()) {
@@ -80,7 +80,7 @@ class ClassroomController extends Controller
 
     $classroom->name = $request->get('name');
     $classroom->description = $request->get('description');
-    $classroom->maximum_partecipants = $request->get('maximum_partecipants');
+    $classroom->capacity = $request->get('capacity');
 
     if($classroom->save()) {
       return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);

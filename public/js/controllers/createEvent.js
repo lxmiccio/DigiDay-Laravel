@@ -58,16 +58,16 @@ angular.module('myControllers').controller('CreateEventController', function ($f
 
   vm.onClassroomChange = function(classroom, maximumPartecipants)
   {
-    if(maximumPartecipants > classroom[0].maximumPartecipants) {
-      vm.maximumPartecipants = classroom[0].maximumPartecipants;
+    if(maximumPartecipants > classroom[0].capacity) {
+      vm.maximumPartecipants = classroom[0].capacity;
     }
   }
 
   vm.onMaximumPartecipantsChange = function(maximumPartecipants, selectedClassroom) {
     if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
       vm.maximumPartecipants = 0;
-    } else if(maximumPartecipants > selectedClassroom[0].maximumPartecipants) {
-      vm.maximumPartecipants = selectedClassroom[0].maximumPartecipants;
+    } else if(maximumPartecipants > selectedClassroom[0].capacity) {
+      vm.maximumPartecipants = selectedClassroom[0].capacity;
     }
   };
 

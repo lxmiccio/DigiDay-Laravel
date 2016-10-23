@@ -12,14 +12,13 @@ class TopicTransformer extends Fractal\TransformerAbstract
 			'id' => $topic->id,
 			'name' => $topic->name,
 			'description' => $topic->description,
+			'disabled' => $topic->disabled,
 
-			'events' => $topic->events()->orderBy('starting_date')->get([
+			'events' => $topic->events()->orderBy('starting_date', 'desc')->get([
 				'id',
 				'name',
-				'description',
 				'starting_date as startingDate',
 				'ending_date as endingDate',
-				'maximum_partecipants as maximumPartecipants'
 			])
 		];
 	}

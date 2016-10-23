@@ -10,21 +10,21 @@ angular.module('myControllers').controller('AdministerClassroomsController', fun
     console.log(response);
   });
 
-  vm.onMaximumPartecipantsChange = function(maximumPartecipants) {
-    if(!Number.isInteger(maximumPartecipants) || maximumPartecipants < 0) {
-      vm.maximumPartecipants = 0;
+  vm.onCapacityChange = function(capacity) {
+    if(!Number.isInteger(capacity) || capacity < 0) {
+      vm.capacity = 0;
     }
   };
 
-  vm.create = function(name, maximumPartecipants, description) {
+  vm.create = function(name, capacity, description) {
     classroomService.create({
       'name': name,
-      'maximum_partecipants': maximumPartecipants,
+      'maximum_partecipants': capacity,
       'description': description
     }, function(response) {
 
       vm.name = null;
-      vm.maximumPartecipants = null;
+      vm.capacity = null;
       vm.description = null;
 
       classroomService.getAll(function(response) {

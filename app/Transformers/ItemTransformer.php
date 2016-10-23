@@ -11,17 +11,15 @@ class ItemTransformer extends Fractal\TransformerAbstract
 		return [
 			'id' => $item->id,
 			'name' => $item->name,
-			'description' => $item->description,
 			'amount' => $item->amount,
+			'description' => $item->description,
 
 			'events' => $item->events()->orderBy('starting_date', 'desc')->get([
 				'events.id',
-				'name',
-				'description',
-				'starting_date as startingDate',
-				'ending_date as endingDate',
-				'maximum_partecipants as maximumPartecipants',
-        'required'
+				'events.name',
+				'events.starting_date as startingDate',
+				'events.ending_date as endingDate',
+        'event_item.required'
 			])
 		];
 	}

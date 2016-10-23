@@ -16,12 +16,13 @@ class CreateEventsTable extends Migration
       $table->increments('id');
 
       $table->string('name');
-      $table->text('description')->nullable();
 
       $table->datetime('starting_date');
       $table->datetime('ending_date');
 
       $table->integer('maximum_partecipants')->unsigned();
+
+      $table->text('description')->nullable();
 
       $table->integer('user_id')->unsigned();
       $table->foreign('user_id')->references('id')->on('users');

@@ -83,11 +83,11 @@ class AuthController extends Controller
 
   public function signup(Request $request)
   {
-    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email']), [
+    $validator = Validator::make($request->only(['fresher', 'email', 'first_name', 'last_name']), [
       'fresher' => 'required|unique:users,fresher',
-      'first_name' => 'required',
-      'last_name' => 'required',
       'email' => 'required|email|unique:users,email',
+      'first_name' => 'required',
+      'last_name' => 'required'
     ]);
 
     if($validator->fails()) {
@@ -97,9 +97,10 @@ class AuthController extends Controller
     $user = new User;
 
     $user->fresher = $request->get('fresher');
+    $user->email = $request->get('email');
     $user->first_name = $request->get('first_name');
     $user->last_name = $request->get('last_name');
-    $user->email = $request->get('email');
+    $user->image = 'images/default/default.jpg';
     $user->password = str_random(255);
     $user->confirmation_token = str_random(255);
 

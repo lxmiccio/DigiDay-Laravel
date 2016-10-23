@@ -26,7 +26,7 @@
           <td class="text-center">{{event.topic.name}}</td>
           <td class="text-center"><a ng-click="index.locate('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
           <td class="text-center">{{event.duration}}</td>
-          <td class="text-center">{{event.users.length}}</td>
+          <td class="text-center">{{event.users.length}}/{{event.maximimPartecipants}}</td>
         </tr>
       </tbody>
     </table>
@@ -65,7 +65,7 @@
           <td class="text-center">{{event.topic.name}}</td>
           <td class="text-center"><a ng-click="index.locate('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
           <td class="text-center">{{event.duration}}</td>
-          <td class="text-center">{{event.users.length}}</td>
+          <td class="text-center">{{event.users.length}}/{{event.maximimPartecipants}}</td>
         </tr>
       </tbody>
     </table>
@@ -104,7 +104,7 @@
           <td class="text-center">{{event.topic.name}}</td>
           <td class="text-center"><a ng-click="index.locate('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
           <td class="text-center">{{event.duration}}</td>
-          <td class="text-center">{{event.users.length}}</td>
+          <td class="text-center">{{event.users.length}}/{{event.maximimPartecipants}}</td>
         </tr>
       </tbody>
     </table>

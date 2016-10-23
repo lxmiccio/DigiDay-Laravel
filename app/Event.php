@@ -7,16 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
   protected $fillable = [
-    'name', 'description', 'starting_date', 'ending_date', 'maximum_partecipants'
+    'name', 'starting_date', 'ending_date', 'maximum_partecipants', 'description', 'image'
   ];
-
-  /**
-  * Get the user that owns the event.
-  */
-  public function user()
-  {
-    return $this->belongsTo('App\User');
-  }
 
   /**
   * Get the classroom that owns the event.
@@ -35,11 +27,11 @@ class Event extends Model
   }
 
   /**
-  * Get the users that belong to the event.
+  * Get the user that owns the event.
   */
-  public function users()
+  public function user()
   {
-    return $this->belongsToMany('App\User');
+    return $this->belongsTo('App\User');
   }
 
   /**
@@ -48,5 +40,13 @@ class Event extends Model
   public function items()
   {
     return $this->belongsToMany('App\Item')->withPivot('required');
+  }
+
+  /**
+  * Get the users that belong to the event.
+  */
+  public function users()
+  {
+    return $this->belongsToMany('App\User');
   }
 }

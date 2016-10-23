@@ -16,17 +16,20 @@ class CreateUsersTable extends Migration
       $table->increments('id');
 
       $table->string('fresher')->unique();
+      $table->string('password');
+
+      $table->string('email')->unique();
 
       $table->string('first_name');
       $table->string('last_name');
-      $table->string('email')->unique();
-
-      $table->string('password');
 
       $table->string('image')->nullable();
 
       $table->string('confirmation_token');
+
       $table->boolean('confirmed')->default(0);
+
+      $table->boolean('disabled')->default(0);
 
       $table->timestamps();
     });

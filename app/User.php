@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fresher', 'first_name', 'last_name', 'email', 'password', 'birthdate', 'sex', 'image'
+        'fresher', 'password', 'email', 'first_name', 'last_name', 'image'
     ];
 
     /**
@@ -40,14 +40,6 @@ class User extends Authenticatable
         return $this->hasMany('App\PasswordReset');
     }
 
-    /**
-     * Get the roles that belong to the user.
-     */
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
-    }
-
   	/**
   	* Get the events that the user attends.
   	*/
@@ -55,6 +47,14 @@ class User extends Authenticatable
   	{
   		return $this->belongsToMany('App\Event');
   	}
+
+    /**
+     * Get the roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
 
     /**
      * This mutator automatically hashes the password.
