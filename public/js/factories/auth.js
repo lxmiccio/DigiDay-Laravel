@@ -8,6 +8,8 @@ angular.module('myServices').factory('authService', function ($http, localStorag
         localStorageService.remove('token');
         onError(response);
       });
+    } else {
+      onError();
     }
   };
 
