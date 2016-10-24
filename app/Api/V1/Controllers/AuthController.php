@@ -75,8 +75,7 @@ class AuthController extends Controller
   {
     if(JWTAuth::parseToken()->invalidate()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_logout');
     }
   }
@@ -95,7 +94,6 @@ class AuthController extends Controller
     }
 
     $user = new User;
-
     $user->fresher = $request->get('fresher');
     $user->email = $request->get('email');
     $user->first_name = $request->get('first_name');
@@ -105,14 +103,13 @@ class AuthController extends Controller
     $user->confirmation_token = str_random(255);
 
     if($user->save()) {
-      Mail::send('emails.auth.confirm', ['user' => $user], function($message) use($user) {
+      Mail::send('emails.auth.confirm', ['user' => $user], function ($message) use ($user) {
         $message->from('miccio.alex@gmail.com', 'DigiDay');
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
       });
 
       return $this->response->item(User::find($user->id), new UserTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_user');
     }
   }
@@ -129,14 +126,12 @@ class AuthController extends Controller
     }
 
     $user = User::where('confirmation_token', $request->get('token'))->first();
-
     $user->password = $request->get('password');
     $user->confirmed = 1;
 
     if($user->save()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_confirm_user');
     }
   }
@@ -157,8 +152,7 @@ class AuthController extends Controller
 
     if($response == Password::RESET_LINK_SENT) {
       return $this->response->noContent();
-    }
-    else if($response == Password::INVALID_USER){
+    } else if($response == Password::INVALID_USER) {
       return $this->response->errorNotFound('user_not_found');
     }
   }
@@ -183,8 +177,7 @@ class AuthController extends Controller
 
     if($response == Password::PASSWORD_RESET) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_reset_password');
     }
   }

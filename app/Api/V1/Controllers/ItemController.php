@@ -23,7 +23,7 @@ class ItemController extends Controller
 
   public function index()
   {
-    return $this->response->collection(Item::all(), new ItemTransformer);
+    return $this->response->collection(Item::orderBy('name')->get(), new ItemTransformer);
   }
 
   public function show($id)
@@ -43,7 +43,7 @@ class ItemController extends Controller
   {
     $validator = Validator::make($request->only(['name', 'amount']), [
       'name' => 'required',
-      'amount' => 'required|integer|min:0'
+      'amount' => 'required|integer|min:1'
     ]);
 
     if($validator->fails()) {
@@ -51,15 +51,13 @@ class ItemController extends Controller
     }
 
     $item = new Item;
-
     $item->name = $request->get('name');
-    $item->description = $request->get('description');
     $item->amount = $request->get('amount');
+    $item->description = $request->get('description');
 
     if($item->save()) {
       return $this->response->item(Item::find($item->id), new ItemTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_item');
     }
   }
@@ -77,15 +75,13 @@ class ItemController extends Controller
     }
 
     $item = Item::find($id);
-
     $item->name = $request->get('name');
-    $item->description = $request->get('description');
     $item->amount = $request->get('amount');
+    $item->description = $request->get('description');
 
     if($item->save()) {
       return $this->response->item(Item::find($id), new ItemTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_update_item');
     }
   }
@@ -97,12 +93,27 @@ class ItemController extends Controller
     ]);
 
     $item = Item::find($id);
+    $item->disabled = 1;
 
-    if($item->delete()) {
+    if($item->save()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_delete_item');
     }
   }
+
+  // public function destroy($id)
+  // {
+  //   $validator = Validator::make(['id' => $id], [
+  //     'id' => 'required|exists:items,id'
+  //   ]);
+  //
+  //   $item = Item::find($id);
+  //
+  //   if($item->delete()) {
+  //     return $this->response->noContent();
+  //   } else {
+  //     return $this->response->errorInternal('could_not_delete_item');
+  //   }
+  // }
 }

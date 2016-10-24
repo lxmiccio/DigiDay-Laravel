@@ -20,6 +20,8 @@ class CreateItemsTable extends Migration
 
       $table->text('description')->nullable();
 
+      $table->boolean('disabled')->default(0);
+
       $table->timestamps();
     });
   }

@@ -23,7 +23,7 @@ class TopicController extends Controller
 
   public function index()
   {
-    return $this->response->collection(Topic::all(), new TopicTransformer);
+    return $this->response->collection(Topic::orderBy('name')->get(), new TopicTransformer);
   }
 
   public function show($id)
@@ -50,14 +50,12 @@ class TopicController extends Controller
     }
 
     $topic = new Topic;
-
     $topic->name = $request->get('name');
     $topic->description = $request->get('description');
 
     if($topic->save()) {
       return $this->response->item(Topic::find($topic->id), new TopicTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_topic');
     }
   }
@@ -74,14 +72,12 @@ class TopicController extends Controller
     }
 
     $topic = Topic::find($id);
-
     $topic->name = $request->get('name');
     $topic->description = $request->get('description');
 
     if($topic->save()) {
       return $this->response->item(Topic::find($topic->id), new TopicTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_update_topic');
     }
   }
@@ -93,12 +89,27 @@ class TopicController extends Controller
     ]);
 
     $topic = Topic::find($id);
+    $topic->disabled = 1;
 
-    if($topic->delete()) {
+    if($topic->save()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_delete_topic');
     }
   }
+
+  // public function destroy($id)
+  // {
+  //   $validator = Validator::make(['id' => $id], [
+  //     'id' => 'required|exists:topics,id'
+  //   ]);
+  //
+  //   $topic = Topic::find($id);
+  //
+  //   if($topic->delete()) {
+  //     return $this->response->noContent();
+  //   } else {
+  //     return $this->response->errorInternal('could_not_delete_topic');
+  //   }
+  // }
 }

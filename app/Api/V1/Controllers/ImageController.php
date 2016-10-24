@@ -65,12 +65,10 @@ class ImageController extends Controller
     if(file_exists($request->get('image'))) {
       if(unlink($request->get('image'))) {
         return $this->response->noContent();
-      }
-      else {
+      } else {
         return $this->response->errorInternal('could_not_remove_image');
       }
-    }
-    else {
+    } else {
       return $this->response->noContent();
     }
   }

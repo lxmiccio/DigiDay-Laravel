@@ -23,7 +23,7 @@ class ClassroomController extends Controller
 
   public function index()
   {
-    return $this->response->collection(Classroom::all(), new ClassroomTransformer);
+    return $this->response->collection(Classroom::orderBy('name')->get(), new ClassroomTransformer);
   }
 
   public function show($id)
@@ -43,7 +43,7 @@ class ClassroomController extends Controller
   {
     $validator = Validator::make($request->only(['name', 'capacity']), [
       'name' => 'required|unique:classrooms,name',
-      'capacity' => 'required|integer|min:0'
+      'capacity' => 'required|integer|min:1'
     ]);
 
     if($validator->fails()) {
@@ -51,15 +51,13 @@ class ClassroomController extends Controller
     }
 
     $classroom = new Classroom;
-
     $classroom->name = $request->get('name');
-    $classroom->description = $request->get('description');
     $classroom->capacity = $request->get('capacity');
+    $classroom->description = $request->get('description');
 
     if($classroom->save()) {
       return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_classroom');
     }
   }
@@ -68,8 +66,8 @@ class ClassroomController extends Controller
   {
     $validator = Validator::make(array_merge(['id' => $id], $request->only(['name', 'capacity'])), [
       'id' => 'required|exists:classrooms,id',
-      'name' => 'required',
-      'capacity' => 'required|integer|min:0'
+      'name' => 'required|unique:classrooms,name',
+      'capacity' => 'required|integer|min:1'
     ]);
 
     if($validator->fails()) {
@@ -77,15 +75,13 @@ class ClassroomController extends Controller
     }
 
     $classroom = Classroom::find($id);
-
     $classroom->name = $request->get('name');
-    $classroom->description = $request->get('description');
     $classroom->capacity = $request->get('capacity');
+    $classroom->description = $request->get('description');
 
     if($classroom->save()) {
       return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_update_classroom');
     }
   }
@@ -97,12 +93,27 @@ class ClassroomController extends Controller
     ]);
 
     $classroom = Classroom::find($id);
+    $classroom->disabled = 1;
 
-    if($classroom->delete()) {
+    if($classroom->save()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_delete_classroom');
     }
   }
+
+  // public function destroy($id)
+  // {
+  //   $validator = Validator::make(['id' => $id], [
+  //     'id' => 'required|exists:classrooms,id'
+  //   ]);
+  //
+  //   $classroom = Classroom::find($id);
+  //
+  //   if($classroom->delete()) {
+  //     return $this->response->noContent();
+  //   } else {
+  //     return $this->response->errorInternal('could_not_delete_classroom');
+  //   }
+  // }
 }

@@ -23,7 +23,7 @@ class EventController extends Controller
 
   public function index()
   {
-    return $this->response->collection(Event::all(), new EventTransformer);
+    return $this->response->collection(Event::orderBy('starting_date', 'desc')->get(), new EventTransformer);
   }
 
   public function show($id)
@@ -41,14 +41,14 @@ class EventController extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make($request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipants', 'user_id', 'classroom_id', 'topic_id']), [
+    $validator = Validator::make($request->only(['name', 'starting_date', 'ending_date', 'maximum_partecipants', 'classroom_id', 'topic_id', 'user_id']), [
       'name' => 'required',
       'starting_date' => 'required|date_format:Y-m-d H:i:s',
       'ending_date' => 'required|date_format:Y-m-d H:i:s|after:starting_date',
-      'maximum_partecipants' => 'required|integer|min:0',
-      'user_id' => 'required|exists:users,id',
+      'maximum_partecipants' => 'required|integer|min:1',
       'classroom_id' => 'required|exists:classrooms,id',
-      'topic_id' => 'required|exists:topics,id'
+      'topic_id' => 'required|exists:topics,id',
+      'user_id' => 'required|exists:users,id'
     ]);
 
     if($validator->fails()) {
@@ -56,20 +56,18 @@ class EventController extends Controller
     }
 
     $event = new Event;
-
     $event->name = $request->get('name');
-    $event->description = $request->get('description');
     $event->starting_date = $request->get('starting_date');
     $event->ending_date = $request->get('ending_date');
     $event->maximum_partecipants = $request->get('maximum_partecipants');
-    $event->user_id = $request->get('user_id');
+    $event->description = $request->get('description');
     $event->classroom_id = $request->get('classroom_id');
     $event->topic_id = $request->get('topic_id');
+    $event->user_id = $request->get('user_id');
 
     if($event->save()) {
       return $this->response->item(Event::find($event->id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_event');
     }
   }
@@ -81,7 +79,7 @@ class EventController extends Controller
       'name' => 'required',
       'starting_date' => 'required|date_format:Y-m-d H:i:s',
       'ending_date' => 'required|date_format:Y-m-d H:i:s|after:starting_date',
-      'maximum_partecipants' => 'required|integer|min:0'
+      'maximum_partecipants' => 'required|integer|min:1'
     ]);
 
     if($validator->fails()) {
@@ -89,17 +87,15 @@ class EventController extends Controller
     }
 
     $event = Event::find($id);
-
     $event->name = $request->get('name');
-    $event->description = $request->get('description');
     $event->starting_date = $request->get('starting_date');
     $event->ending_date = $request->get('ending_date');
     $event->maximum_partecipants = $request->get('maximum_partecipants');
+    $event->description = $request->get('description');
 
     if($event->save()) {
       return $this->response->item(Event::find($id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_update_event');
     }
   }
@@ -122,8 +118,7 @@ class EventController extends Controller
 
     if(count($event->users()->get()) > $count) {
       return $this->response->item(Event::find($id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_attach_user');
     }
   }
@@ -146,8 +141,7 @@ class EventController extends Controller
 
     if(count($event->users()->get()) < $count) {
       return $this->response->item(Event::find($id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_detach_user');
     }
   }
@@ -156,7 +150,7 @@ class EventController extends Controller
     $validator = Validator::make(array_merge(['id' => $id], $request->only(['item_id', 'required'])), [
       'id' => 'required|exists:events,id',
       'item_id' => 'required|exists:items,id',
-      'required' => 'required|integer|min:0'
+      'required' => 'required|integer|min:1'
     ]);
 
     if($validator->fails()) {
@@ -171,8 +165,7 @@ class EventController extends Controller
 
     if(count($event->items()->get()) > $count) {
       return $this->response->item(Event::find($id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_attach_item');
     }
   }
@@ -195,8 +188,7 @@ class EventController extends Controller
 
     if(count($event->items()->get()) < $count) {
       return $this->response->item(Event::find($id), new EventTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_detach_item');
     }
   }
@@ -214,8 +206,7 @@ class EventController extends Controller
 
     if($event->delete()) {
       return $this->response->noContent();
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_delete_event');
     }
   }

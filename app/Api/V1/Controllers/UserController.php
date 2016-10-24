@@ -29,7 +29,7 @@ class UserController extends Controller
 
   public function index()
   {
-    return $this->response->collection(User::all(), new UserTransformer);
+    return $this->response->collection(User::orderBy('last_name')->get(), new UserTransformer);
   }
 
   public function show($id)
@@ -47,11 +47,11 @@ class UserController extends Controller
 
   public function create(Request $request)
   {
-    $validator = Validator::make($request->only(['fresher', 'first_name', 'last_name', 'email']), [
+    $validator = Validator::make($request->only(['fresher', 'email', 'first_name', 'last_name']), [
       'fresher' => 'required|unique:users,fresher',
+      'email' => 'required|email|unique:users,email',
       'first_name' => 'required',
-      'last_name' => 'required',
-      'email' => 'required|email|unique:users,email'
+      'last_name' => 'required'
     ]);
 
     if($validator->fails()) {
@@ -59,11 +59,11 @@ class UserController extends Controller
     }
 
     $user = new User;
-
     $user->fresher = $request->get('fresher');
+    $user->email = $request->get('email');
     $user->first_name = $request->get('first_name');
     $user->last_name = $request->get('last_name');
-    $user->email = $request->get('email');
+    $user->image = 'images/default/default.jpg';
     $user->password = str_random(255);
     $user->confirmation_token = str_random(255);
 
@@ -74,8 +74,7 @@ class UserController extends Controller
       });
 
       return $this->response->item(User::find($user->id), new UserTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_create_user');
     }
   }
@@ -92,7 +91,6 @@ class UserController extends Controller
     }
 
     $user = User::find($id);
-
     $user->email = $request->get('email');
     $user->confirmation_token = str_random(255);
     $user->confirmed = 0;
@@ -100,27 +98,32 @@ class UserController extends Controller
     if($user->save()) {
       Mail::send('emails.auth.change', ['user' => $user], function ($message) use ($user) {
         $message->from('miccio.alex@gmail.com', 'DigiDay');
-        $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
+        $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il nuovo indirizzo Email');
       });
 
       return $this->response->item(User::find($user->id), new UserTransformer);
-    }
-    else {
-      return $this->response->errorInternal('could_not_create_user');
+    } else {
+      return $this->response->errorInternal('could_not_update_email');
     }
   }
 
   public function updateImage(Request $request, $id)
   {
-    $user = User::find($id);
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:users,id'
+    ]);
 
+    if($validator->fails()) {
+      throw new ValidationHttpException($validator->errors()->all());
+    }
+
+    $user = User::find($id);
     $user->image = $request->get('image');
 
     if($user->save()) {
       return $this->response->item(User::find($user->id), new UserTransformer);
-    }
-    else {
-      return $this->response->errorInternal('could_not_create_user');
+    } else {
+      return $this->response->errorInternal('could_not_update_image');
     }
   }
 
@@ -143,8 +146,7 @@ class UserController extends Controller
 
     if(count($user->roles()->get()) > $count) {
       return $this->response->item(User::find($id), new UserTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_attach_role');
     }
   }
@@ -168,8 +170,7 @@ class UserController extends Controller
 
     if(count($user->roles()->get()) < $count) {
       return $this->response->item(User::find($id), new UserTransformer);
-    }
-    else {
+    } else {
       return $this->response->errorInternal('could_not_detach_role');
     }
   }
@@ -181,14 +182,30 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
+    $user->disabled = 1;
 
-    $user->roles()->detach();
-
-    if($user->delete()) {
+    if($user->save()) {
       return $this->response->noContent();
-    }
-    else {
-      return $this->response->errorInternal('could_not_delete_classroom');
+    } else {
+      return $this->response->errorInternal('could_not_delete_user');
     }
   }
+
+  // public function destroy($id)
+  // {
+  //   $validator = Validator::make(['id' => $id], [
+  //     'id' => 'required|exists:users,id'
+  //   ]);
+  //
+  //   $user = User::find($id);
+  //
+  //   $user->roles()->detach();
+  //
+  //   if($user->delete()) {
+  //     return $this->response->noContent();
+  //   }
+  //   else {
+  //     return $this->response->errorInternal('could_not_delete_user');
+  //   }
+  // }
 }
