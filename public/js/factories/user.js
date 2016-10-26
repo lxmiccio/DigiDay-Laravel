@@ -56,6 +56,14 @@ angular.module('myServices').factory('userService', function ($http, localStorag
 		});
 	};
 
+	function attend(id, data, onSuccess, onError) {
+		$http.put('api/users/' + id + '/attended', data).then(function(response) {
+			onSuccess(response);
+		}, function(response) {
+			onError(response);
+		});
+	};
+
 	function remove(id, onSuccess, onError) {
 		$http.delete('api/users/' + id).then(function() {
 			onSuccess();
@@ -72,6 +80,7 @@ angular.module('myServices').factory('userService', function ($http, localStorag
     updateImage: updateImage,
     attachRole: attachRole,
     detachRole: detachRole,
+    attend: attend,
     remove: remove
   };
 

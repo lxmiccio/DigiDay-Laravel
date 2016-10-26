@@ -20,6 +20,7 @@ $api->version('v1', function ($api) {
 	$api->put('users/{id}/update/image', 'App\Api\V1\Controllers\UserController@updateImage');
 	$api->put('users/{id}/attach/role', 'App\Api\V1\Controllers\UserController@attachRole');
 	$api->put('users/{id}/detach/role', 'App\Api\V1\Controllers\UserController@detachRole');
+	$api->put('users/{id}/attended', 'App\Api\V1\Controllers\UserController@attended');
 	$api->delete('users/{id}', 'App\Api\V1\Controllers\UserController@destroy');
 
 	$api->resource('classrooms', 'App\Api\V1\Controllers\ClassroomController');

@@ -14,17 +14,17 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-  // use Helpers;
+  use Helpers;
 
-  // public function __construct()
-  // {
-  //   $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
-  // }
+  public function __construct()
+  {
+    $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+  }
 
-  // public function index()
-  // {
-  //   return $this->response->collection(Role::orderBy('name')->get(), new RoleTransformer);
-  // }
+  public function index()
+  {
+    return $this->response->collection(Role::orderBy('name')->get(), new RoleTransformer);
+  }
 
   // public function show($id)
   // {

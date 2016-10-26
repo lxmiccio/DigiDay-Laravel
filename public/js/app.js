@@ -65,6 +65,9 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/eventi', {
     templateUrl: 'views/events.html',
     controller: 'EventsController as ctrl'
+  }).when('/evento/:id/registro', {
+    templateUrl: 'views/register.html',
+    controller: 'RegisterController as ctrl'
   }).otherwise({
     redirectTo: '/'
   });

@@ -175,6 +175,25 @@ class UserController extends Controller
     }
   }
 
+  public function attended(Request $request, $id)
+  {
+    $validator = Validator::make(array_merge(['id' => $id], $request->only(['attended', 'event_id'])), [
+      'id' => 'required|exists:users,id',
+      'attended' => 'required',
+      'event_id' => 'required|exists:events,id'
+    ]);
+
+    if($validator->fails()) {
+      throw new ValidationHttpException($validator->errors()->all());
+    }
+
+    User::find($id)->attendedEvents()->updateExistingPivot($request->get('event_id'), [
+      'attended' => $request->get('attended')
+    ]);
+
+    return $this->response->item(User::find($id), new UserTransformer);
+  }
+
   public function destroy($id)
   {
     $validator = Validator::make(['id' => $id], [
