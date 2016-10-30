@@ -29,7 +29,7 @@ class UserController extends Controller
 
   public function index()
   {
-    return $this->response->collection(User::orderBy('last_name')->get(), new UserTransformer);
+    return $this->response->collection(User::orderBy('fresher')->get(), new UserTransformer);
   }
 
   public function show($id)

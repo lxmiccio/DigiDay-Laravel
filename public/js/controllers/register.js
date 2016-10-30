@@ -78,8 +78,6 @@ angular.module('myControllers').controller('RegisterController', function($route
       }
     });
 
-    console.log(body)
-
     var pdf = {
       content: [{
         text: event.name,

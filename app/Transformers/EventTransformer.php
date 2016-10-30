@@ -42,7 +42,7 @@ class EventTransformer extends Fractal\TransformerAbstract
 				'event_item.required'
 			]),
 
-			'users' => $event->users()->orderBy('last_name')->get([
+			'users' => $event->users()->orderBy('fresher')->get([
 				'users.id',
 				'users.fresher',
 				'users.email',

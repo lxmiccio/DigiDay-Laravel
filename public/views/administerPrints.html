@@ -1,0 +1,108 @@
+<!-- Flawless -->
+
+<div class="row" ng-if="index.isAdministrator()">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center"><strong>Amministra le Stampe</strong></h2>
+      </div>
+    </div>
+
+    <div class="row br-lg"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="text-center">Seleziona una Data</h4>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="dropdown">
+            <p class="dropdown-toggle" id="dropdown2" data-toggle="dropdown">
+              <input type="text" class="form-control" placeholder="Ora di Inizio..." data-ng-model="ctrl.startingDate"/>
+            </p>
+            <ul class="dropdown-menu">
+              <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown2', minView:'day'}" data-ng-model="ctrl.startingDate" ng-change="ctrl.onStartingDateChange(ctrl.startingDate)"/>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row br-sm" ng-if="ctrl.startingDate"></div>
+
+      <div class="row" ng-if="ctrl.startingDate">
+        <div class="col-xs-12">
+          <div class="dropdown">
+            <p class="dropdown-toggle" id="dropdown3" data-toggle="dropdown">
+              <input type="text" class="form-control" placeholder="Ora di Fine..." data-ng-model="ctrl.endingDate"/>
+            </p>
+            <ul class="dropdown-menu">
+              <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown3', minView:'day'}" data-ng-model="ctrl.endingDate" ng-change="ctrl.onEndingDateChange(ctrl.endingDate, ctrl.startingDate, ctrl.classrooms, ctrl.items)"/>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <button type="button" class="btn btn-primary" ng-click="ctrl.filterEvents(ctrl.events, ctrl.startingDate, ctrl.endingDate)">Filtra</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="visible-sm visible-xs"/>
+      <hr class="visible-sm visible-xs"/>
+      <hr class="visible-sm visible-xs"/>
+    </div>
+
+    <div class="col-md-7 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="text-center">Eventi</h4>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-striped" style="margin-bottom: 0px">
+            <thead>
+              <tr>
+                <th class="col-xs-4 text-center">Nome</th>
+                <th class="col-xs-4 text-center">Proprietario</th>
+                <th class="col-xs-4 text-center">Partecipanti</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="event in ctrl.filteredEvents">
+                <td class="text-center">{{event.name}}</td>
+                <td class="text-center">{{event.user.firstName}} {{event.user.lastName}}</td>
+                <td class="text-center">{{event.users.length}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.filteredEvents)">Pdf</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
