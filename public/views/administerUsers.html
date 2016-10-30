@@ -38,7 +38,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
-            <button type="button" class="btn btn-success" ng-click="index.locate('utente/' + ctrl.user[0].id + '/eventi')">Cerca</button>
+            <a ng-href="utente/{{ctrl.user[0].id}}/eventi"><button type="button" class="btn btn-success">Cerca</button></a>
           </div>
         </div>
       </div>
@@ -117,16 +117,16 @@
 
       <hr/>
 
-      <div class="row">
+      <div class="row" ng-if="ctrl.users && ctrl.users.length > 0">
         <div class="col-xs-12">
-          <table class="table table-striped">
+          <table class="table table-striped" style="margin-bottom: 0px;">
             <thead>
               <tr>
                 <th class="col-xs-2 text-center">Matricola</th>
-                <th class="col-xs-4 text-center">Nome e Cognome</th>
+                <th class="col-xs-3 text-center">Nome e Cognome</th>
                 <th class="col-xs-2 text-center">Email</th>
                 <th class="col-xs-2 text-center">Ruoli</th>
-                <th class="col-xs-2 text-center"></th>
+                <th class="col-xs-3 text-center"></th>
               </tr>
             </thead>
             <tbody>

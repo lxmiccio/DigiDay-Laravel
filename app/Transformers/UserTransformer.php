@@ -30,6 +30,7 @@ class UserTransformer extends Fractal\TransformerAbstract
 				'name' => $event->name,
 				'startingDate' => $event->starting_date,
 				'endingDate' => $event->ending_date,
+				'maximumPartecipants' => $event->maximum_partecipants,
 
 				'topic' => $event->topic()->get([
 					'id',
@@ -71,6 +72,7 @@ class UserTransformer extends Fractal\TransformerAbstract
 				'name' => $event->name,
 				'startingDate' => $event->starting_date,
 				'endingDate' => $event->ending_date,
+				'maximumPartecipants' => $event->maximum_partecipants,
 
 				'topic' => $event->topic()->get([
 					'id',

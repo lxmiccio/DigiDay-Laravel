@@ -24,6 +24,14 @@ angular.module('myControllers').controller('AdministerEventsController', functio
       }
       vm.events[index].duration = hours + 'h, ' + minutes + 'm';
 
+      var partecipants = 0;
+      angular.forEach(event.users, function(user) {
+        if(user.attended) {
+          partecipants++;
+        }
+      });
+      vm.events[index].partecipants = partecipants;
+
       vm.events[index].writtenItems = '';
       angular.forEach(event.items, function(item) {
         vm.events[index].writtenItems += item.name + ' (' + item.required + '), ';

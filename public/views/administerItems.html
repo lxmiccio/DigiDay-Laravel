@@ -66,9 +66,10 @@
       </div>
 
       <hr/>
-      <div class="row">
+
+      <div class="row" ng-if="ctrl.items && ctrl.items.length > 0">
         <div class="col-xs-12">
-          <table class="table table-striped">
+          <table class="table table-striped" style="margin-bottom: 0px;">
             <thead>
               <tr>
                 <th class="col-xs-5 text-center">Nome</th>

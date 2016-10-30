@@ -25,8 +25,8 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
     templateUrl: 'views/profile.html',
     controller: 'ProfileController as ctrl'
   }).when('/utente/:id/eventi', {
-    templateUrl: 'views/attendedEvents.html',
-    controller: 'AttendedEventsController as ctrl'
+    templateUrl: 'views/administerUserAttendedEvents.html',
+    controller: 'UserAttendedEventsController as ctrl'
   }).when('/utente/:id/immagine', {
     templateUrl: 'views/updateImage.html',
     controller: 'UpdateImageController as ctrl'
@@ -44,7 +44,7 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/classe/:id/modifica', {
     templateUrl: 'views/updateClassroom.html',
     controller: 'UpdateClassRoomController as ctrl'
-  }).when('/amministrazione/eventi', {
+  }).when('/amministrazione/digiday', {
     templateUrl: 'views/administerEvents.html',
     controller: 'AdministerEventsController as ctrl'
   }).when('/amministrazione/materiali', {
@@ -53,7 +53,7 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/materiale/:id/modifica', {
     templateUrl: 'views/updateItem.html',
     controller: 'UpdateItemController as ctrl'
-  }).when('/amministrazione/stampa', {
+  }).when('/amministrazione/stampe', {
     templateUrl: 'views/administerPrints.html',
     controller: 'AdministerPrintsController as ctrl'
   }).when('/amministrazione/utenti', {

@@ -1,4 +1,5 @@
 <!-- Flawless -->
+
 <div ng-if="index.isAdministrator()">
   <div ng-if="ctrl.events && ctrl.events.length > 0">
     <div class="row">
@@ -9,25 +10,25 @@
 
     <div class="row br-lg"></div>
 
-    <div class="row">
+    <div class="row" ng-if="ctrl.events && ctrl.events.length > 0">
       <div class="col-xs-12">
         <table class="table table-striped" style="margin-bottom: 0px;">
           <thead>
             <tr>
               <th class="col-xs-4 text-center">Titolo</th>
               <th class="col-xs-2 text-center">Argomento</th>
-              <th class="col-xs-3 text-center">Creatore</th>
-              <th class="col-xs-2 text-center">Durata</th>
+              <th class="col-xs-3 text-center">Proprietario</th>
+              <th class="col-xs-2 text-center">Data</th>
               <th class="col-xs-2 text-center">Partecipanti</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="event in ctrl.events">
-              <td class="text-center"><a ng-click="index.locate('evento/' + event.id)">{{event.name}}</a></td>
+              <td class="text-center"><a ng-href="evento/{{event.id}}">{{event.name}}</a></td>
               <td class="text-center">{{event.topic.name}}</td>
-              <td class="text-center"><a ng-click="index.locate('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
-              <td class="text-center">{{event.duration}}</td>
-              <td class="text-center">{{event.partecipants}}/{{event.users.length}}</td>
+              <td class="text-center"><a ng-href="utente/{{event.user.id}}">{{event.user.firstName}} {{event.user.lastName}}</a></td>
+              <td class="text-center">{{event.date}}</td>
+              <td class="text-center">{{event.partecipants}}/{{event.users.length}}/{{event.maximumPartecipants}}</td>
             </tr>
           </tbody>
         </table>
@@ -42,7 +43,6 @@
   </div>
 
   <div ng-if="ctrl.attendedEvents && ctrl.attendedEvents.length > 0">
-
     <div class="row">
       <div class="col-xs-12">
         <h3 class="text-center"><strong style="color: #006400">DigiDay a cui ha partecipato</strong></h3>
@@ -58,18 +58,18 @@
             <tr>
               <th class="col-xs-4 text-center">Titolo</th>
               <th class="col-xs-2 text-center">Argomento</th>
-              <th class="col-xs-3 text-center">Creatore</th>
-              <th class="col-xs-2 text-center">Durata</th>
+              <th class="col-xs-3 text-center">Proprietario</th>
+              <th class="col-xs-2 text-center">Data</th>
               <th class="col-xs-2 text-center">Partecipanti</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="event in ctrl.attendedEvents">
-              <td class="text-center"><a ng-click="index.locate('evento/' + event.id)">{{event.name}}</a></td>
+              <td class="text-center"><a ng-href="evento/{{event.id}}">{{event.name}}</a></td>
               <td class="text-center">{{event.topic.name}}</td>
-              <td class="text-center"><a ng-click="index.locate('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
-              <td class="text-center">{{event.duration}}</td>
-              <td class="text-center">{{event.partecipants}}/{{event.users.length}}</td>
+              <td class="text-center"><a ng-href="utente/{{event.user.id}}">{{event.user.firstName}} {{event.user.lastName}}</a></td>
+              <td class="text-center">{{event.date}}</td>
+              <td class="text-center">{{event.partecipants}}/{{event.users.length}}/{{event.maximumPartecipants}}</td>
             </tr>
           </tbody>
         </table>
@@ -85,10 +85,9 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.user, ctrl.events, ctrl.attendedEvents)">PDF</button>
+          <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.user, ctrl.events, ctrl.attendedEvents)">Genera PDF</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

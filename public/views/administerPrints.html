@@ -68,15 +68,19 @@
           <table class="table table-striped" style="margin-bottom: 0px">
             <thead>
               <tr>
-                <th class="col-xs-4 text-center">Nome</th>
-                <th class="col-xs-4 text-center">Proprietario</th>
-                <th class="col-xs-4 text-center">Partecipanti</th>
+                <th class="col-xs-3 text-center">Nome</th>
+                <th class="col-xs-2 text-center">Argomento</th>
+                <th class="col-xs-3 text-center">Proprietario</th>
+                <th class="col-xs-2 text-center">Data</th>
+                <th class="col-xs-2 text-center">Partecipanti</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="event in ctrl.filteredEvents">
                 <td class="text-center"><a ng-href="evento/{{event.id}}">{{event.name}}</a></td>
+                <td class="text-center">{{event.topic.name}}</td>
                 <td class="text-center"><a ng-href="utente/{{event.user.id}}">{{event.user.firstName}} {{event.user.lastName}}</a></td>
+                <td class="text-center">{{event.date}}</td>
                 <td class="text-center">{{event.users.length}}</td>
               </tr>
             </tbody>

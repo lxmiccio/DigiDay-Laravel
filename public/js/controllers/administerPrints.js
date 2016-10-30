@@ -111,11 +111,6 @@ angular.module('myControllers').controller('AdministerPrintsController', functio
           alignment: 'center',
           fontSize: 10,
           margin: [0, 2, 0, 2]
-        },
-        text: {
-          alignment: 'left',
-          fontSize: 12,
-          margin: [0, 15, 0, 15]
         }
       }
     };
