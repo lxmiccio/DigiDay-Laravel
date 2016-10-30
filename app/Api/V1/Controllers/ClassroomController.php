@@ -102,6 +102,38 @@ class ClassroomController extends Controller
     }
   }
 
+  public function enable($id)
+  {
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:classrooms,id'
+    ]);
+
+    $classroom = Classroom::find($id);
+    $classroom->disabled = 0;
+
+    if($classroom->save()) {
+      return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
+    } else {
+      return $this->response->errorInternal('could_not_enable_classroom');
+    }
+  }
+
+  public function disable($id)
+  {
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:classrooms,id'
+    ]);
+
+    $classroom = Classroom::find($id);
+    $classroom->disabled = 1;
+
+    if($classroom->save()) {
+      return $this->response->item(Classroom::find($classroom->id), new ClassroomTransformer);
+    } else {
+      return $this->response->errorInternal('could_not_disable_classroom');
+    }
+  }
+
   // public function destroy($id)
   // {
   //   $validator = Validator::make(['id' => $id], [

@@ -64,13 +64,21 @@ angular.module('myServices').factory('userService', function ($http, localStorag
 		});
 	};
 
-	function remove(id, onSuccess, onError) {
-		$http.delete('api/users/' + id).then(function() {
-			onSuccess();
+  function enable(id, data, onSuccess, onError) {
+		$http.put('api/users/' + id + '/enable', data).then(function(response) {
+			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-	};
+  };
+
+  function disable(id, data, onSuccess, onError) {
+		$http.put('api/users/' + id + '/disable', data).then(function(response) {
+			onSuccess(response);
+		}, function(response) {
+			onError(response);
+		});
+  };
 
   return {
     getAll: getAll,
@@ -81,7 +89,8 @@ angular.module('myServices').factory('userService', function ($http, localStorag
     attachRole: attachRole,
     detachRole: detachRole,
     attend: attend,
-    remove: remove
+    enable: enable,
+    disable: disable
   };
 
 });

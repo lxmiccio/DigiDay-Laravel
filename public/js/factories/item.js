@@ -32,20 +32,29 @@ angular.module('myServices').factory('itemService', function ($http) {
 		});
 	};
 
-	function remove(id, onSuccess, onError) {
-		$http.delete('api/items/' + id).then(function() {
-			onSuccess();
+  function enable(id, data, onSuccess, onError) {
+		$http.put('api/items/' + id + '/enable', data).then(function(response) {
+			onSuccess(response);
 		}, function(response) {
 			onError(response);
 		});
-	};
+  };
+
+  function disable(id, data, onSuccess, onError) {
+		$http.put('api/items/' + id + '/disable', data).then(function(response) {
+			onSuccess(response);
+		}, function(response) {
+			onError(response);
+		});
+  };
 
 	return {
 		getAll: getAll,
 		getById: getById,
 		create: create,
 		update: update,
-		remove: remove
+		enable: enable,
+		disable: disable
 	};
 
 });

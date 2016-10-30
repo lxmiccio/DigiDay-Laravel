@@ -86,7 +86,23 @@ class ItemController extends Controller
     }
   }
 
-  public function destroy($id)
+  public function enable($id)
+  {
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:items,id'
+    ]);
+
+    $item = Item::find($id);
+    $item->disabled = 0;
+
+    if($item->save()) {
+      return $this->response->item(Item::find($item->id), new ItemTransformer);
+    } else {
+      return $this->response->errorInternal('could_not_enable_item');
+    }
+  }
+
+  public function disable($id)
   {
     $validator = Validator::make(['id' => $id], [
       'id' => 'required|exists:items,id'
@@ -96,9 +112,9 @@ class ItemController extends Controller
     $item->disabled = 1;
 
     if($item->save()) {
-      return $this->response->noContent();
+      return $this->response->item(Item::find($item->id), new ItemTransformer);
     } else {
-      return $this->response->errorInternal('could_not_delete_item');
+      return $this->response->errorInternal('could_not_disable_item');
     }
   }
 

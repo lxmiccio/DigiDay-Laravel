@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('AdministerClassroomsController', function (classroomService) {
+angular.module('myControllers').controller('AdministerClassroomsController', function(classroomService) {
 
   var vm  = this;
 
@@ -19,7 +19,7 @@ angular.module('myControllers').controller('AdministerClassroomsController', fun
   vm.create = function(name, capacity, description) {
     classroomService.create({
       'name': name,
-      'maximum_partecipants': capacity,
+      'capacity': capacity,
       'description': description
     }, function(response) {
 
@@ -27,26 +27,24 @@ angular.module('myControllers').controller('AdministerClassroomsController', fun
       vm.capacity = null;
       vm.description = null;
 
-      classroomService.getAll(function(response) {
-        vm.classrooms = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
+      vm.classrooms.push(response.data.data);
 
     }, function(response) {
       console.log(response);
     });
   };
 
-  vm.remove = function(classroom) {
-    classroomService.remove(classroom.id, function(response) {
+  vm.enable = function(classroom) {
+    classroomService.enable(classroom.id, {}, function(response) {
+      vm.classrooms[vm.classrooms.indexOf(classroom)] = response.data.data;
+    }, function(response) {
+      console.log(response);
+    });
+  };
 
-      classroomService.getAll(function(response) {
-        vm.classrooms = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
-
+  vm.disable = function(classroom) {
+    classroomService.disable(classroom.id, {}, function(response) {
+      vm.classrooms[vm.classrooms.indexOf(classroom)] = response.data.data;
     }, function(response) {
       console.log(response);
     });

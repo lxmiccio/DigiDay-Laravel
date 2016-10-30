@@ -1,20 +1,21 @@
 <!-- Flawless -->
 
 <style>
-body {
-  min-width: 724px;
-}
+  body {
+    min-width: 724px;
+  }
 </style>
-<div class="row" ng-if="index.isAdministrator()">
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2 class="text-center"><strong>Amministra gli Utenti</strong></h2>
-      </div>
-    </div>
 
-    <div class="row br-lg"></div>
+<div ng-if="index.isAdministrator()">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center"><strong>Amministra gli Utenti</strong></h2>
+    </div>
   </div>
+
+  <hr/>
+
+  <div class="row br-lg"></div>
 
   <div class="row">
     <div class="col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -97,7 +98,7 @@ body {
       <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
-            <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.selectedRoles)">Crea</button>
+            <button type="button" class="btn btn-success" ng-click="ctrl.create(ctrl.fresher, ctrl.firstName, ctrl.lastName, ctrl.email, ctrl.selectedRoles)">Aggiungi</button>
           </div>
         </div>
       </div>
@@ -131,12 +132,14 @@ body {
             <tbody>
               <tr ng-repeat="user in ctrl.users">
                 <td class="text-center" style="padding-top: 9px;">{{user.fresher}}</td>
-                <td class="text-center" style="padding-top: 9px;"><a ng-click="index.locate('utente/' + user.id)">{{user.firstName}} {{user.lastName}}</a></td>
+                <td class="text-center" style="padding-top: 9px;"><a ng-href="utente/{{user.id}}">{{user.firstName}} {{user.lastName}}</a></td>
                 <td class="text-center" style="padding-top: 9px;">{{user.email}}</td>
                 <td class="text-center" style="padding-top: 9px;">{{user.writtenRoles}}</td>
                 <td class="text-center">
-                  <a class="btn btn-info btn-xs" ng-click="index.redirect('amministrazione/utente/' + user.id + '/modifica')"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                  <a class="btn btn-danger btn-xs" ng-click="ctrl.remove(user)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a class="btn btn-primary btn-xs" ng-href="amministrazione/utente/{{user.id}}/modifica"><i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                  <a class="btn btn-danger btn-xs" ng-click="ctrl.disable(user)" ng-if="!user.disabled"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                  <a class="btn btn-success btn-xs" ng-click="ctrl.enable(user)" ng-if="user.disabled"><i class="fa fa-eye" aria-hidden="true"></i></a>
                 </td>
               </tr>
             </tbody>

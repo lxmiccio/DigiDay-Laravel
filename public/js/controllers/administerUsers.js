@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('AdministerUsersController', function ($q, $window, roleService, userService) {
+angular.module('myControllers').controller('AdministerUsersController', function($q, $window, roleService, userService) {
 
   var vm = this;
 
@@ -52,28 +52,37 @@ angular.module('myControllers').controller('AdministerUsersController', function
       }, function(response) {
         console.log(response);
       });
+    }, function(response) {
+      console.log(response);
+    });
+  };
+
+  vm.enable = function(user) {
+    userService.enable(user.id, {}, function(response) {
+
+      response.data.data.writtenRoles = '';
+      angular.forEach(response.data.data.roles, function(role) {
+        response.data.data.writtenRoles += role.name + ', ';
+      });
+      response.data.data.writtenRoles = response.data.data.writtenRoles.slice(0, -2);
+
+      vm.users[vm.users.indexOf(user)] = response.data.data;
 
     }, function(response) {
       console.log(response);
     });
   };
 
-  vm.remove = function(user) {
-    userService.remove(user.id, function(response) {
+  vm.disable = function(user) {
+    userService.disable(user.id, {}, function(response) {
 
-      userService.getAll(function(response) {
-        vm.users = response.data.data;
-
-        angular.forEach(vm.users, function(user, index) {
-          var writtenRoles = '';
-          angular.forEach(user.roles, function(role) {
-            writtenRoles += role.name + ', ';
-          });
-          vm.users[index].writtenRoles = writtenRoles.slice(0, -2);
-        });
-      }, function(response) {
-        console.log(response);
+      response.data.data.writtenRoles = '';
+      angular.forEach(response.data.data.roles, function(role) {
+        response.data.data.writtenRoles += role.name + ', ';
       });
+      response.data.data.writtenRoles = response.data.data.writtenRoles.slice(0, -2);
+
+      vm.users[vm.users.indexOf(user)] = response.data.data;
 
     }, function(response) {
       console.log(response);

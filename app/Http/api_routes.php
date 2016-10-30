@@ -21,9 +21,13 @@ $api->version('v1', function ($api) {
 	$api->put('users/{id}/attach/role', 'App\Api\V1\Controllers\UserController@attachRole');
 	$api->put('users/{id}/detach/role', 'App\Api\V1\Controllers\UserController@detachRole');
 	$api->put('users/{id}/attended', 'App\Api\V1\Controllers\UserController@attended');
+	$api->put('users/{id}/enable', 'App\Api\V1\Controllers\UserController@enable');
+	$api->put('users/{id}/disable', 'App\Api\V1\Controllers\UserController@disable');
 	$api->delete('users/{id}', 'App\Api\V1\Controllers\UserController@destroy');
 
 	$api->resource('classrooms', 'App\Api\V1\Controllers\ClassroomController');
+	$api->put('classrooms/{id}/enable', 'App\Api\V1\Controllers\ClassroomController@enable');
+	$api->put('classrooms/{id}/disable', 'App\Api\V1\Controllers\ClassroomController@disable');
 
 	$api->resource('events', 'App\Api\V1\Controllers\EventController');
 	$api->put('events/{id}/attach/user', 'App\Api\V1\Controllers\EventController@attachUser');
@@ -35,9 +39,13 @@ $api->version('v1', function ($api) {
 	$api->post('images/remove', 'App\Api\V1\Controllers\ImageController@remove');
 
 	$api->resource('items', 'App\Api\V1\Controllers\ItemController');
+	$api->put('items/{id}/enable', 'App\Api\V1\Controllers\ItemController@enable');
+	$api->put('items/{id}/disable', 'App\Api\V1\Controllers\ItemController@disable');
 
 	$api->resource('roles', 'App\Api\V1\Controllers\RoleController');
 
 	$api->resource('topics', 'App\Api\V1\Controllers\TopicController');
+	$api->put('topics/{id}/enable', 'App\Api\V1\Controllers\TopicController@enable');
+	$api->put('topics/{id}/disable', 'App\Api\V1\Controllers\TopicController@disable');
 
 });

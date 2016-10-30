@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('AdministerItemsController', function (itemService) {
+angular.module('myControllers').controller('AdministerItemsController', function(itemService) {
 
   var vm  = this;
 
@@ -27,26 +27,24 @@ angular.module('myControllers').controller('AdministerItemsController', function
       vm.amount = null;
       vm.description = null;
 
-      itemService.getAll(function(response) {
-        vm.items = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
+      vm.items.push(response.data.data);
 
     }, function(response) {
       console.log(response);
     });
   };
 
-  vm.remove = function(item) {
-    itemService.remove(item.id, function(response) {
+  vm.enable = function(item) {
+    itemService.enable(item.id, {}, function(response) {
+      vm.items[vm.items.indexOf(item)] = response.data.data;
+    }, function(response) {
+      console.log(response);
+    });
+  };
 
-      itemService.getAll(function(response) {
-        vm.items = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
-
+  vm.disable = function(item) {
+    itemService.disable(item.id, {}, function(response) {
+      vm.items[vm.items.indexOf(item)] = response.data.data;
     }, function(response) {
       console.log(response);
     });

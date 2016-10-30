@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('AdministerTopicsController', function (topicService) {
+angular.module('myControllers').controller('AdministerTopicsController', function(topicService) {
 
   var vm  = this;
 
@@ -19,26 +19,24 @@ angular.module('myControllers').controller('AdministerTopicsController', functio
       vm.name = null;
       vm.description = null;
 
-      topicService.getAll(function(response) {
-        vm.topics = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
+      vm.topics.push(response.data.data);
 
     }, function(response) {
       console.log(response);
     });
   };
 
-  vm.remove = function(topic) {
-    topicService.remove(topic.id, function(response) {
+  vm.enable = function(topic) {
+    topicService.enable(topic.id, {}, function(response) {
+      vm.topics[vm.topics.indexOf(topic)] = response.data.data;
+    }, function(response) {
+      console.log(response);
+    });
+  };
 
-      topicService.getAll(function(response) {
-        vm.topics = response.data.data;
-      }, function(response) {
-        console.log(response);
-      });
-
+  vm.disable = function(topic) {
+    topicService.disable(topic.id, {}, function(response) {
+      vm.topics[vm.topics.indexOf(topic)] = response.data.data;
     }, function(response) {
       console.log(response);
     });

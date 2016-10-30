@@ -82,7 +82,23 @@ class TopicController extends Controller
     }
   }
 
-  public function destroy($id)
+  public function enable($id)
+  {
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:topics,id'
+    ]);
+
+    $topic = Topic::find($id);
+    $topic->disabled = 0;
+
+    if($topic->save()) {
+      return $this->response->item(Topic::find($topic->id), new TopicTransformer);
+    } else {
+      return $this->response->errorInternal('could_not_enable_topic');
+    }
+  }
+
+  public function disable($id)
   {
     $validator = Validator::make(['id' => $id], [
       'id' => 'required|exists:topics,id'
@@ -92,9 +108,9 @@ class TopicController extends Controller
     $topic->disabled = 1;
 
     if($topic->save()) {
-      return $this->response->noContent();
+      return $this->response->item(Topic::find($topic->id), new TopicTransformer);
     } else {
-      return $this->response->errorInternal('could_not_delete_topic');
+      return $this->response->errorInternal('could_not_disable_topic');
     }
   }
 

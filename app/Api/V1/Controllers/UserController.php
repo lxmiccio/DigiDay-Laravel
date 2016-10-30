@@ -194,7 +194,23 @@ class UserController extends Controller
     return $this->response->item(User::find($id), new UserTransformer);
   }
 
-  public function destroy($id)
+  public function enable($id)
+  {
+    $validator = Validator::make(['id' => $id], [
+      'id' => 'required|exists:users,id'
+    ]);
+
+    $user = User::find($id);
+    $user->disabled = 0;
+
+    if($user->save()) {
+      return $this->response->item(User::find($user->id), new UserTransformer);
+    } else {
+      return $this->response->errorInternal('could_not_enable_user');
+    }
+  }
+
+  public function disable($id)
   {
     $validator = Validator::make(['id' => $id], [
       'id' => 'required|exists:users,id'
@@ -204,9 +220,9 @@ class UserController extends Controller
     $user->disabled = 1;
 
     if($user->save()) {
-      return $this->response->noContent();
+      return $this->response->item(User::find($user->id), new UserTransformer);
     } else {
-      return $this->response->errorInternal('could_not_delete_user');
+      return $this->response->errorInternal('could_not_disable_user');
     }
   }
 

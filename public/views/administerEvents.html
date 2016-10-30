@@ -2,45 +2,50 @@
 
 <style>
   body {
-    min-width: 660px;
+    min-width: 724px;
   }
 </style>
-<div class="row" ng-if="index.isAdministrator()">
-  <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2 class="text-center"><strong>Amministra gli Eventi</strong></h2>
+
+<div ng-if="index.isAdministrator()">
+  <div class="row">
+    <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center"><strong>Amministra gli Eventi</strong></h2>
+        </div>
       </div>
-    </div>
 
-    <hr/>
+      <hr/>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="col-xs-2 text-center">Creatore</th>
-              <th class="col-xs-2 text-center">Nome</th>
-              <th class="col-xs-2 text-center">Data d'Inizio</th>
-              <th class="col-xs-1 text-center">Partecipanti</th>
-              <th class="col-xs-1 text-center">Classe</th>
-              <th class="col-xs-3 text-center">Materiali</th>
-              <th class="col-xs-1 text-center"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="event in ctrl.events">
-              <td class="text-center" style="padding-top: 9px;"><a ng-click="index.redirect('utente/' + event.user.id)">{{event.user.firstName}} {{event.user.lastName}}</a></td>
-              <td class="text-center" style="padding-top: 9px;">{{event.name}}</td>
-              <td class="text-center" style="padding-top: 9px;">{{event.startingDate}}</td>
-              <td class="text-center" style="padding-top: 9px;">{{event.users.length}} / {{event.maximumPartecipants}}</td>
-              <td class="text-center" style="padding-top: 9px;">{{event.classroom.name}}</td>
-              <td class="text-center" style="padding-top: 9px;">{{event.writtenItems}}</td>
-              <td class="text-center"><a class="btn btn-danger btn-xs" ng-click="ctrl.remove(event)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row br-lg"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col-xs-2 text-center">Nome</th>
+                <th class="col-xs-2 text-center">Creatore</th>
+                <th class="col-xs-2 text-center">Data</th>
+                <th class="col-xs-1 text-center">Durata</th>
+                <th class="col-xs-1 text-center">Partecipanti</th>
+                <th class="col-xs-1 text-center">Classe</th>
+                <th class="col-xs-3 text-center">Materiali</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="event in ctrl.events">
+                <td class="text-center"><a ng-href="evento/{{event.id}}">{{event.name}}</a></td>
+                <td class="text-center"><a ng-href="utente/{{event.user.id}}">{{event.user.firstName}} {{event.user.lastName}}</a></td>
+                <td class="text-center">{{event.date}}</td>
+                <td class="text-center">{{event.duration}}</td>
+                <td class="text-center">{{event.users.length}}/{{event.maximumPartecipants}}</td>
+                <td class="text-center">{{event.classroom.name}}</td>
+                <td class="text-center">{{event.writtenItems}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
