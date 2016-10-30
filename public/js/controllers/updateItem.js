@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateItemController', function ($routeParams, $window, itemService) {
+angular.module('myControllers').controller('UpdateItemController', function($routeParams, $window, itemService) {
 
   var vm  = this;
 

@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateImageController', function ($routeParams, $window, imageService, userService) {
+angular.module('myControllers').controller('UpdateImageController', function($routeParams, $window, imageService, userService) {
 
   var vm  = this;
 
@@ -34,8 +34,7 @@ angular.module('myControllers').controller('UpdateImageController', function ($r
   vm.updateImage = function(image, user) {
     if(!vm.changedImage) {
       $window.location.href = 'utente/' + user.id;
-    }
-    else {
+    } else {
       imageService.remove({
         image: user.image
       }, function(response) {
@@ -53,11 +52,9 @@ angular.module('myControllers').controller('UpdateImageController', function ($r
           }, function(response) {
             console.log(response);
           });
-
         }, function(response) {
           console.log(response);
         });
-
       }, function(response) {
         console.log(response);
       });

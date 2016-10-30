@@ -24,8 +24,8 @@ angular.module('myServices').factory('userService', function ($http, localStorag
 		});
 	};
 
-	function updateEmail(id, data, onSuccess, onError) {
-		$http.put('api/users/' + id + '/update/email', data).then(function(response) {
+	function update(id, data, onSuccess, onError) {
+		$http.put('api/users/' + id + '/update', data).then(function(response) {
 			onSuccess(response);
 		}, function(response) {
 			onError(response);
@@ -84,7 +84,7 @@ angular.module('myServices').factory('userService', function ($http, localStorag
     getAll: getAll,
     getById: getById,
     create: create,
-    updateEmail: updateEmail,
+    update: update,
     updateImage: updateImage,
     attachRole: attachRole,
     detachRole: detachRole,

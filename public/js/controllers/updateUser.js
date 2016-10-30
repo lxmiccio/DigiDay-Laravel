@@ -5,9 +5,11 @@ angular.module('myControllers').controller('UpdateUserController', function ($fi
   var vm  = this;
 
   userService.getById($routeParams.id, function(response) {
-
     vm.user = response.data.data;
 
+    vm.fresher = vm.user.fresher;
+    vm.firstName = vm.user.firstName;
+    vm.lastName = vm.user.lastName;
     vm.email = vm.user.email;
 
     roleService.getAll(function(response) {
@@ -16,14 +18,16 @@ angular.module('myControllers').controller('UpdateUserController', function ($fi
     }, function(response) {
       console.log(response);
     });
-
   }, function(response) {
     console.log(response);
   });
 
-  vm.updateEmail = function(email, user) {
-    userService.updateEmail(user.id, {
-      'email': email
+  vm.update = function(fresher, email, firstName, lastName, user) {
+    userService.update(user.id, {
+      'fresher': fresher,
+      'email': email,
+      'first_name': firstName,
+      'last_name': lastName
     }, function(response) {
       $window.location.href = 'amministrazione/utenti';
     }, function(response) {
@@ -48,14 +52,8 @@ angular.module('myControllers').controller('UpdateUserController', function ($fi
     userService.detachRole(user.id, {
       role_id: role.id
     }, function(response) {
-
-      userService.getById(user.id, function(response) {
-        vm.user = response.data.data;
-        vm.filteredRoles = $filter('newRoles')(vm.roles, vm.user);
-      }, function(response) {
-        console.log(response);
-      });
-
+      vm.user = response.data.data;
+      vm.filteredRoles = $filter('newRoles')(vm.roles, vm.user);
     }, function(response) {
       console.log(response);
     });

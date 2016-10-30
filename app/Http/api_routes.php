@@ -16,7 +16,7 @@ $api->version('v1', function ($api) {
 	$api->get('users', 'App\Api\V1\Controllers\UserController@index');
 	$api->get('users/{id}', 'App\Api\V1\Controllers\UserController@show');
 	$api->post('users', 'App\Api\V1\Controllers\UserController@create');
-	$api->put('users/{id}/update/email', 'App\Api\V1\Controllers\UserController@updateEmail');
+	$api->put('users/{id}/update', 'App\Api\V1\Controllers\UserController@update');
 	$api->put('users/{id}/update/image', 'App\Api\V1\Controllers\UserController@updateImage');
 	$api->put('users/{id}/attach/role', 'App\Api\V1\Controllers\UserController@attachRole');
 	$api->put('users/{id}/detach/role', 'App\Api\V1\Controllers\UserController@detachRole');

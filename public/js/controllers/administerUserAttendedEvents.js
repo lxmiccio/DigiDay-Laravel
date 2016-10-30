@@ -139,4 +139,5 @@ angular.module('myControllers').controller('UserAttendedEventsController', funct
 
     pdfMake.createPdf(pdf).open();
   };
+
 });

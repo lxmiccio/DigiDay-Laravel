@@ -1,22 +1,21 @@
 <!-- Flawless -->
 
-<div class="row" ng-if="index.isAdministrator()">
+<div ng-if="index.isAdministrator()">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-      <div class="row">
-        <div class="col-xs-12">
-          <h2 class="text-center"><strong>Modifica l'Utente {{ctrl.user.firstName}} {{ctrl.user.lastName}}</strong></h2>
-          <div class="row br-lg"></div>
-        </div>
-      </div>
+    <div class="col-xs-12">
+      <h2 class="text-center"><strong>Modifica l'Utente {{ctrl.user.firstName}} {{ctrl.user.lastName}}</strong></h2>
     </div>
   </div>
+
+  <hr/>
+
+  <div class="row br-lg"></div>
 
   <div class="row">
     <div class="col-md-4 col-md-offset-1 col-xs-10 col-xs-offset-1 col-xs-10 col-xs-offset-1">
       <div class="row">
         <div class="col-xs-12">
-          <p class="text-center">Modifica la Email di {{ctrl.user.firstName}} {{ctrl.user.lastName}}</p>
+          <h4 class="text-center">Modifica l'Utente {{ctrl.user.firstName}} {{ctrl.user.lastName}}</h4>
         </div>
       </div>
 
@@ -24,7 +23,31 @@
 
       <div class="row">
         <div class="col-xs-12">
+          <input type="text" class="form-control" placeholder="Matricola..." ng-model="ctrl.fresher" required/>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
           <input type="text" class="form-control" placeholder="Email..." ng-model="ctrl.email" required/>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" class="form-control" placeholder="Nome..." ng-model="ctrl.firstName" required/>
+        </div>
+      </div>
+
+      <div class="row br-sm"></div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" class="form-control" placeholder="Cognome..." ng-model="ctrl.lastName" required/>
         </div>
       </div>
 
@@ -33,12 +56,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
-            <button type="button" class="btn btn-success" ng-click="ctrl.updateEmail(ctrl.email, ctrl.user)">Modifica</button>
+            <button type="button" class="btn btn-success" ng-click="ctrl.update(ctrl.fresher, ctrl.email, ctrl.firstName, ctrl.lastName, ctrl.user)">Modifica</button>
           </div>
         </div>
       </div>
 
-      <hr class="visible-smvisible-xs"/>
+      <hr class="visible-sm visible-xs"/>
       <hr class="visible-sm visible-xs"/>
       <hr class="visible-sm visible-xs"/>
     </div>
@@ -85,7 +108,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th class="col-xs-8 text-center">Nome</th>
+                <th class="col-xs-8 text-center">Ruolo</th>
                 <th class="col-xs-4 text-center"></th>
               </tr>
             </thead>

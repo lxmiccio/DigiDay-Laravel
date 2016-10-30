@@ -79,19 +79,38 @@ class UserController extends Controller
     }
   }
 
-  public function updateEmail(Request $request, $id)
+  public function update(Request $request, $id)
   {
-    $validator = Validator::make(array_merge(['id' => $id], $request->only(['email'])), [
-      'id' => 'required|exists:users,id',
-      'email' => 'required|email|unique:users,email'
-    ]);
+    if(!strcmp($request->get('email'), User::find($id)->email)) {
+      $validator = Validator::make(array_merge(['id' => $id], $request->only(['fresher', 'first_name', 'last_name'])), [
+        'id' => 'required|exists:users,id',
+        'fresher' => 'required|unique:users,fresher',
+        'first_name' => 'required',
+        'last_name' => 'required'
+      ]);
 
-    if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
+      if($validator->fails()) {
+        throw new ValidationHttpException($validator->errors()->all());
+      }
+    } else {
+      $validator = Validator::make(array_merge(['id' => $id], $request->only(['fresher', 'email', 'first_name', 'last_name'])), [
+        'id' => 'required|exists:users,id',
+        'fresher' => 'required|unique:users,fresher',
+        'email' => 'required|email|unique:users,email',
+        'first_name' => 'required',
+        'last_name' => 'required'
+      ]);
+
+      if($validator->fails()) {
+        throw new ValidationHttpException($validator->errors()->all());
+      }
     }
 
     $user = User::find($id);
+    $user->fresher = $request->get('fresher');
     $user->email = $request->get('email');
+    $user->first_name = $request->get('first_name');
+    $user->last_name = $request->get('last_name');
     $user->confirmation_token = str_random(255);
     $user->confirmed = 0;
 

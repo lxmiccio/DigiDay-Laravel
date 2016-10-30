@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateTopicController', function ($routeParams, $window, topicService) {
+angular.module('myControllers').controller('UpdateTopicController', function($routeParams, $window, topicService) {
 
   var vm  = this;
 
