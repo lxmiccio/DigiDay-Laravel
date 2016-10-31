@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('RecoverController', function ($window, authService) {
+angular.module('myControllers').controller('RecoverController', function($window, authService) {
 
   var vm  = this;
 

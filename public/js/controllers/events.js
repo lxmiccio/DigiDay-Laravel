@@ -4,22 +4,19 @@ angular.module('myControllers').controller('EventsController', function($filter,
 
   var vm = this;
 
-  vm.myEvents = [];
-  vm.subscribedEvents = [];
-  vm.otherEvents = [];
-
   authService.me(function(response) {
     vm.user = response.data.data;
 
-    eventService.getAll(function(response) {
-      $filter('newRoles')(vm.roles, vm.user);
+    vm.myEvents = [];
+    vm.subscribedEvents = [];
+    vm.otherEvents = [];
 
+    eventService.getAll(function(response) {
       angular.forEach($filter('newEvents')(response.data.data), function(event) {
-        var added = false;
+        event.date = $filter('date')(new Date(event.startingDate), 'dd/MM/yyyy');
 
         var hours;
         var minutes;
-
         if(new Date(event.startingDate).getMinutes() > new Date(event.endingDate).getMinutes()) {
           hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours() - 1;
           minutes = 60 - new Date(event.startingDate).getMinutes() + new Date(event.endingDate).getMinutes();
@@ -30,8 +27,9 @@ angular.module('myControllers').controller('EventsController', function($filter,
           hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours();
           minutes = 0;
         }
-
         event.duration = hours + 'h, ' + minutes + 'm';
+
+        var added = false;
 
         if(event.user.id == vm.user.id) {
           vm.myEvents.push(event);
@@ -55,10 +53,13 @@ angular.module('myControllers').controller('EventsController', function($filter,
 
   }, function(response) {
     eventService.getAll(function(response) {
-      angular.forEach(response.data.data, function(event) {
+      vm.otherEvents = [];
+
+      angular.forEach($filter('newEvents')(response.data.data), function(event) {
+        event.date = $filter('date')(new Date(event.startingDate), 'dd/MM/yyyy');
+
         var hours;
         var minutes;
-
         if(new Date(event.startingDate).getMinutes() > new Date(event.endingDate).getMinutes()) {
           hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours() - 1;
           minutes = 60 - new Date(event.startingDate).getMinutes() + new Date(event.endingDate).getMinutes();
@@ -69,7 +70,6 @@ angular.module('myControllers').controller('EventsController', function($filter,
           hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours();
           minutes = 0;
         }
-
         event.duration = hours + 'h, ' + minutes + 'm';
 
         vm.otherEvents.push(event);

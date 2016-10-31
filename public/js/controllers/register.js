@@ -1,11 +1,35 @@
 // Flawless
 
-angular.module('myControllers').controller('RegisterController', function($routeParams, eventService, userService) {
+angular.module('myControllers').controller('RegisterController', function($filter, $routeParams, eventService, userService) {
 
   var vm  = this;
 
   eventService.getById($routeParams.id, function(response) {
     vm.event = response.data.data;
+
+    vm.event.date = $filter('date')(new Date(vm.event.startingDate), 'dd/MM/yyyy');
+
+    var hours;
+    var minutes;
+    if(new Date(vm.event.startingDate).getMinutes() > new Date(vm.event.endingDate).getMinutes()) {
+      hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours() - 1;
+      minutes = 60 - new Date(vm.event.startingDate).getMinutes() + new Date(vm.event.endingDate).getMinutes();
+    } else if(new Date(vm.event.startingDate).getMinutes() < new Date(vm.event.endingDate).getMinutes()) {
+      hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+      minutes = new Date(vm.event.endingDate).getMinutes() - new Date(vm.event.startingDate).getMinutes();
+    } else {
+      hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+      minutes = 0;
+    }
+    vm.event.duration = hours + 'h, ' + minutes + 'm';
+
+    var partecipants = 0;
+    angular.forEach(vm.event.users, function(user) {
+      if(user.attended) {
+        partecipants++;
+      }
+    });
+    vm.event.partecipants = partecipants;
 
     angular.forEach(vm.event.users, function(user, index) {
       if(user.attended) {
@@ -22,7 +46,7 @@ angular.module('myControllers').controller('RegisterController', function($route
 
   vm.confirm = function(users) {
     angular.forEach(users, function(user) {
-      if(user.attended && !user.startingAttended) {
+      if(!user.startingAttended && user.attended) {
         userService.attend(user.id, {
           attended: user.attended,
           event_id: vm.event.id
@@ -31,7 +55,7 @@ angular.module('myControllers').controller('RegisterController', function($route
         }, function(response) {
           console.log(response);
         });
-      } else if(!user.attended && user.startingAttended) {
+      } else if(user.startingAttended && !user.attended) {
         userService.attend(user.id, {
           attended: user.attended,
           event_id: vm.event.id
@@ -50,19 +74,13 @@ angular.module('myControllers').controller('RegisterController', function($route
       { text: 'Presente', style: 'tableHeader' }
     ]];
 
-    var hours;
-    var minutes;
-
-    if(new Date(event.startingDate).getMinutes() > new Date(event.endingDate).getMinutes()) {
-      hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours() - 1;
-      minutes = 60 - new Date(event.startingDate).getMinutes() + new Date(event.endingDate).getMinutes();
-    } else if(new Date(event.startingDate).getMinutes() < new Date(event.endingDate).getMinutes()) {
-      hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours();
-      minutes = new Date(event.endingDate).getMinutes() - new Date(event.startingDate).getMinutes();
-    } else {
-      hours = new Date(event.endingDate).getHours() - new Date(event.startingDate).getHours();
-      minutes = 0;
-    }
+    var partecipants = 0;
+    angular.forEach(event.users, function(user) {
+      if(user.attended) {
+        partecipants++;
+      }
+    });
+    event.partecipants = partecipants;
 
     angular.forEach(users, function(user) {
       if(user.attended) {
@@ -83,10 +101,19 @@ angular.module('myControllers').controller('RegisterController', function($route
         text: event.name,
         style: 'header'
       }, {
+        text: 'Argomento: ' + event.topic.name,
+        style: 'text'
+      }, {
         text: 'Proprietario: ' + event.user.firstName + ' ' + event.user.lastName,
         style: 'text'
       }, {
-        text: 'Durata complessiva: ' + hours + ' ore e ' + minutes + ' minuti',
+        text: 'Data: ' + event.date,
+        style: 'text'
+      }, {
+        text: 'Durata: ' + event.duration,
+        style: 'text'
+      }, {
+        text: 'Partecipanti: ' + event.partecipants + '/' + event.users.length + '/' + event.maximumPartecipants,
         style: 'text'
       }, {
         style: 'table',

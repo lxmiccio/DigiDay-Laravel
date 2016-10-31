@@ -16,23 +16,20 @@ angular.module('myControllers').controller('SignupController', function($window,
     console.log(response);
   });
 
-  vm.signup = function(fresher, firstName, lastName, email, role) {
+  vm.signup = function(fresher, email, firstName, lastName, selectedRole) {
     authService.signup({
       'fresher': fresher,
-      'first_name': firstName,
-      'last_name': lastName,
       'email': email,
-      'role_id': role[0].id
+      'first_name': firstName,
+      'last_name': lastName
     }, function(response) {
-      
       userService.attachRole(response.data.data.id, {
-        'role_id': role[0].id
+        'role_id': selectedRole[0].id
       }, function(response) {
         $window.location.href = '';
       }, function(response) {
         console.log(response);
       });
-
     }, function(response) {
       console.log(response);
     });

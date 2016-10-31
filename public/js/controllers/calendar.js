@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('CalendarController', function ($filter, calendarConfig, authService, eventService, topicService) {
+angular.module('myControllers').controller('CalendarController', function($filter, calendarConfig, authService, eventService, topicService) {
 
   var vm = this;
 
@@ -18,7 +18,6 @@ angular.module('myControllers').controller('CalendarController', function ($filt
           vm.events[index].title = event.name;
           vm.events[index].startsAt = new Date(event.startingDate);
           vm.events[index].endsAt = new Date(event.endingDate);
-          vm.events[index].color = calendarConfig.colorTypes.info;
 
           if(event.user.id == vm.user.id) {
             vm.events[index].color = calendarConfig.colorTypes.important;
@@ -33,8 +32,10 @@ angular.module('myControllers').controller('CalendarController', function ($filt
 
             if(partecipate) {
               vm.events[index].color = calendarConfig.colorTypes.success;
-            } else if(event.users.length == event.maxPartecipants) {
+            } else if(event.users.length == event.maximumPartecipants) {
               vm.events[index].color = calendarConfig.colorTypes.inverse;
+            } else {
+              vm.events[index].color = calendarConfig.colorTypes.info;
             }
           }
         });
@@ -55,7 +56,12 @@ angular.module('myControllers').controller('CalendarController', function ($filt
         vm.events[index].title = event.name;
         vm.events[index].startsAt = new Date(event.startingDate);
         vm.events[index].endsAt = new Date(event.endingDate);
-        vm.events[index].color = calendarConfig.colorTypes.info;
+
+        if(event.users.length == event.maximumPartecipants) {
+          vm.events[index].color = calendarConfig.colorTypes.inverse;
+        } else {
+          vm.events[index].color = calendarConfig.colorTypes.info;
+        }
       });
 
       vm.filteredEvents = angular.copy(vm.events);

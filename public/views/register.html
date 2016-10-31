@@ -1,68 +1,78 @@
 <!-- Flawless -->
 
-<div class="row" ng-if="index.showAuthenticationMessages && ctrl.event && index.isAuthenticated && index.user.id == ctrl.event.user.id">
-  <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2 class="text-center"><strong>Registro</strong></h2>
+<div ng-if="index.isAuthenticated && index.user.id == ctrl.event.user.id">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center"><strong>Registro</strong></h2>
+        </div>
       </div>
-    </div>
 
-    <div class="row br-sm"></div>
+      <div class="row br-sm"></div>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="text-center">Segna i Presenti all'evento {{ctrl.event.name}}</p>
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="col-xs-4 text-center">Matricola</th>
-              <th class="col-xs-4 text-center">Nome</th>
-              <th class="col-xs-4 text-center">Presente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="user in ctrl.event.users">
-              <td class="text-center">{{user.fresher}}</td>
-              <td class="text-center">{{user.firstName}} {{user.lastName}}</td>
-              <td class="text-center"><input type="checkbox" ng-model="ctrl.event.users[$index].attended"></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-center">Segna i Presenti al DigiDay {{ctrl.event.name}}</p>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-12">
-        <div class="text-center">
-          <button type="button" class="btn btn-success" ng-click="ctrl.confirm(ctrl.event.users)">Conferma</button>
-          <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.event, ctrl.event.users)">Pdf</button>
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+        <hr/>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-xs-4 text-center">Matricola</th>
+                  <th class="col-xs-4 text-center">Nome e Cognome</th>
+                  <th class="col-xs-4 text-center">Presente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in ctrl.event.users">
+                  <td class="text-center">{{user.fresher}}</td>
+                  <td class="text-center">{{user.firstName}} {{user.lastName}}</td>
+                  <td class="text-center"><input type="checkbox" ng-model="ctrl.event.users[$index].attended"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <button type="button" class="btn btn-success" ng-click="ctrl.confirm(ctrl.event.users)">Conferma</button>
+              <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.event, ctrl.event.users)">Genera PDF</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row" ng-if="index.showAuthenticationMessages && ctrl.event && (!index.isAuthenticated || index.user.id != ctrl.event.user.id)">
-  <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2 class="text-center"><strong>Registro</strong></h2>
+<div ng-if="!index.isAuthenticated || index.user.id != ctrl.event.user.id">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center"><strong>Registro</strong></h2>
+        </div>
       </div>
-    </div>
 
-    <div class="row br-sm"></div>
+      <div class="row br-sm"></div>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="text-center">Solamente il creatore dell'evento {{ctrl.event.name}} può registrare le presenze</p>
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-center">Solamente il Proprietario del DigiDay, {{ctrl.event.user.firstName}} {{ctrl.event.user.lastName}}, può registrare le presenze</p>
+        </div>
       </div>
     </div>
   </div>

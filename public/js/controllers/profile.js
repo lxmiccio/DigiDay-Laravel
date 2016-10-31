@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('ProfileController', function ($routeParams, userService) {
+angular.module('myControllers').controller('ProfileController', function($routeParams, userService) {
 
   var vm  = this;
 

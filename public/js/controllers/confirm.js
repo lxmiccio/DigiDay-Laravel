@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('ConfirmController', function ($routeParams, $window, authService) {
+angular.module('myControllers').controller('ConfirmController', function($routeParams, $window, authService) {
 
   var vm  = this;
 

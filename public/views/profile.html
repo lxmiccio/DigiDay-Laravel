@@ -1,23 +1,55 @@
 <!-- Flawless -->
 
-<div class="row" ng-if="index.isAuthenticated()">
-  <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
-    <div class="jumbotron">
+<div ng-if="index.isAuthenticated()">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
       <div class="row">
         <div class="col-md-4 col-md-offset-1 col-xs-10 col-xs-offset-1 col-xs-10 col-xs-offset-1">
-          <img ng-if="ctrl.user.image" ng-src="{{ctrl.user.image | decache}}" class="img-responsive img-rounded center-block"/>
+          <div class="row">
+            <div class="col-xs-12">
+              <h3 class="text-center"><strong>Immagine del Profilo</strong></h3>
+            </div>
+          </div>
+
+          <hr/>
+
+          <div class="row br-sm"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <img ng-if="ctrl.user.image" ng-src="{{ctrl.user.image | decache}}" class="img-responsive img-rounded center-block"/>
+            </div>
+          </div>
+
+          <div ng-if="index.user.id == ctrl.user.id">
+            <hr/>
+
+            <div class="row br-sm"></div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <a ng-href="utente/{{ctrl.user.id}}/immagine"><button type="button" class="btn btn-primary">Modifica immagine</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="visible-sm visible-xs"/>
+          <hr class="visible-sm visible-xs"/>
+          <hr class="visible-sm visible-xs"/>
         </div>
 
         <div class="col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row br-lg visible-sm visible-xs"></div>
-
           <div class="row">
             <div class="col-xs-12">
               <h3 class="text-center"><strong>{{ctrl.user.firstName}} {{ctrl.user.lastName}}</strong></h3>
             </div>
           </div>
 
-          <div class="row br-lg"></div>
+          <hr/>
+
+          <div class="row br-sm"></div>
 
           <div class="row">
             <div class="col-xs-12">
@@ -41,21 +73,13 @@
             </div>
           </div>
 
-          <div class="row br-sm" ng-if="index.user.id == ctrl.user.id"></div>
+          <div ng-if="index.user.id == ctrl.user.id">
+            <div class="row br-sm"></div>
 
-          <div class="row" ng-if="index.user.id == ctrl.user.id">
-            <div class="col-xs-12">
-              <p class="text-center" ng-if="ctrl.user.confirmed">Hai confermato la Email</p>
-              <p class="text-center" ng-if="!ctrl.user.confirmed">Non hai confermato la Email</p>
-            </div>
-          </div>
-
-          <div class="row br-lg" ng-if="index.user.id == ctrl.user.id"></div>
-
-          <div class="row" ng-if="index.user.id == ctrl.user.id">
-            <div class="col-xs-12">
-              <div class="text-center">
-                <button type="button" class="btn btn-primary" ng-click="index.redirect('utente/' + ctrl.user.id + '/immagine')">Modifica immagine</button>
+            <div class="row">
+              <div class="col-xs-12">
+                <p class="text-center" ng-if="ctrl.user.confirmed"><strong>Hai confermato la Email</strong></p>
+                <p class="text-center" ng-if="!ctrl.user.confirmed"><strong>Non hai confermato la Email</strong></p>
               </div>
             </div>
           </div>

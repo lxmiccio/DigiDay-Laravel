@@ -4,6 +4,12 @@ angular.module('myControllers').controller('AdministerUsersController', function
 
   var vm = this;
 
+  roleService.getAll(function(response) {
+    vm.roles = response.data.data;
+  }, function(response) {
+    console.log(response);
+  });
+
   userService.getAll(function(response) {
     vm.users = response.data.data;
 
@@ -14,12 +20,6 @@ angular.module('myControllers').controller('AdministerUsersController', function
       });
       vm.users[index].writtenRoles = vm.users[index].writtenRoles.slice(0, -2);
     });
-  }, function(response) {
-    console.log(response);
-  });
-
-  roleService.getAll(function(response) {
-    vm.roles = response.data.data;
   }, function(response) {
     console.log(response);
   });

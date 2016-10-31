@@ -1,15 +1,15 @@
 // Flawless
 
-angular.module('myControllers').controller('ResetController', function ($routeParams, $window, authService) {
+angular.module('myControllers').controller('ResetController', function($routeParams, $window, authService) {
 
   var vm  = this;
 
-  vm.reset = function(fresher, password, confirmationPassword) {
+  vm.reset = function(fresher, password, passwordConfirmation) {
     authService.reset({
       'token': $routeParams.token,
       'fresher': fresher,
       'password': password,
-      'password_confirmation': confirmationPassword
+      'password_confirmation': passwordConfirmation
     }, function(response) {
       $window.location.href = 'accedi';
     }, function(response) {

@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('CreateEventController', function ($filter, $q, $window, classroomService, eventService, itemService, topicService) {
+angular.module('myControllers').controller('CreateEventController', function($filter, $q, $window, classroomService, eventService, itemService, topicService) {
 
   var vm  = this;
 
@@ -23,8 +23,8 @@ angular.module('myControllers').controller('CreateEventController', function ($f
   });
 
   vm.onDateChange = function(date) {
-    if(date >= new Date()) {
-      vm.date = $filter('date')(date, 'yyyy-MM-dd');
+    if(new Date(date) >= new Date()) {
+      vm.date = $filter('date')(new Date(date), 'yyyy-MM-dd');
     } else {
       vm.date = null;
     }
@@ -35,8 +35,8 @@ angular.module('myControllers').controller('CreateEventController', function ($f
   vm.onStartingDateChange = function(startingDate) {
     startingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(startingDate).getHours(), new Date(startingDate).getMinutes());
 
-    if(startingDate >= new Date() && startingDate.getHours() >= 14 && startingDate.getHours() <= 18) {
-      vm.startingDate = $filter('date')(startingDate, 'yyyy-MM-dd HH:mm:ss')
+    if(new Date(startingDate) >= new Date() && new Date(startingDate).getHours() >= 14 && new Date(startingDate).getHours() <= 18) {
+      vm.startingDate = $filter('date')(new Date(startingDate), 'yyyy-MM-dd HH:mm:ss')
     } else {
       vm.startingDate = null;
     }
@@ -47,10 +47,10 @@ angular.module('myControllers').controller('CreateEventController', function ($f
   vm.onEndingDateChange = function(endingDate, startingDate, classrooms, items) {
     endingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(endingDate).getHours(), new Date(endingDate).getMinutes());
 
-    if(endingDate > new Date(startingDate) && endingDate.getHours() <= 18) {
-      vm.endingDate = $filter('date')(endingDate, 'yyyy-MM-dd HH:mm:ss');
-      vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, startingDate, endingDate);
-      vm.filteredItems = $filter('availableItems')(items, startingDate, endingDate);
+    if(new Date(endingDate) > new Date(startingDate) && new Date(endingDate).getHours() <= 18) {
+      vm.endingDate = $filter('date')(new Date(endingDate), 'yyyy-MM-dd HH:mm:ss');
+      vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, new Date(startingDate), new Date(endingDate));
+      vm.filteredItems = $filter('availableItems')(items, new Date(startingDate), new Date(endingDate));
     } else {
       vm.endingDate = null;
     }
@@ -79,16 +79,16 @@ angular.module('myControllers').controller('CreateEventController', function ($f
     }
   };
 
-  vm.create = function(name, startingDate, endingDate, maximumPartecipants, selectedClassroom, selectedTopic, selectedItems, description, user) {
+  vm.create = function(name, startingDate, endingDate, maximumPartecipants, description, selectedClassroom, selectedTopic, selectedItems, user) {
     eventService.create({
       'name': name,
       'starting_date': startingDate,
       'ending_date': endingDate,
       'maximum_partecipants': maximumPartecipants,
-      'user_id': user.id,
+      'description': description,
       'classroom_id': selectedClassroom[0].id,
       'topic_id': selectedTopic[0].id,
-      'description': description
+      'user_id': user.id
     }, function(response) {
       var promises = [];
 

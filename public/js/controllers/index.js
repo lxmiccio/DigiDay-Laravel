@@ -8,7 +8,6 @@ angular.module('myControllers').controller('IndexController', function ($locatio
     vm.user = response.data.data;
     vm.showAuthenticationMessages = true;
   }, function(response) {
-    console.log(response);
     vm.showAuthenticationMessages = true;
   });
 
