@@ -5,19 +5,35 @@ angular.module('myControllers').controller('CreateEventController', function($fi
   var vm  = this;
 
   classroomService.getAll(function(response) {
-    vm.classrooms = response.data.data;
+    vm.classrooms = [];
+
+    angular.forEach(response.data.data, function(classroom) {
+      if(!classroom.disabled) {
+        vm.classrooms.push(classroom);
+      }
+    })
   }, function(response) {
     console.log(response);
   });
 
   itemService.getAll(function(response) {
-    vm.items = response.data.data;
+    vm.items = [];
+
+    angular.forEach(response.data.data, function(item) {
+      if(!item.disabled) {
+        vm.items.push(item);
+      }
+    })
   }, function(response) {
     console.log(response);
   });
 
   topicService.getAll(function(response) {
-    vm.topics = response.data.data;
+    vm.topics = [];
+
+    angular.forEach(response.data.data, function(topic) {
+      vm.topics.push(topic);
+    })
   }, function(response) {
     console.log(response);
   });

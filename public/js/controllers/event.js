@@ -153,6 +153,9 @@ angular.module('myControllers').controller('EventController', function($filter, 
         text: 'Argomento: ' + event.topic.name,
         style: 'text'
       }, {
+        text: 'Aula: ' + event.classroom.name,
+        style: 'text'
+      }, {
         text: 'Proprietario: ' + event.user.firstName + ' ' + event.user.lastName,
         style: 'text'
       }, {

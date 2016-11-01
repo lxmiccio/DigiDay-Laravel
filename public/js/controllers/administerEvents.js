@@ -60,8 +60,9 @@ angular.module('myControllers').controller('AdministerEventsController', functio
 
   vm.openPdf = function(events, startingDate, endingDate) {
     var body = [[
-      { text: 'Evento', style: 'tableHeader' },
+      { text: 'DigiDay', style: 'tableHeader' },
       { text: 'Argomento', style: 'tableHeader' },
+      { text: 'Aula', style: 'tableHeader' },
       { text: 'Proprietario', style: 'tableHeader' },
       { text: 'Data', style: 'tableHeader' },
       { text: 'Durata', style: 'tableHeader' },
@@ -72,6 +73,7 @@ angular.module('myControllers').controller('AdministerEventsController', functio
       body.push([
         { text: event.name, style: 'tableText' },
         { text: event.topic.name, style: 'tableText' },
+        { text: event.classroom.name, style: 'tableText' },
         { text: event.user.firstName + ' ' + event.user.lastName, style: 'tableText' },
         { text: event.date, style: 'tableText' },
         { text: event.duration, style: 'tableText' },
@@ -86,7 +88,7 @@ angular.module('myControllers').controller('AdministerEventsController', functio
       }, {
         style: 'table',
         table: {
-          widths: ['*', '*', '*', '*', '*', '*'],
+          widths: ['*', '*', '*', '*', '*', '*', '*'],
           headerRows: 1,
           body: body
         }
