@@ -117,19 +117,4 @@ class ItemController extends Controller
       return $this->response->errorInternal('could_not_disable_item');
     }
   }
-
-  // public function destroy($id)
-  // {
-  //   $validator = Validator::make(['id' => $id], [
-  //     'id' => 'required|exists:items,id'
-  //   ]);
-  //
-  //   $item = Item::find($id);
-  //
-  //   if($item->delete()) {
-  //     return $this->response->noContent();
-  //   } else {
-  //     return $this->response->errorInternal('could_not_delete_item');
-  //   }
-  // }
 }

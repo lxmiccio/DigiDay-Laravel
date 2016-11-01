@@ -43,7 +43,6 @@
     <script src="js/controllers/administerClassrooms.js"></script>
     <script src="js/controllers/administerEvents.js"></script>
     <script src="js/controllers/administerItems.js"></script>
-    <script src="js/controllers/administerPrints.js"></script>
     <script src="js/controllers/administerTopics.js"></script>
     <script src="js/controllers/administerUserAttendedEvents.js"></script>
     <script src="js/controllers/administerUsers.js"></script>
@@ -56,7 +55,6 @@
     <script src="js/controllers/login.js"></script>
     <script src="js/controllers/profile.js"></script>
     <script src="js/controllers/recover.js"></script>
-    <script src="js/controllers/register.js"></script>
     <script src="js/controllers/reset.js"></script>
     <script src="js/controllers/signup.js"></script>
     <script src="js/controllers/updateClassroom.js"></script>
@@ -88,31 +86,38 @@
     <header id="header" class="navbar-inverse">
       <div class="container">
         <div class="navbar-header ">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" ng-click="index.redirect('/')">DigiDay</a>
+
+          <a class="navbar-brand" ng-href="/">DigiDay</a>
         </div>
-        <nav class="collapse navbar-collapse" id="navbar-collapse-1">
+        <nav class="collapse navbar-collapse" id="navbar-collapse" style="border: none;">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Home</a></li>
-            <li><a href="/eventi">Eventi</a></li>
-            <li ng-if="!index.isAuthenticated()"><a ng-click="index.locate('/registrati')">Registrati</a></li>
-            <li ng-if="!index.isAuthenticated()"><a ng-click="index.locate('/accedi')">Accedi</a></li>
-            <li ng-if="index.isAdministrator()"><a ng-click="index.locate('/amministrazione')">Amministrazione</a></li>
-            <li ng-if="index.isAuthenticated()"><a ng-click="index.locate('/evento/crea')">Crea Evento</a></li>
-            <li ng-if="index.isAuthenticated()" class="dropdown hidden-xs">
+            <li><a ng-href="/">Home</a></li>
+            <li><a ng-href="/eventi">Eventi</a></li>
+
+            <li ng-if="!index.isAuthenticated()"><a ng-href="registrati">Registrati</a></li>
+            <li ng-if="!index.isAuthenticated()"><a ng-href="accedi">Accedi</a></li>
+
+            <li ng-if="index.isAdministrator()"><a ng-href="amministrazione">Amministrazione</a></li>
+
+            <li ng-if="index.isAuthenticated()"><a ng-href="evento/crea">Crea Evento</a></li>
+
+            <li class="dropdown hidden-xs" ng-if="index.isAuthenticated()">
               <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}&nbsp;<span class="caret"></span></a>
+
               <ul class="dropdown-menu">
-                <li><a ng-click="index.locate('/utente/' + index.user.id)">Profilo</a></li>
+                <li><a ng-href="utente/{{index.user.id}}">Profilo</a></li>
                 <li><a ng-click="index.logout()">Logout</a></li>
               </ul>
             </li>
-            <li ng-if="index.isAuthenticated()" class="visible-xs"><a ng-click="index.locate('/utente/' + index.user.id)">Profilo</a></li>
-            <li ng-if="index.isAuthenticated()" class="visible-xs"><a ng-click="index.logout()">Logout</a></li>
+
+            <li class="visible-xs" ng-if="index.isAuthenticated()"><a ng-href="utente/{{index.user.id}}">Profilo</a></li>
+            <li class="visible-xs" ng-if="index.isAuthenticated()"><a ng-click="index.logout()">Logout</a></li>
           </ul>
         </nav>
       </div>

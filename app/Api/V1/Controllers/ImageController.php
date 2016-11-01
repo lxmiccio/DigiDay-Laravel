@@ -63,7 +63,7 @@ class ImageController extends Controller
     }
 
     if(file_exists($request->get('image'))) {
-      if(!strcmp($request->get('image'), 'images/default/user.jpg')) {
+      if(strcmp($request->get('image'), 'images/default/user.jpg')) {
         if(unlink($request->get('image'))) {
           return $this->response->noContent();
         } else {

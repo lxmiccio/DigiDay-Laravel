@@ -244,22 +244,4 @@ class UserController extends Controller
       return $this->response->errorInternal('could_not_disable_user');
     }
   }
-
-  // public function destroy($id)
-  // {
-  //   $validator = Validator::make(['id' => $id], [
-  //     'id' => 'required|exists:users,id'
-  //   ]);
-  //
-  //   $user = User::find($id);
-  //
-  //   $user->roles()->detach();
-  //
-  //   if($user->delete()) {
-  //     return $this->response->noContent();
-  //   }
-  //   else {
-  //     return $this->response->errorInternal('could_not_delete_user');
-  //   }
-  // }
 }

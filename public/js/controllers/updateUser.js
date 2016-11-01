@@ -1,6 +1,6 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateUserController', function ($filter, $routeParams, $window, roleService, userService) {
+angular.module('myControllers').controller('UpdateUserController', function($filter, $routeParams, $window, roleService, userService) {
 
   var vm  = this;
 

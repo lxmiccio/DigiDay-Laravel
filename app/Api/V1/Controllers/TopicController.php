@@ -113,19 +113,4 @@ class TopicController extends Controller
       return $this->response->errorInternal('could_not_disable_topic');
     }
   }
-
-  // public function destroy($id)
-  // {
-  //   $validator = Validator::make(['id' => $id], [
-  //     'id' => 'required|exists:topics,id'
-  //   ]);
-  //
-  //   $topic = Topic::find($id);
-  //
-  //   if($topic->delete()) {
-  //     return $this->response->noContent();
-  //   } else {
-  //     return $this->response->errorInternal('could_not_delete_topic');
-  //   }
-  // }
 }

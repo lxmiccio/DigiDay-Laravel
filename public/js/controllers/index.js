@@ -1,4 +1,6 @@
-angular.module('myControllers').controller('IndexController', function ($location, $window, localStorageService, authService) {
+// Flawless
+
+angular.module('myControllers').controller('IndexController', function($location, $window, localStorageService, authService) {
 
   var vm  = this;
 
@@ -11,7 +13,7 @@ angular.module('myControllers').controller('IndexController', function ($locatio
     vm.showAuthenticationMessages = true;
   });
 
-  vm.isAdministrator = function () {
+  vm.isAdministrator = function() {
     if(vm.user) {
       var administrator = false;
       angular.forEach(vm.user.roles, function(role) {
@@ -26,7 +28,7 @@ angular.module('myControllers').controller('IndexController', function ($locatio
     }
   };
 
-  vm.isAuthenticated = function () {
+  vm.isAuthenticated = function() {
     return authService.isAuthenticated();
   };
 
