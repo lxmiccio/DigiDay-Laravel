@@ -103,7 +103,7 @@ class AuthController extends Controller
     $user->confirmation_token = str_random(255);
 
     if($user->save()) {
-      Mail::send('emails.auth.confirm', ['user' => $user], function ($message) use ($user) {
+      Mail::send('emails.auth.confirm', ['user' => $user], function($message) use($user) {
         $message->from('miccio.alex@gmail.com', 'DigiDay');
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
       });
@@ -146,7 +146,7 @@ class AuthController extends Controller
       throw new ValidationHttpException($validator->errors()->all());
     }
 
-    $response = Password::sendResetLink(['email' => User::where('fresher', $request->only(['fresher']))->first()->email], function (Message $message) {
+    $response = Password::sendResetLink(['email' => User::where('fresher', $request->only(['fresher']))->first()->email], function(Message $message) {
       $message->subject('DigiDay - Modifica la tua Password');
     });
 
@@ -170,7 +170,7 @@ class AuthController extends Controller
       throw new ValidationHttpException($validator->errors()->all());
     }
 
-    $response = Password::reset(array_merge(['email' => User::where('fresher', $request->only(['fresher']))->first()->email], $request->only(['token', 'password', 'password_confirmation'])), function ($user, $password) {
+    $response = Password::reset(array_merge(['email' => User::where('fresher', $request->only(['fresher']))->first()->email], $request->only(['token', 'password', 'password_confirmation'])), function($user, $password) {
       $user->password = $password;
       $user->save();
     });

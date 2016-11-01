@@ -1,8 +1,13 @@
 <html>
   <body>
-    <h3>Conferma il tuo Account.</h3>
+    <h3>Completa la registrazione su DigiDay</h3>
 
-    <p>È stato creato un Account su DigiDay, per confermarlo utilizza il link sottostante.</p>
+    <br/>
+
+    <p>Salve {{$user->first_name}} {{$user->last_name}},</p>
+    <p>È stato creato un nuovo Account su DigiDay, per completare la registrazione utilizza il link sottostante.</p>
+
+    <br/>
 
     <p>{{url('http://localhost:8000/utente/conferma/' . $user->confirmation_token)}}</p>
   </body>

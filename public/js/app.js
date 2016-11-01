@@ -6,30 +6,6 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   $routeProvider.when('/', {
     templateUrl: 'views/calendar.html',
     controller: 'CalendarController as ctrl'
-  }).when('/registrati', {
-    templateUrl: 'views/signup.html',
-    controller: 'SignupController as ctrl'
-  }).when('/accedi', {
-    templateUrl: 'views/login.html',
-    controller: 'LoginController as ctrl'
-  }).when('/utente/conferma/:token', {
-    templateUrl: 'views/confirm.html',
-    controller: 'ConfirmController as ctrl'
-  }).when('/utente/recupera', {
-    templateUrl: 'views/recover.html',
-    controller: 'RecoverController as ctrl'
-  }).when('/utente/reimposta/:token', {
-    templateUrl: 'views/reset.html',
-    controller: 'ResetController as ctrl'
-  }).when('/utente/:id', {
-    templateUrl: 'views/profile.html',
-    controller: 'ProfileController as ctrl'
-  }).when('/utente/:id/eventi', {
-    templateUrl: 'views/administerUserAttendedEvents.html',
-    controller: 'UserAttendedEventsController as ctrl'
-  }).when('/utente/:id/immagine', {
-    templateUrl: 'views/updateImage.html',
-    controller: 'UpdateImageController as ctrl'
   }).when('/amministrazione', {
     templateUrl: 'views/administration.html'
   }).when('/amministrazione/argomenti', {
@@ -53,24 +29,45 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
   }).when('/amministrazione/materiale/:id/modifica', {
     templateUrl: 'views/updateItem.html',
     controller: 'UpdateItemController as ctrl'
-  }).when('/amministrazione/stampe', {
-    templateUrl: 'views/administerPrints.html',
-    controller: 'AdministerPrintsController as ctrl'
   }).when('/amministrazione/utenti', {
     templateUrl: 'views/administerUsers.html',
     controller: 'AdministerUsersController as ctrl'
   }).when('/amministrazione/utente/:id/modifica', {
     templateUrl: 'views/updateUser.html',
     controller: 'UpdateUserController as ctrl'
+  }).when('/registrati', {
+    templateUrl: 'views/signup.html',
+    controller: 'SignupController as ctrl'
+  }).when('/utente/conferma/:token', {
+    templateUrl: 'views/confirm.html',
+    controller: 'ConfirmController as ctrl'
+  }).when('/accedi', {
+    templateUrl: 'views/login.html',
+    controller: 'LoginController as ctrl'
+  }).when('/utente/recupera', {
+    templateUrl: 'views/recover.html',
+    controller: 'RecoverController as ctrl'
+  }).when('/utente/reimposta/:token', {
+    templateUrl: 'views/reset.html',
+    controller: 'ResetController as ctrl'
+  }).when('/utente/:id', {
+    templateUrl: 'views/profile.html',
+    controller: 'ProfileController as ctrl'
+  }).when('/utente/:id/eventi', {
+    templateUrl: 'views/administerUserAttendedEvents.html',
+    controller: 'UserAttendedEventsController as ctrl'
+  }).when('/utente/:id/immagine', {
+    templateUrl: 'views/updateImage.html',
+    controller: 'UpdateImageController as ctrl'
+  }).when('/eventi', {
+    templateUrl: 'views/events.html',
+    controller: 'EventsController as ctrl'
   }).when('/evento/crea', {
     templateUrl: 'views/createEvent.html',
     controller: 'CreateEventController as ctrl'
   }).when('/evento/:id', {
     templateUrl: 'views/event.html',
     controller: 'EventController as ctrl'
-  }).when('/eventi', {
-    templateUrl: 'views/events.html',
-    controller: 'EventsController as ctrl'
   }).otherwise({
     redirectTo: '/'
   });

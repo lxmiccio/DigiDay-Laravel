@@ -40,6 +40,12 @@ angular.module('myControllers').controller('EventController', function($filter, 
         vm.event.users[index].attended = false;
       }
     });
+
+    if(new Date(vm.event.startingDate) > new Date()) {
+      vm.event.isNew = true;
+    } else {
+      vm.event.isNew = false;
+    }
   }, function(response) {
     console.log(response);
   });

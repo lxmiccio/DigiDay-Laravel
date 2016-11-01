@@ -3,6 +3,7 @@
 namespace App\Api\V1\Controllers;
 
 use JWTAuth;
+use Mail;
 use Validator;
 use App\Event;
 use App\Http\Controllers\Controller;
@@ -200,6 +201,13 @@ class EventController extends Controller
     ]);
 
     $event = Event::find($id);
+
+    foreach ($event->users()->orderBy('fresher')->get() as $user) {
+      Mail::send('emails.event.deleted', ['event' => $event, 'user' => $user], function($message) use($user) {
+        $message->from('miccio.alex@gmail.com', 'DigiDay');
+        $message->to($user->email, $user->first_name)->subject('DigiDay - Evento Eliminato');
+      });
+    }
 
     $event->items()->detach();
     $event->users()->detach();

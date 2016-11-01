@@ -58,53 +58,59 @@
       </div>
     </div>
 
-    <hr/>
+    <div ng-if="ctrl.event.isNew">
+      <hr/>
 
-    <div ng-if="index.isAuthenticated() && index.user.id == ctrl.event.user.id">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="text-center">
-            <button class="btn btn-danger" ng-click="ctrl.remove(ctrl.event)">Elimina</button>
+      <div ng-if="index.isAuthenticated() && index.user.id == ctrl.event.user.id">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <button class="btn btn-danger" ng-click="ctrl.remove(ctrl.event)">Elimina</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && !ctrl.isSubscribed(ctrl.event, index.user) && ctrl.event.users.length < ctrl.event.maximumPartecipants">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <button class="btn btn-success" ng-click="ctrl.subscribe(ctrl.event, index.user)">Iscrivimi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && !ctrl.isSubscribed(ctrl.event, index.user) && ctrl.event.users.length >= ctrl.event.maximumPartecipants">
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-center"><strong>Numero massimo di Partecipanti raggiunto</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && ctrl.isSubscribed(ctrl.event, index.user)">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <button class="btn btn-danger" ng-click="ctrl.unsubscribe(ctrl.event, index.user)">Disiscrivimi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="!index.isAuthenticated()">
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-center"><strong>Devi essere Autenticato per iscriverti ad un DigiDay</strong></p>
           </div>
         </div>
       </div>
     </div>
 
-    <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && !ctrl.isSubscribed(ctrl.event, index.user) && ctrl.event.users.length < ctrl.event.maximumPartecipants">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="text-center">
-            <button class="btn btn-success" ng-click="ctrl.subscribe(ctrl.event, index.user)">Iscrivimi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && !ctrl.isSubscribed(ctrl.event, index.user) && ctrl.event.users.length >= ctrl.event.maximumPartecipants">
-      <div class="row">
-        <div class="col-xs-12">
-          <p class="text-center"><strong>Numero massimo di Partecipanti raggiunto</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div ng-if="index.isAuthenticated() && index.user.id != ctrl.event.user.id && ctrl.isSubscribed(ctrl.event, index.user)">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="text-center">
-            <button class="btn btn-danger" ng-click="ctrl.unsubscribe(ctrl.event, index.user)">Disiscrivimi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div ng-if="!index.isAuthenticated()">
-      <div class="row">
-        <div class="col-xs-12">
-          <p class="text-center"><strong>Devi essere Autenticato per iscriverti ad un DigiDay</strong></p>
-        </div>
-      </div>
-    </div>
+    <hr class="visible-sm visible-xs"/>
+    <hr class="visible-sm visible-xs"/>
+    <hr class="visible-sm visible-xs"/>
   </div>
 
   <div ng-if="index.isAuthenticated && index.user.id == ctrl.event.user.id">
