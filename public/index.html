@@ -108,7 +108,7 @@
             <li ng-if="index.isAuthenticated()"><a ng-href="evento/crea">Crea Evento</a></li>
 
             <li class="dropdown hidden-xs" ng-if="index.isAuthenticated()">
-              <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}&nbsp;<span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">{{index.user.firstName}} {{index.user.lastName}}<span class="caret"></span></a>
 
               <ul class="dropdown-menu">
                 <li><a ng-href="utente/{{index.user.id}}">Profilo</a></li>

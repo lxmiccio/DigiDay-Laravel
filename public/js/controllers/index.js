@@ -4,13 +4,10 @@ angular.module('myControllers').controller('IndexController', function($location
 
   var vm  = this;
 
-  vm.showAuthenticationMessages = false;
-
   authService.me(function(response) {
     vm.user = response.data.data;
-    vm.showAuthenticationMessages = true;
   }, function(response) {
-    vm.showAuthenticationMessages = true;
+    console.log(response);
   });
 
   vm.isAdministrator = function() {

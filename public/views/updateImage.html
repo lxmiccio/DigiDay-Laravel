@@ -28,14 +28,18 @@
           <p class="text-right"><a ng-click="ctrl.removeImage()">Rimuovi Immagine</a></p>
           <p class="text-right"><a ng-click="ctrl.restoreImage(ctrl.user.image)">Ripristina Immagine</a></p>
 
-          <div class="form-control" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="!ctrl.image" ng-model="image">
-            <div class="placeholder">Immagine...</div>
+          <div ng-if="!ctrl.image">
+            <div class="form-control" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="image">
+              <div class="placeholder">Immagine...</div>
+            </div>
           </div>
 
-          <div class="form-control form-control-image" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-if="ctrl.image" ng-model="image">
-            <div class="row">
-              <div class="col-xs-12">
-                <img ngf-src="ctrl.image" class="img-responsive img-rounded center-block">
+          <div ng-if="ctrl.image">
+            <div class="form-control form-control-image" ngf-select ngf-drop ngf-change="ctrl.changeImage(image)" ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="image">
+              <div class="row">
+                <div class="col-xs-12">
+                  <img ngf-src="ctrl.image" class="img-responsive img-rounded center-block">
+                </div>
               </div>
             </div>
           </div>
@@ -51,6 +55,14 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="!index.isAuthenticated || index.user.id != ctrl.user.id">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center"><strong>Devi essere il Proprietario del Profilo</strong></h2>
     </div>
   </div>
 </div>

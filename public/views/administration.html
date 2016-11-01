@@ -1,8 +1,8 @@
 <!-- Flawless -->
 
-<div class="row" ng-if="index.isAdministrator()">
-  <div class="col-md-4 col-sm-6 col-xs-6">
-    <div class="jumbotron">
+<div ng-if="index.isAdministrator()">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-6">
       <div class="row">
         <div class="col-xs-12">
           <h3 class="text-center"><strong>Argomenti</strong></h3>
@@ -20,10 +20,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-4 col-sm-6 col-xs-6">
-    <div class="jumbotron">
+    <div class="col-md-4 col-sm-6 col-xs-6">
       <div class="row">
         <div class="col-xs-12">
           <h3 class="text-center"><strong>Classi</strong></h3>
@@ -41,10 +39,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-4 col-sm-6 col-xs-6">
-    <div class="jumbotron">
+    <div class="col-md-4 col-sm-6 col-xs-6">
       <div class="row">
         <div class="col-xs-12">
           <h3 class="text-center"><strong>DigiDay</strong></h3>
@@ -64,45 +60,54 @@
     </div>
   </div>
 
-  <div class="col-md-4 col-sm-6 col-xs-6">
-    <div class="jumbotron">
+  <div class="row br-lg">
+    <div class="row br-lg">
+
       <div class="row">
-        <div class="col-xs-12">
-          <h3 class="text-center"><strong>Materiali</strong></h3>
+        <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-6">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3 class="text-center"><strong>Materiali</strong></h3>
+            </div>
+          </div>
+
+          <div class="row br-sm">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <a ng-href="amministrazione/materiali"><button type="button" class="btn btn-primary">Amministra</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="row br-sm">
+        <div class="col-md-4 col-sm-6 col-xs-6">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3 class="text-center"><strong>Utenti</strong></h3>
+            </div>
+          </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="text-center">
-              <a ng-href="amministrazione/materiali"><button type="button" class="btn btn-primary">Amministra</button></a>
+          <div class="row br-sm">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <a ng-href="amministrazione/utenti"><button type="button" class="btn btn-primary">Amministra</button></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="col-md-4 col-sm-6 col-xs-6">
-    <div class="jumbotron">
-      <div class="row">
-        <div class="col-xs-12">
-          <h3 class="text-center"><strong>Utenti</strong></h3>
-        </div>
-      </div>
-
-      <div class="row br-sm">
-
+      <div ng-if="!index.isAdministrator()">
         <div class="row">
           <div class="col-xs-12">
-            <div class="text-center">
-              <a ng-href="amministrazione/utenti"><button type="button" class="btn btn-primary">Amministra</button></a>
-            </div>
+            <h2 class="text-center"><strong>Devi essere un Amministratore</strong></h2>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

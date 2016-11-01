@@ -81,13 +81,21 @@
     <hr/>
 
     <div class="row br-lg"></div>
+  </div>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="text-center">
-          <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.user, ctrl.events, ctrl.attendedEvents)">Genera PDF</button>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" ng-click="ctrl.openPdf(ctrl.user, ctrl.events, ctrl.attendedEvents)">Genera PDF</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="!index.isAdministrator()">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center"><strong>Devi essere un Amministratore</strong></h2>
     </div>
   </div>
 </div>
