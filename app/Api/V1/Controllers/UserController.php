@@ -68,8 +68,8 @@ class UserController extends Controller
     $user->confirmation_token = str_random(255);
 
     if($user->save()) {
-      Mail::send('emails.auth.confirm', ['user' => $user], function($message) use($user) {
-        $message->from('miccio.alex@gmail.com', 'DigiDay');
+      Mail::send('emails.auth.confirm', ['user' => $user, 'url' => Config::get("app.url")], function($message) use($user) {
+        $message->from(Config::get("mail.from")["address"], Config::get("mail.from")["name"]);
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il tuo Account');
       });
 
@@ -115,8 +115,8 @@ class UserController extends Controller
     $user->confirmed = 0;
 
     if($user->save()) {
-      Mail::send('emails.auth.change', ['user' => $user], function($message) use($user) {
-        $message->from('miccio.alex@gmail.com', 'DigiDay');
+      Mail::send('emails.auth.change', ['user' => $user, 'url' => Config::get("app.url")], function($message) use($user) {
+        $message->from(Config::get("mail.from")["address"], Config::get("mail.from")["name"]);
         $message->to($user->email, $user->first_name)->subject('DigiDay - Conferma il nuovo indirizzo Email');
       });
 

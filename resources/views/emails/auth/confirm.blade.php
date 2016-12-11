@@ -9,6 +9,6 @@
 
     <br/>
 
-    <p>{{url('http://localhost:8000/utente/conferma/' . $user->confirmation_token)}}</p>
+    <p>{{url(URL::to('/') . '/utente/conferma/' . $user->confirmation_token)}}</p>
   </body>
 </html>

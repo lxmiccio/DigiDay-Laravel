@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use Config;
 use JWTAuth;
 use Mail;
 use Validator;
@@ -203,8 +204,8 @@ class EventController extends Controller
     $event = Event::find($id);
 
     foreach ($event->users()->orderBy('fresher')->get() as $user) {
-      Mail::send('emails.event.deleted', ['event' => $event, 'user' => $user], function($message) use($user) {
-        $message->from('miccio.alex@gmail.com', 'DigiDay');
+      Mail::send('emails.event.deleted', ['event' => $event, 'user' => $event->user()->get()->first()], function($message) use($user) {
+        $message->from(Config::get("mail.from")["address"], Config::get("mail.from")["name"]);
         $message->to($user->email, $user->first_name)->subject('DigiDay - Evento Eliminato');
       });
     }

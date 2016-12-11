@@ -9,7 +9,7 @@
 
     <br/>
 
-    <p>{{url('http://localhost:8000/utente/reimposta/' . $token)}}</p>
+    <p>{{url(URL::to('/') . '/utente/reimposta/' . $token)}}</p>
 
     <br/>
 

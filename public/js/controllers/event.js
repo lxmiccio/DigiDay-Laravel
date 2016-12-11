@@ -84,6 +84,46 @@ angular.module('myControllers').controller('EventController', function($filter, 
       'user_id': user.id
     }, function(response) {
       vm.event = response.data.data;
+
+      vm.event.date = $filter('date')(new Date(vm.event.startingDate), 'dd/MM/yyyy');
+
+      var hours;
+      var minutes;
+      if(new Date(vm.event.startingDate).getMinutes() > new Date(vm.event.endingDate).getMinutes()) {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours() - 1;
+        minutes = 60 - new Date(vm.event.startingDate).getMinutes() + new Date(vm.event.endingDate).getMinutes();
+      } else if(new Date(vm.event.startingDate).getMinutes() < new Date(vm.event.endingDate).getMinutes()) {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+        minutes = new Date(vm.event.endingDate).getMinutes() - new Date(vm.event.startingDate).getMinutes();
+      } else {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+        minutes = 0;
+      }
+      vm.event.duration = hours + 'h, ' + minutes + 'm';
+
+      var partecipants = 0;
+      angular.forEach(vm.event.users, function(user) {
+        if(user.attended) {
+          partecipants++;
+        }
+      });
+      vm.event.partecipants = partecipants;
+
+      angular.forEach(vm.event.users, function(user, index) {
+        if(user.attended) {
+          vm.event.users[index].startingAttended = true;
+          vm.event.users[index].attended = true;
+        } else {
+          vm.event.users[index].startingAttended = false;
+          vm.event.users[index].attended = false;
+        }
+      });
+
+      if(new Date(vm.event.startingDate) > new Date()) {
+        vm.event.isNew = true;
+      } else {
+        vm.event.isNew = false;
+      }
     }, function(response) {
       console.log(response);
     });
@@ -94,6 +134,46 @@ angular.module('myControllers').controller('EventController', function($filter, 
       'user_id': user.id
     }, function(response) {
       vm.event = response.data.data;
+
+      vm.event.date = $filter('date')(new Date(vm.event.startingDate), 'dd/MM/yyyy');
+
+      var hours;
+      var minutes;
+      if(new Date(vm.event.startingDate).getMinutes() > new Date(vm.event.endingDate).getMinutes()) {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours() - 1;
+        minutes = 60 - new Date(vm.event.startingDate).getMinutes() + new Date(vm.event.endingDate).getMinutes();
+      } else if(new Date(vm.event.startingDate).getMinutes() < new Date(vm.event.endingDate).getMinutes()) {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+        minutes = new Date(vm.event.endingDate).getMinutes() - new Date(vm.event.startingDate).getMinutes();
+      } else {
+        hours = new Date(vm.event.endingDate).getHours() - new Date(vm.event.startingDate).getHours();
+        minutes = 0;
+      }
+      vm.event.duration = hours + 'h, ' + minutes + 'm';
+
+      var partecipants = 0;
+      angular.forEach(vm.event.users, function(user) {
+        if(user.attended) {
+          partecipants++;
+        }
+      });
+      vm.event.partecipants = partecipants;
+
+      angular.forEach(vm.event.users, function(user, index) {
+        if(user.attended) {
+          vm.event.users[index].startingAttended = true;
+          vm.event.users[index].attended = true;
+        } else {
+          vm.event.users[index].startingAttended = false;
+          vm.event.users[index].attended = false;
+        }
+      });
+
+      if(new Date(vm.event.startingDate) > new Date()) {
+        vm.event.isNew = true;
+      } else {
+        vm.event.isNew = false;
+      }
     }, function(response) {
       console.log(response);
     });
