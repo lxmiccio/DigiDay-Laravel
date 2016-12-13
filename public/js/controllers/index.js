@@ -2,7 +2,7 @@
 
 angular.module('myControllers').controller('IndexController', function($location, $window, localStorageService, authService) {
 
-  var vm  = this;
+  var vm = this;
 
   authService.me(function(response) {
     vm.user = response.data.data;
