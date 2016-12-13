@@ -8,6 +8,10 @@ p {
   margin-bottom: 0px;
 }
 
+.alert {
+  margin-bottom: 0px;
+}
+
 .form-control-image {
   height: auto;
   padding: 10px;
