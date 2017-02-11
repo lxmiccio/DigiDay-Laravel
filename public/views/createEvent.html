@@ -30,7 +30,7 @@
               <input type="text" class="form-control" placeholder="Data..." data-ng-model="ctrl.date"/>
             </p>
             <ul class="dropdown-menu">
-              <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown1', minView:'day'}" data-ng-model="ctrl.date" ng-change="ctrl.onDateChange(ctrl.date)"/>
+              <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown1', minView:'day'}" data-ng-model="ctrl.date" data-before-render="ctrl.onDateRender($view, $dates, $leftDate, $upDate, $rightDate)" ng-change="ctrl.onDateChange(ctrl.date)"/>
             </ul>
           </div>
         </div>
@@ -46,8 +46,16 @@
                 <input type="text" class="form-control" placeholder="Ora di Inizio..." data-ng-model="ctrl.startingDate"/>
               </p>
               <ul class="dropdown-menu">
-                <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown2', startView:'hour'}" data-ng-model="ctrl.startingDate" ng-change="ctrl.onStartingDateChange(ctrl.startingDate)"/>
+                <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown2'}" data-ng-model="ctrl.startingDate" data-before-render="ctrl.onStartingOrEndingDateRender($view, $dates, $leftDate, $upDate, $rightDate)" ng-change="ctrl.onStartingDateChange(ctrl.startingDate)"/>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="ctrl.showStartingDateError">
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="text-right" style="color: red; font-size: 12px">* L'orario deve essere compreso tra le 8:00 e le 20:00</p>
             </div>
           </div>
         </div>
@@ -63,8 +71,16 @@
                 <input type="text" class="form-control" placeholder="Ora di Fine..." data-ng-model="ctrl.endingDate"/>
               </p>
               <ul class="dropdown-menu">
-                <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown3', startView:'hour'}" data-ng-model="ctrl.endingDate" ng-change="ctrl.onEndingDateChange(ctrl.endingDate, ctrl.startingDate, ctrl.classrooms, ctrl.items)"/>
+                <datetimepicker data-datetimepicker-config="{dropdownSelector: '#dropdown3'}" data-ng-model="ctrl.endingDate" data-before-render="ctrl.onStartingOrEndingDateRender($view, $dates, $leftDate, $upDate, $rightDate)" ng-change="ctrl.onEndingDateChange(ctrl.endingDate, ctrl.startingDate, ctrl.classrooms, ctrl.items)"/>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="ctrl.showEndingDateError">
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="text-right" style="color: red; font-size: 12px">* Il digiday deve terminare dopo l'orario di inizio e prima delle 20:00</p>
             </div>
           </div>
         </div>
@@ -86,6 +102,12 @@
         <div class="row">
           <div class="col-xs-12">
             <input type="number" class="form-control" placeholder="Partecipanti..." ng-change="ctrl.onMaximumPartecipantsChange(ctrl.maximumPartecipants, ctrl.selectedClassroom)" ng-model="ctrl.maximumPartecipants" required/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-right" style="font-size: 12px">* L'aula {{ctrl.selectedClassroom[0].name}} può contenere al massimo {{ctrl.selectedClassroom[0].capacity}} persone</p>
           </div>
         </div>
       </div>
