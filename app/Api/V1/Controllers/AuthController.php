@@ -99,7 +99,7 @@ class AuthController extends Controller
     $user->email = $request->get('email');
     $user->first_name = $request->get('first_name');
     $user->last_name = $request->get('last_name');
-    $user->image = 'images/default/default.jpg';
+    $user->image = 'images/default/user.jpg';
     $user->password = str_random(255);
     $user->confirmation_token = str_random(255);
 
