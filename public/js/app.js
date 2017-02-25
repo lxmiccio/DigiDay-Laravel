@@ -1,4 +1,4 @@
-angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'timepickerPop', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
+angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
 
 .config(function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
