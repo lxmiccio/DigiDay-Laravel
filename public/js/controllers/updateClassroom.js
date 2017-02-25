@@ -1,6 +1,10 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateClassRoomController', function($routeParams, $window, classroomService) {
+angular.module('myControllers').controller('UpdateClassRoomController', function($routeParams, $window, authService, classroomService) {
+
+  authService.isAdministrator(function() {
+    $window.location.href = '/';
+  });
 
   var vm  = this;
 

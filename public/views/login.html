@@ -37,7 +37,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <input type="text" class="form-control" placeholder="Matricola..." ng-model="ctrl.fresher" required/>
+          <input type="text" class="form-control" placeholder="*Matricola..." ng-model="ctrl.fresher" required/>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
       <div class="row">
         <div class="col-xs-12">
           <p class="text-right"><a ng-href="utente/recupera">Password dimenticata?</a></p>
-          <input type="password" class="form-control" placeholder="Password..." ng-model="ctrl.password" required/>
+          <input type="password" class="form-control" placeholder="*Password..." ng-model="ctrl.password" required/>
         </div>
       </div>
 
@@ -59,14 +59,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<div ng-if="index.isAuthenticated()">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2 class="text-center"><strong>Non devi aver effettuato l'Accesso</strong></h2>
     </div>
   </div>
 </div>

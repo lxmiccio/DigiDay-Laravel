@@ -2,6 +2,10 @@
 
 angular.module('myControllers').controller('LoginController', function($rootScope, $timeout, $window, authService) {
 
+  if(authService.isAuthenticated()) {
+    $window.location.href = '/';
+  }
+
   var vm  = this;
 
   vm.showError = false;
@@ -17,10 +21,10 @@ angular.module('myControllers').controller('LoginController', function($rootScop
       $window.location.href = $rootScope.previous;
     }, function(response) {
       vm.showError = true;
-      vm.error = "Credenziali errate";
+      vm.error = response.data.message;
       $timeout(function() {
         vm.showError = false;
-      }, 60000);
+      }, 30000);
     });
   };
 

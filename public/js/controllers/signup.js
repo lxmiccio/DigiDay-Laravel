@@ -1,8 +1,15 @@
 // Flawless
 
-angular.module('myControllers').controller('SignupController', function($window, authService, roleService, userService) {
+angular.module('myControllers').controller('SignupController', function($timeout, $window, authService, roleService, userService) {
+
+  if(authService.isAuthenticated()) {
+    $window.location.href = '/';
+  }
 
   var vm = this;
+
+  vm.showError = false;
+  vm.error = "";
 
   roleService.getAll(function(response) {
     vm.roles = [];
@@ -31,7 +38,11 @@ angular.module('myControllers').controller('SignupController', function($window,
         console.log(response);
       });
     }, function(response) {
-      console.log(response);
+      vm.showError = true;
+      vm.error = response.data.message;
+      $timeout(function() {
+        vm.showError = false;
+      }, 30000);
     });
   };
 

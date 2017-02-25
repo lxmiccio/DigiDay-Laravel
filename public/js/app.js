@@ -1,4 +1,4 @@
-angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
+angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-multi-select', 'LocalStorageModule', 'ngFileUpload', 'mwl.calendar', 'ngRoute', 'timepickerPop', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'myControllers', 'myFilters', 'myServices'])
 
 .config(function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
@@ -7,7 +7,8 @@ angular.module('digidayApp', ['angular-jwt', 'angularRandomString', 'isteven-mul
     templateUrl: 'views/calendar.html',
     controller: 'CalendarController as ctrl'
   }).when('/amministrazione', {
-    templateUrl: 'views/administration.html'
+    templateUrl: 'views/administration.html',
+    controller: 'AdministrationController as ctrl'
   }).when('/amministrazione/argomenti', {
     templateUrl: 'views/administerTopics.html',
     controller: 'AdministerTopicsController as ctrl'

@@ -57,12 +57,12 @@ class AuthController extends Controller
     ]);
 
     if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
+      return $this->response->errorUnauthorized('La matricola selezionata non esiste');
     }
 
     try {
       if(!$token = JWTAuth::attempt(array_merge(['fresher' => $request->only(['fresher'])], $request->only(['password'])))) {
-        return $this->response->errorUnauthorized('could_not_login');
+        return $this->response->errorUnauthorized('La password non corrisponde alla matricola');
       }
     } catch(JWTException $exception) {
       return $this->response->errorInternal('could_not_create_token');
@@ -82,15 +82,16 @@ class AuthController extends Controller
 
   public function signup(Request $request)
   {
-    $validator = Validator::make($request->only(['fresher', 'email', 'first_name', 'last_name']), [
-      'fresher' => 'required|unique:users,fresher',
-      'email' => 'required|email|unique:users,email',
-      'first_name' => 'required',
-      'last_name' => 'required'
-    ]);
+    if(Validator::make($request->only(['fresher']), ['fresher' => 'required|unique:users,fresher'])->fails()) {
+      return $this->response->errorBadRequest('La matricola selezionata è già registrata');
+    }
 
-    if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
+    if(Validator::make($request->only(['email']), ['email' => 'required|email|unique:users,email'])->fails()) {
+      return $this->response->errorBadRequest('La email selezionata è già registrata');
+    }
+
+    if(Validator::make($request->only(['first_name', 'last_name']), ['first_name' => 'required', 'last_name' => 'required'])->fails()) {
+      return $this->response->errorBadRequest('Inserire nome e cognome');
     }
 
     $user = new User;
@@ -143,7 +144,7 @@ class AuthController extends Controller
     ]);
 
     if($validator->fails()) {
-      throw new ValidationHttpException($validator->errors()->all());
+      return $this->response->errorBadRequest('La matricola selezionata non esiste');
     }
 
     $response = Password::sendResetLink(['email' => User::where('fresher', $request->only(['fresher']))->first()->email], function(Message $message) {
@@ -159,9 +160,12 @@ class AuthController extends Controller
 
   public function reset(Request $request)
   {
-    $validator = Validator::make($request->only(['token', 'fresher', 'password', 'password_confirmation']), [
+    if(Validator::make($request->only(['fresher']), ['fresher' => 'required|exists:users,freshe'])->fails()) {
+      return $this->response->errorBadRequest('La matricola selezionata non esiste');
+    }
+
+    $validator = Validator::make($request->only(['token', 'password', 'password_confirmation']), [
       'token' => 'required',
-      'fresher' => 'required|exists:users,fresher',
       'password' => 'required|confirmed|min:6',
       'password_confirmation' => 'required|min:6',
     ]);

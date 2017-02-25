@@ -65,6 +65,23 @@ angular.module('myServices').factory('authService', function ($http, localStorag
     });
   };
 
+  function isAdministrator(onError) {
+    me(function(response) {
+      var administrator = false;
+      angular.forEach(response.data.data.roles, function(role) {
+        console.log(role.name);
+        if(role.name == 'Amministratore') {
+          administrator = true;
+        }
+      });
+      if(!administrator) {
+        onError();
+      }
+    }, function(response) {
+      onError();
+    });
+  };
+
   function isAuthenticated() {
     if(localStorageService.get('token')) {
       return true;
@@ -81,6 +98,7 @@ angular.module('myServices').factory('authService', function ($http, localStorag
     confirm: confirm,
     recover: recover,
     reset: reset,
+    isAdministrator: isAdministrator,
     isAuthenticated: isAuthenticated
   };
 

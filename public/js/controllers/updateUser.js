@@ -1,6 +1,10 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateUserController', function($filter, $routeParams, $window, roleService, userService) {
+angular.module('myControllers').controller('UpdateUserController', function($filter, $routeParams, $window, authService, roleService, userService) {
+
+  authService.isAdministrator(function() {
+    $window.location.href = '/';
+  });
 
   var vm  = this;
 

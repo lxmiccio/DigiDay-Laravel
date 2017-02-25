@@ -1,6 +1,10 @@
 // Flawless
 
-angular.module('myControllers').controller('AdministerItemsController', function(itemService) {
+angular.module('myControllers').controller('AdministerItemsController', function($window, authService, itemService) {
+
+  authService.isAdministrator(function() {
+    $window.location.href = '/';
+  });
 
   var vm  = this;
 

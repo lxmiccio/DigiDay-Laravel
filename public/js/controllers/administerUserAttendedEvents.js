@@ -1,6 +1,10 @@
 // Flawless
 
-angular.module('myControllers').controller('UserAttendedEventsController', function($filter, $routeParams, eventService, userService) {
+angular.module('myControllers').controller('UserAttendedEventsController', function($filter, $routeParams, $window, authService, eventService, userService) {
+
+  authService.isAdministrator(function() {
+    $window.location.href = '/';
+  });
 
   var vm = this;
 

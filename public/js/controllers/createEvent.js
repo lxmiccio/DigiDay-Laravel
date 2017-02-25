@@ -41,6 +41,14 @@ angular.module('myControllers').controller('CreateEventController', function($fi
     console.log(response);
   });
 
+  vm.onDateRender = function(view, dates, leftDate, upDate, rightDate) {
+    angular.forEach(dates, function(date, index) {
+      if(new Date(date.localDateValue()) < new Date() || new Date(date.localDateValue()).getDay() == 0 || new Date(date.localDateValue()).getDay() == 6) {
+        dates[index].selectable = false;
+      }
+    });
+  };
+
   vm.onDateChange = function(date) {
     if(new Date(date) >= new Date()) {
       vm.date = $filter('date')(new Date(date), 'yyyy-MM-dd');
@@ -48,27 +56,6 @@ angular.module('myControllers').controller('CreateEventController', function($fi
       vm.date = null;
     }
     vm.startingDate = null;
-    vm.endingDate = null;
-  };
-
-  vm.onDateRender = function(view, dates, leftDate, upDate, rightDate) {
-    angular.forEach(dates, function(date, index) {
-      if(new Date(date.localDateValue()) < new Date() || new Date(date.localDateValue()).getDay() == 0 || new Date(date.localDateValue()).getDay() == 6) {
-        dates[index].selectable = false;
-      }
-    });
-  }
-
-  vm.onStartingDateChange = function(startingDate) {
-    startingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(startingDate).getHours(), new Date(startingDate).getMinutes());
-
-    if(new Date(startingDate) >= new Date() && new Date(startingDate).getHours() >= 8 && new Date(startingDate).getHours() <= 19) {
-      vm.startingDate = $filter('date')(new Date(startingDate), 'yyyy-MM-dd HH:mm:ss')
-      vm.showStartingDateError = false;
-    } else {
-      vm.startingDate = null;
-      vm.showStartingDateError = true;
-    }
     vm.endingDate = null;
   };
 
@@ -80,12 +67,33 @@ angular.module('myControllers').controller('CreateEventController', function($fi
         }
       }
     });
-  }
+  };
+
+  vm.onStartingDateChange = function(startingDate) {
+    startingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(startingDate).getHours(), new Date(startingDate).getMinutes());
+
+    if(new Date(startingDate) >= new Date() && new Date(startingDate).getHours() >= 8 && new Date(startingDate).getHours() <= 19) {
+      vm.startingDate = $filter('date')(new Date(startingDate), 'yyyy-MM-dd HH:mm:ss')
+      vm.showStartingDateError = false;
+    } else if(new Date(startingDate).getHours() == 20 && new Date(startingDate).getMinutes() == 0) {
+      vm.startingDate = $filter('date')(new Date(startingDate), 'yyyy-MM-dd HH:mm:ss')
+      vm.showStartingDateError = false;
+    } else {
+      vm.startingDate = null;
+      vm.showStartingDateError = true;
+    }
+    vm.endingDate = null;
+  };
 
   vm.onEndingDateChange = function(endingDate, startingDate, classrooms, items) {
     endingDate = new Date(new Date(vm.date).getFullYear(), new Date(vm.date).getMonth(), new Date(vm.date).getDate(), new Date(endingDate).getHours(), new Date(endingDate).getMinutes());
 
-      if(new Date(endingDate) > new Date(startingDate) && new Date(endingDate).getHours() <= 19) {
+    if(new Date(endingDate) > new Date(startingDate) && new Date(endingDate).getHours() <= 19) {
+      vm.endingDate = $filter('date')(new Date(endingDate), 'yyyy-MM-dd HH:mm:ss');
+      vm.showEndingDateError = false;
+      vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, new Date(startingDate), new Date(endingDate));
+      vm.filteredItems = $filter('availableItems')(items, new Date(startingDate), new Date(endingDate));
+    } else if(new Date(endingDate) > new Date(startingDate) && new Date(endingDate).getHours() == 20 && new Date(endingDate).getMinutes() == 0) {
       vm.endingDate = $filter('date')(new Date(endingDate), 'yyyy-MM-dd HH:mm:ss');
       vm.showEndingDateError = false;
       vm.filteredClassrooms = $filter('availableClassrooms')(classrooms, new Date(startingDate), new Date(endingDate));

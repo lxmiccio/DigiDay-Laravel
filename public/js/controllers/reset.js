@@ -2,6 +2,10 @@
 
 angular.module('myControllers').controller('ResetController', function($routeParams, $timeout, $window, authService) {
 
+  if(authService.isAuthenticated()) {
+    $window.location.href = '/';
+  }
+
   var vm  = this;
 
   vm.showError = false;
@@ -19,10 +23,10 @@ angular.module('myControllers').controller('ResetController', function($routePar
       $window.location.href = 'accedi';
     }, function(response) {
       vm.showError = true;
-      vm.error = "Matricola inesistente???";
+      vm.error = response.data.message;
       $timeout(function() {
         vm.showError = false;
-      }, 60000);
+      }, 30000);
     });
   };
 

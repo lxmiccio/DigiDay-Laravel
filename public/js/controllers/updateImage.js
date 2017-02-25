@@ -1,6 +1,14 @@
 // Flawless
 
-angular.module('myControllers').controller('UpdateImageController', function($routeParams, $window, imageService, userService) {
+angular.module('myControllers').controller('UpdateImageController', function($routeParams, $window, authService, imageService, userService) {
+
+  authService.me(function(response) {
+    if(response.data.data.id != $routeParams.id) {
+      $window.location.href = '/';
+    }
+  }, function(response) {
+    $window.location.href = '/';
+  });
 
   var vm  = this;
 
